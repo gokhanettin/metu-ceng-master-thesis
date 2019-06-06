@@ -1,8 +1,11 @@
 \begin{thebibliography}{1}
 
-% \bibitem{Cura}
-% {\em Ultimaker Cura Software}, 2017 (last released May 12, 2017).
-% \newblock available:
-%   \url{https://ultimaker.com/en/products/ultimaker-cura-software}.
+\bibitem{paper1}
+N.~S. Name~Surname and N.~Surname, ``How to write a good thesis,'' {\em IEEE
+  Conference on Birds}, 1881.
+
+\bibitem{paper2}
+N.~S. Name~Surname and N.~Surname, ``How to write a good thesis,'' {\em IEEE
+  Conference on Birds}, 1881.
 
 \end{thebibliography}
