@@ -22,7 +22,7 @@
 \newif\ifd@uble \d@ublefalse
 \newif\ifs@ngle \s@ngletrue
 
-%page numbering - default 
+%page numbering - default
 \newif\ifpn@top \pn@topfalse
 \newif\ifpn@topr \pn@toprtrue
 
@@ -40,7 +40,7 @@
 \newif\if@twelvept \@twelveptfalse
 
 % seems we need it.
-\newif\if@twoside \@twosidetrue 
+\newif\if@twoside \@twosidetrue
 \@mparswitchtrue \def\ds@draft{\overfullrule 5pt}
 
 \newif\ift@rkish \t@rkishfalse
@@ -183,9 +183,10 @@
 \newif\ifturkish
 \ift@rkish
 \RequirePackage[english,turkish]{babel}
-\turkishtrue 
+\turkishtrue
 \else
-\RequirePackage[turkish,english]{babel}
+% FIXME: Breaks in overleaf
+%\RequirePackage[turkish,english]{babel}
 \turkishfalse
 \fi
 
