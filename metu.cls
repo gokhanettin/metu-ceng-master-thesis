@@ -186,7 +186,7 @@
 \turkishtrue
 \else
 % FIXME: Breaks in overleaf
-%\RequirePackage[turkish,english]{babel}
+\RequirePackage[turkish,english]{babel}
 \turkishfalse
 \fi
 
