@@ -1,6 +1,6 @@
-METU COMPUTER ENGINEERING MASTER THESIS
+# METU COMPUTER ENGINEERING MASTER THESIS
 
-# Setting up the Environment
+## Setting up the Environment
 
 I heavily use vim and any other tools that support vim key shortcuts. For LaTeX
 editing I prefer [vimtex](https://github.com/lervag/vimtex/) vim plugin and
