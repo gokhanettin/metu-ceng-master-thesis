@@ -3,7 +3,7 @@
 
 In this chapter, we introduce our proposed architecture of the mini driverless
 car with its hardware and software components. We also present our simulation
-environement, which was implemented to speed up the development and
+environment, which was implemented to speed up the development and
 verification processes.
 
 \section{Hardware Configuration}
@@ -123,11 +123,11 @@ to locate the traffic signs with respect to the body frame.
 LIDAR node is configured to provide scan data to the costmap nodes in the scene
 interpretation module at 5 Hz rotational speed. The costmap nodes then
 publishes local occupancy grid maps that indicate nearby objects. Scene
-interpretation maintains two local maps in different sizes. 3x3 local map with
-0.1 meter/cell resolution is used in navigation module for collision avoidance.
-The second 4x4 local map with 0.2 meter/cell resolution is internally used by
-the scene interpretation module for behavior planning to guide the trajectory
-planner before the navigation module observe the obstacles.
+interpretation maintains two local maps in different sizes. The small map is
+used in navigation module for collision avoidance.  The larger map is
+internally used by the scene interpretation module for behavior planning to
+guide the trajectory planner before the navigation module observe the
+obstacles.
 
 Behavior planner component decides if the car should stop or in which speed
 range it should move, whether it should track the lanes or follow a predefined
