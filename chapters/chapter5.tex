@@ -46,7 +46,7 @@ in Equations \eqref{eq:dt} and \eqref{eq:st}.
 \end{equation}
 
 \begin{equation}
-    d(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
+    s(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
 \label{eq:st}
 \end{equation}
 
@@ -208,15 +208,16 @@ From the figure, we write down the following equations:
 \label{eq:radius4}
 \end{equation}
 
-Combining \eqref{radius1}, \eqref{radius2}, and \eqref{radius3}, we obtain
+Combining \eqref{eq:radius1}, \eqref{eq:radius2}, and \eqref{eq:radius3}, we
+obtain
 
 \begin{equation}
     R = \frac{L^2}{2y_L}
 \label{eq:radius5}
 \end{equation}
 
-Substituting \eqref{radius4} in \eqref{radius5}, we obtain and turning radius
-$R$ in terms of feedback angle $\alpha$ and lookahead distance $L$.
+Substituting \eqref{eq:radius4} in \eqref{eq:radius5}, we obtain and turning
+radius $R$ in terms of feedback angle $\alpha$ and lookahead distance $L$.
 
 \begin{equation}
     R = \frac{L}{2\sin{\alpha}}
@@ -233,9 +234,9 @@ position in the world coordinates.
 \label{eq:alpha}
 \end{equation}
 
-Finally, using \eqref{steering} and \eqref{radius6}, we derivate the steering
-angle $\delta$ in terms of feedback angle $alpha$, constant wheelbase $L_b$,
-and lookahead distance $L$.
+Finally, using \eqref{eq:steering} and \eqref{eq:radius6}, we derivate the
+steering angle $\delta$ in terms of feedback angle $alpha$, constant wheelbase
+$L_b$, and lookahead distance $L$.
 
 \begin{equation}
     \delta = \tan^{-1}(\frac{2L_b\sin\alpha}{L})
