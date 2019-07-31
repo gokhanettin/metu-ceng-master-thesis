@@ -1,3 +1,46 @@
-\chapter{Conclusion and Discussion}
+\chapter{Conclusion}
 \label{chp:b7}
+
+This thesis aimed to investigate autonomous car software architectures for
+urban driving scenarios. Based on the existing studies, decomposed
+architectures prove more success in city traffic compared to end-to-end
+solutions. As a budget-friendly alternative, we developed a mini autonomous car
+with this a decomposed architecture for urban scenarios including seven
+different traffic signs, traffic signals, bridge, overtaking a stationary car,
+an parking with no predefined map. These scenarios together makes the problem
+too complicated to be addressed with the existing mini autonomous car studies.
+
+Due to lack of traffic scene segmentation datasets for mini cars, we started
+with creating a dataset. Then we trained a U-net based model to learn ego lane,
+right lane, left lane, road side, and traffic signs semantics from the camera
+images. Learning lane semantics for right and left lanes along the with ego
+lane enabled the trajectory planner to implement a lane change policy such that
+it assigns more cost to occupying left lane when the right lane is available.
+We showed that we achieved 82\% IoU for the ego lane, which is comparable to
+the related work \cite{cite9}.
+
+For the traffic sign and signal classification, we first implemented a region
+proposal algorithm relying on 70\% precision of the traffic sign segmentation.
+Then we merged existing relevant datasets for our scenarios and augmented it by
+cropping the sign region proposals. Finally, we trained another relatively
+small deep learing model with the final dataset and achieved 97\% accuracy.
+
+We implemented a finite state machine for invoking different behaviors of our
+car. This behavior planner interprets environmetal perception for the
+trajectory planner. The trajectory planner finds an optimum trajectory for
+desired behavior such as target speed or target point to stop, for example, due
+to a red light.
+
+Our work can be improved in a number of ways. First, although our trajectory
+planner works well for structural environments, it is not suitable for
+unstructural environments such as parking lots. Algorithms such as hybrid A*
+and state lattice planner would be a better choice for parking lot navigation.
+Second, we only deal with static obstacles in the current study. For responding
+to dynamic obstacles, we need an additional prediction component that estimates
+the trajectories of moving objects. The trajectory planner should also take
+these trajectories into account. Moreover, the trajectory planner should be
+extended with distance keeping mode so that the behavior planner can choose to
+follow moving vehicles with a safety margin. Last, we only follow lanes and
+traffic signs without a global route. Integration of a coarse map enables
+making global plans between current and destination locations.
 
