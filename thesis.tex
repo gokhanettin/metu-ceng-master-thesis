@@ -130,65 +130,82 @@
 % \affiliationv{JüriBölüm, Ankara University}
 %
 % Keywords : English & Turkish, Comma seperated
-\keywords{keywords, seperated, with, comma}
-\anahtarklm{virgülle, ayrılmış, anahtar, kelimeler}
+\keywords{autonomous car,
+    traffic scene parsing,
+    traffic sign classification,
+    behavior planning,
+    optimal trajectory planning,
+    pure pursuit controller
+    }
+\anahtarklm{otonom araç,
+    trafik sahnesi ayrıştırma,
+    trafik işareti sınıflandırması,
+    davranış planlayıcı,
+    optimal yörünge planlayıcı,
+    pure pursuit kontrolcüsü
+    }
 %
 % Abstract in English
 %
 \abstract{
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales augue
- sit amet eros maximus, sed venenatis metus vehicula. Proin vel ligula porta
- justo iaculis ultrices non a ex. Sed lacinia bibendum feugiat. Integer mollis
- ac quam eu malesuada. Pellentesque malesuada facilisis metus quis condimentum.
- Nulla eget odio eget arcu elementum fringilla. Vestibulum eget pretium libero.
- Ut fermentum eleifend enim, nec facilisis sapien iaculis eu. Curabitur
- volutpat turpis risus, sed sollicitudin velit imperdiet sit amet.
-
-Aliquam tristique dictum facilisis. Aliquam non erat sed ligula lobortis varius
-id eu est. Suspendisse dapibus auctor diam ut ultrices. Lorem ipsum dolor sit
-amet, consectetur adipiscing elit. Vestibulum leo lectus, ornare ac lectus
-eget, placerat ultrices nulla. Praesent sit amet sodales nibh. Sed vestibulum
-non lorem non scelerisque.
-
-Sed eget fringilla purus. Pellentesque habitant morbi tristique senectus et
-netus et malesuada fames ac turpis egestas. Duis id metus risus. Vestibulum
-tempor leo orci, non semper quam aliquet non. Nam vitae convallis dolor,
-lacinia mollis nunc. Vestibulum imperdiet ornare mauris eget blandit. Etiam
-venenatis mauris dictum urna convallis fringilla vitae non dui. Etiam sit amet
-venenatis turpis. Nulla facilisi. Etiam sed nulla pulvinar, ullamcorper mauris
-a, vulputate risus. Integer ligula nisi, porta sed dapibus ac, mattis at
-libero. Curabitur sodales lacus ac ante facilisis, ac condimentum ante
-suscipit. Proin aliquet mattis diam tempus fermentum. Phasellus quis congue
-ante, sed fringilla dui.
+    Autonomous cars capable of driving in city traffic has been long studied in
+    decomposed architectures with perception, planning, and control components.
+    Recent advances in deep learning techniques considerably contributed to the
+    perception component of this approach. These advances also led to evolution
+    of other approaches such as end-to-end learning steering commands and more
+    recently learning driving affordances from raw camera images. Though the
+    latter approaches are promising to simplify the overall architecture to
+    some extent, the former is found more persuasive constituting the majority of
+    today's state-of-art self-driving cars close to market. However, studies on
+    autonomous small-scale cars which are supposed to be fast and and low-cost
+    protptyping platforms are not a par with the state-of-art decomposed
+    architectures. They often remain limited to end-to-end approaches or resort
+    to tranditional computer vision techniques in oversimplified traffic
+    scenarios. To address this problem, we proposed a decomposed architecture
+    for small-scale cars covering the extended traffic scenarios with seven
+    traffic signs, traffic lights, lane shifts, cloverleaf interchange,
+    pedestrian crossings, and parking. We created a traffic scene segmentation
+    dataset filling a gap for autonomous mini cars. We learned semantics of
+    lanes and classified traffic lights and signs with deep learning models.
+    Given the visual information as well as the detected obstacles by laser
+    scans, we decided on the best behavior for the car with a rule-based
+    system. Using the interpretation of the scene in terms of the behavior and
+    perception, we found optimal trajectories along the lanes and followed them
+    with a controller. With our novel lane segmentation scheme and 97\%
+    accuracy classifier, we achieved successful results along our courses in
+    real and simulation domains.
 }
 %
 % Turkish Abstract
 %
 \oz{
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales augue
- sit amet eros maximus, sed venenatis metus vehicula. Proin vel ligula porta
- justo iaculis ultrices non a ex. Sed lacinia bibendum feugiat. Integer mollis
- ac quam eu malesuada. Pellentesque malesuada facilisis metus quis condimentum.
- Nulla eget odio eget arcu elementum fringilla. Vestibulum eget pretium libero.
- Ut fermentum eleifend enim, nec facilisis sapien iaculis eu. Curabitur
- volutpat turpis risus, sed sollicitudin velit imperdiet sit amet.\cite{paper1}
-
-Aliquam tristique dictum facilisis. Aliquam non erat sed ligula lobortis varius
-id eu est. Suspendisse dapibus auctor diam ut ultrices. Lorem ipsum dolor sit
-amet, consectetur adipiscing elit. Vestibulum leo lectus, ornare ac lectus
-eget, placerat ultrices nulla. Praesent sit amet sodales nibh. Sed vestibulum
-non lorem non scelerisque.
-
-Sed eget fringilla purus. Pellentesque habitant morbi tristique senectus et
-netus et malesuada fames ac turpis egestas. Duis id metus risus. Vestibulum
-tempor leo orci, non semper quam aliquet non. Nam vitae convallis dolor,
-lacinia mollis nunc. Vestibulum imperdiet ornare mauris eget blandit. Etiam
-venenatis mauris dictum urna convallis fringilla vitae non dui. Etiam sit amet
-venenatis turpis. Nulla facilisi. Etiam sed nulla pulvinar, ullamcorper mauris
-a, vulputate risus. Integer ligula nisi, porta sed dapibus ac, mattis at
-libero. Curabitur sodales lacus ac ante facilisis, ac condimentum ante
-suscipit. Proin aliquet mattis diam tempus fermentum. Phasellus quis congue
-ante, sed fringilla dui.
+    Şehir trafiğinde sürüş yapabilen otonom araçlar algı, planlama ve control
+    bileşenleriyle ayrılmış mimariler içinde uzun zamandır çalışılmaktadır.
+    Derin öğrenme tekniklerindeki son gelişmeler bu yaklaşımın algı bileşenine
+    büyük ölçüde katkıda bulunmuştur. Bu bileşenler ayrıca kamera görüntüsü
+    üzerinden uçtan uca yönelim komutlarını öğrenme ve daha yenisi sürüş
+    sağlarlıklarını öğrenmek gibi yeni yaklaşımların da gelişiminde etken
+    olmuştur. Sonraki yaklaşımlar genel mimariyi bir derece sadeleştirmek için
+    ümit verici olsa da bugünün pazara yakın olan en gelişmiş kendi kendini
+    sürebilen araçların çoğunluğunu oluşturan ilk yaklaşım daha ikna edici
+    bulunmaktadır. Bununla birlikte, hızlı ve düşük bütçeli protipleme
+    platformu olması beklenen küçük ölçekli otonom araçlar üzerinde yapılan
+    çalışmalar en gelişmiş ayrışmış mimariler ile aynı düzeyde değildir. Bu
+    çalışmalar genellikle uçtan uca yaklaşımlarla sınırlı kalmakta veya aşırı
+    basitleştirilmiş trafik senaryoları içinde geleneksel görüntü işleme
+    yöntemlerine başvurmaktadır. Bu problemi ele almak adına biz küçük ölçekli
+    araçlar için yedi trafik işareti, trafik lambaları, şerit değiştirmeler,
+    yonca kavşak, yaya geçişleri ve park işlemi ile genişletilmiş trafik
+    senaryolarını kapsayan ayrışmış bir mimari sunduk. Otonom küçük araçlar
+    için bir boşluğu doldurarak trafik sahnesi bölümleme veri seti oluşturduk.
+    Derin öğrenme modelleri kullanarak şeritlerin anlamlarını öğrendik ve
+    trafik lamba ve işaretlerini sınıflandırdık. Kural tabanlı bir sistem ile
+    verilen görsel bilgi ve laser taramalarıyla tespit edilen engellere göre
+    araç için en iyi davranışa karar verdik. Davranış ve algı üzerinden yapılan
+    yorumlamayı kullanarak şeritler boyunca en uygun yörüngeleri buduk ve bir
+    kontrolcü ile bu yörüngeleri takip ettik. Özgün şerit bölümleme tasarımız
+    ve \%97 doğruluklu sınıflandırıcımız ile gerçek ve simulasyon ortamlarında
+    güzergahlarımız boyunca başarılı sonuçlar elde ettik.
 }
 %
 % Dedication
@@ -197,26 +214,6 @@ ante, sed fringilla dui.
 %
 % Acknowledgements
 \acknowledgments{
- Sed eget fringilla purus. Pellentesque habitant morbi tristique senectus et
- netus et malesuada fames ac turpis egestas. Duis id metus risus. Vestibulum
- tempor leo orci, non semper quam aliquet non. Nam vitae convallis dolor,
- lacinia mollis nunc. Vestibulum imperdiet ornare mauris eget blandit. Etiam
- venenatis mauris dictum urna convallis fringilla vitae non dui. Etiam sit amet
- venenatis turpis. Nulla facilisi. Etiam sed nulla pulvinar, ullamcorper mauris
- a, vulputate risus. Integer ligula nisi, porta sed dapibus ac, mattis at
- libero. Curabitur sodales lacus ac ante facilisis, ac condimentum ante
- suscipit. Proin aliquet mattis diam tempus fermentum. Phasellus quis congue
- ante, sed fringilla dui.\cite{paper2}
-
-Nullam porta arcu id ultricies consequat. Suspendisse potenti. Morbi vel
-iaculis diam, semper mollis mi. Integer enim est, viverra et orci nec,
-porttitor euismod turpis. Curabitur non magna ut nisl mollis rutrum. Curabitur
-nulla libero, aliquam a magna sed, ullamcorper auctor orci. Donec lectus enim,
-mattis non est in, elementum fringilla nisi. Aenean imperdiet finibus turpis
-non mollis. Sed vulputate nisi nec leo blandit bibendum. Donec luctus augue
-facilisis, aliquam augue iaculis, fringilla ante. Praesent eget sem hendrerit
-odio tempor vulputate. Nam ac semper enim. Ut at massa sem. Nam at nulla
-fringilla mi commodo vulputate.
 }
 
 %
