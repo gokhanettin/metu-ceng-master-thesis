@@ -13,16 +13,17 @@ at recommended speeds.
 
 We build a cubic spline curve from the reference waypoints to represent the
 reference path. In order to generate trajectories along the reference path, we
-use frenet frame as in \cite{cite14, cite15}. Because the map of the
-environment is not known a priori for our scenario, the reference paths are
-either extracted from the lanes or predefined for a specific traffic sign. We
-define normal trajectory $d(t)$ and tangential trajectory $s(t)$ to our
-reference path $\vec{r}(s)$ as shown in Figure \ref{figure:frenet}. To use the
-same convention as \cite{cite15}, we also let $d(t)$ and $s(t)$ be offset
-pattern and distance pattern, respectively. While the offset pattern
-corresponds to lateral dispacement, distance pattern corresponds to
-longitudinal acceleration and deceleration. We combine the two by
-Equation \eqref{eq:trajectory} to obtain a trajectory.
+use frenet frame as in \cite{Werling2010OptimalTG, Yoneda2018TrajectoryOA}.
+Because the map of the environment is not known a priori for our scenario, the
+reference paths are either extracted from the lanes or predefined for a
+specific traffic sign. We define normal trajectory $d(t)$ and tangential
+trajectory $s(t)$ to our reference path $\vec{r}(s)$ as shown in Figure
+\ref{figure:frenet}. To use the same convention as
+\cite{Yoneda2018TrajectoryOA}, we also let $d(t)$ and $s(t)$ be offset pattern
+and distance pattern, respectively. While the offset pattern corresponds to
+lateral dispacement, distance pattern corresponds to longitudinal acceleration
+and deceleration. We combine the two by Equation \eqref{eq:trajectory} to
+obtain a trajectory.
 
 \begin{figure}[h]
   \centering
@@ -33,21 +34,21 @@ Equation \eqref{eq:trajectory} to obtain a trajectory.
 \end{figure}
 
 \begin{equation}
-    \vec{x}(s(t), d(t)) = \vec{r}(s(t)) + d(t)\vec{n}_r(s(t))
-\label{eq:trajectory}
+  \vec{x}(s(t), d(t)) = \vec{r}(s(t)) + d(t)\vec{n}_r(s(t))
+  \label{eq:trajectory}
 \end{equation}
 
 Offset and distance patterns are represented by 5-degree polynomials
 in Equations \eqref{eq:dt} and \eqref{eq:st}.
 
 \begin{equation}
-    d(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
-\label{eq:dt}
+  d(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
+  \label{eq:dt}
 \end{equation}
 
 \begin{equation}
-    s(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
-\label{eq:st}
+  s(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
+  \label{eq:st}
 \end{equation}
 
 We generate a set of trajectories forward simulating various terminal
@@ -86,24 +87,24 @@ The cost function $C$ is defined in Equations \eqref{eq:cost1} -
 \eqref{eq:cost3}.
 
 \begin{equation}
-    C = k_{path}C^i_{path} + k_dC_d + k_sC_s
+  C = k_{path}C^i_{path} + k_dC_d + k_sC_s
 \label{eq:cost1}
 \end{equation}
 
 \begin{equation}
-    C_d = k_j\int_{t_0}^{t_1}\dddot{d}(t)dt + k_x\Delta T + k_y\Delta d^2
+  C_d = k_j\int_{t_0}^{t_1}\dddot{d}(t)dt + k_x\Delta T + k_y\Delta d^2
 \label{eq:cost2}
 \end{equation}
 
 \begin{equation}
-    C_s =
-    \begin{cases}
-        k_j\int_{t_0}^{t_1}\dddot{s}(t)dt + k_x\Delta T + k_y\Delta s^2,
-        &\text{if stop mode;} \\
-        k_j\int_{t_0}^{t_1}\dddot{s}(t)dt + k_x\Delta T + k_y\Delta \dot{s}^2,
-        &\text{if cruise mode,}
-    \end{cases}
-\label{eq:cost3}
+  C_s =
+  \begin{cases}
+    k_j\int_{t_0}^{t_1}\dddot{s}(t)dt + k_x\Delta T + k_y\Delta s^2,
+    &\text{if stop mode;} \\
+    k_j\int_{t_0}^{t_1}\dddot{s}(t)dt + k_x\Delta T + k_y\Delta \dot{s}^2,
+    &\text{if cruise mode,}
+  \end{cases}
+  \label{eq:cost3}
 \end{equation}
 
 where $C_d$ and $C_s$ are the costs from offset and distance patterns,
@@ -121,23 +122,23 @@ evaluations.
 \begin{figure}[h]
   \centering
   \begin{subfigure}[b]{1.0\linewidth}
-      \includegraphics[width=\linewidth]{figures/frenet-shift-left-lane.pdf}
+    \includegraphics[width=\linewidth]{figures/frenet-shift-left-lane.pdf}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{1.0\linewidth}
-      \includegraphics[width=\linewidth]{figures/frenet-keep-left-lane.pdf}
+    \includegraphics[width=\linewidth]{figures/frenet-keep-left-lane.pdf}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{1.0\linewidth}
-      \includegraphics[width=\linewidth]{figures/frenet-shift-right-lane.pdf}
+    \includegraphics[width=\linewidth]{figures/frenet-shift-right-lane.pdf}
     \caption{}
   \end{subfigure}
   \caption{Example multi-lane driving scenario. The thick blue trajectory is
-      the optimal trajectory for different cases. (a) The right lane is
-      blocked, so the car attempts to change lane to the left for overtaking.
-      (b) The right lane is still blocked, so the car keeps occupying the left
-  lane. (c) Because the right lane is less costly when both lanes are
-  available, the car shifts back to right lane.}
+    the optimal trajectory for different cases. (a) The right lane is
+    blocked, so the car attempts to change lane to the left for overtaking.
+    (b) The right lane is still blocked, so the car keeps occupying the left
+    lane. (c) Because the right lane is less costly when both lanes are
+    available, the car shifts back to right lane.}
   \label{figure:frenet-lanes}
 \end{figure}
 
@@ -150,20 +151,20 @@ and $\theta$ is the orientation of the car. Nonholonomic constraints satisfy
 Equation \eqref{eq:nonholonomic}.
 
 \begin{equation}
-    \dot{x}\sin(\theta) - \dot{y}\cos(\theta) = 0
-\label{eq:nonholonomic}
+  \dot{x}\sin(\theta) - \dot{y}\cos(\theta) = 0
+  \label{eq:nonholonomic}
 \end{equation}
 
 such that longitudinal and lateral forces applied on the car tires are always
-smaller than the maximum friction between the tires and the ground \cite{cite18}.
-In other words we assume the car does not slip. With this constaints, we
-estimate the steering angle in terms of turning radius $R$ and the wheelbase of
-the car $L_b$ from Figure \ref{figure:steering} in Equation
-\eqref{eq:steering}.
+smaller than the maximum friction between the tires and the ground
+\cite{Kim2013SensorbasedMP}.  In other words we assume the car does not slip.
+With this constaints, we estimate the steering angle in terms of turning radius
+$R$ and the wheelbase of the car $L_b$ from Figure \ref{figure:steering} in
+Equation \eqref{eq:steering}.
 
 \begin{equation}
-    \delta = \tan^{-1}(\frac{L_b}{R})
-\label{eq:steering}
+  \delta = \tan^{-1}(\frac{L_b}{R})
+  \label{eq:steering}
 \end{equation}
 
 \begin{figure}[h]
@@ -189,39 +190,39 @@ distance greater than a lookahead distance $L$. This is illustrated in Figure
 From the figure, we write down the following equations:
 
 \begin{equation}
-    L^2 = x^2_L + y^2_L
-\label{eq:radius1}
+  L^2 = x^2_L + y^2_L
+  \label{eq:radius1}
 \end{equation}
 
 \begin{equation}
-    R^2 = a^2 + x^2_L
-\label{eq:radius2}
+  R^2 = a^2 + x^2_L
+  \label{eq:radius2}
 \end{equation}
 
 \begin{equation}
-    R = a + y_L
-\label{eq:radius3}
+  R = a + y_L
+  \label{eq:radius3}
 \end{equation}
 
 \begin{equation}
-    \sin{\alpha} = \frac{y_L}{L}
-\label{eq:radius4}
+  \sin{\alpha} = \frac{y_L}{L}
+  \label{eq:radius4}
 \end{equation}
 
 Combining \eqref{eq:radius1}, \eqref{eq:radius2}, and \eqref{eq:radius3}, we
 obtain
 
 \begin{equation}
-    R = \frac{L^2}{2y_L}
-\label{eq:radius5}
+  R = \frac{L^2}{2y_L}
+  \label{eq:radius5}
 \end{equation}
 
 Substituting \eqref{eq:radius4} in \eqref{eq:radius5}, we obtain and turning
 radius $R$ in terms of feedback angle $\alpha$ and lookahead distance $L$.
 
 \begin{equation}
-    R = \frac{L}{2\sin{\alpha}}
-\label{eq:radius6}
+  R = \frac{L}{2\sin{\alpha}}
+  \label{eq:radius6}
 \end{equation}
 
 Feedback angle $\alpha$ is computed by the car configuration $\textbf{q} = [x y
@@ -230,8 +231,8 @@ coordinates. Note that we take the midpoint of the front axle as the car
 position in the world coordinates.
 
 \begin{equation}
-    \alpha = \tan^{-1}(\frac{y_p - y}{x_p - x}) - \theta
-\label{eq:alpha}
+  \alpha = \tan^{-1}(\frac{y_p - y}{x_p - x}) - \theta
+  \label{eq:alpha}
 \end{equation}
 
 Finally, using \eqref{eq:steering} and \eqref{eq:radius6}, we derivate the
@@ -239,12 +240,12 @@ steering angle $\delta$ in terms of feedback angle $alpha$, constant wheelbase
 $L_b$, and lookahead distance $L$.
 
 \begin{equation}
-    \delta = \tan^{-1}(\frac{2L_b\sin\alpha}{L})
-\label{eq:delta}
+  \delta = \tan^{-1}(\frac{2L_b\sin\alpha}{L})
+  \label{eq:delta}
 \end{equation}
 
 In order to tune the controller, we need to choose a lookahead distance $L$.
-\cite{cite18} suggests $L = 2R_{min}$, where $R_{min} =
+\cite{Kim2013SensorbasedMP} suggests $L = 2R_{min}$, where $R_{min} =
 \frac{L_b}{\tan({\delta_{max})}}$. For our car, the max steering angle
 $\delta_{max} = 0.34$ rads and the wheelbase $L_b = 0.25$ meters. Therefore, we
 use $L = 1.4$. Figure \ref{figure:lookahead} illustrates the relation between
@@ -261,12 +262,13 @@ $R_{min}$ and $L$.
 
 One problem with Equation \eqref{eq:delta} is that it does not account for the
 speed. As the speed increases, steering angle $\delta$ becomes more sensitive
-to the feedback angle $\alpha$ \cite{18}. WE address this problem by adding a
-speed factor to lookahead distance $L$ in Equation \eqref{eq:lookahead}.
+to the feedback angle $\alpha$ \cite{Kim2013SensorbasedMP}. We address this
+problem by adding a speed factor to lookahead distance $L$ in Equation
+\eqref{eq:lookahead}.
 
 \begin{equation}
-    L \leftarrow L + kv
-\label{eq:lookahead}
+  L \leftarrow L + kv
+  \label{eq:lookahead}
 \end{equation}
 
 where $v$ is the recommended speed by the trajectory planner, $k$ is the look
