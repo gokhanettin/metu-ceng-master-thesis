@@ -3,7 +3,7 @@
 
 Autonomous cars received a great deal of attention over the last two decades
 and started to be a reality in the last few years with several level of
-autonomy from driving assitance level to full autonomy
+autonomy from driving assistance level to full autonomy
 \cite{Holstein2018EthicalAS}. In quest of fully autonomous vehicles, a number
 of competitions were organized to stimulate researchers' interest
 \cite{Buehler2007The2D, Buehler2009TheDU}. These events started with autonomous
@@ -46,9 +46,9 @@ of the driving environment, which often loses its validity due the changing
 streets or constructions on the roads. Autonomous driving in urban scenarios
 without an accurate map has been studied extending an existing traffic scene
 segmentation dataset with ego lane, parallel lane, and opposite lane
-annotations \cite{cite9}, but it is yet to be deployed and tested on a car. For
-novel methods like this instance, a low-cost and risk-free solution could be
-the use of a small-scale car for initial on-road testing.
+annotations \cite{Meyer2018DeepSL}, but it is yet to be deployed and tested on
+a car. For novel methods like this instance, a low-cost and risk-free solution
+could be the use of a small-scale car for initial on-road testing.
 
 Present smale-scale driverless car studies either focus on directly learning
 steering commands from the images \cite{Bechtel2017DeepPicarAL,
@@ -68,39 +68,39 @@ by a mini autonomous car competition, OpenZeka MARC 2019 \cite{OpenZekaMARC}.
 Our requirements are mostly derived from the competition rules as follows:
 
 \begin{itemize}
-  \item The mini car shall follow lane at 0.6 m/s average speed in a
-      two-lane road given in Figure \ref{figure:openzeka-race-course}.
+  \item The mini car shall follow lane at 0.6 m/s average speed in a two-lane
+    road given in Figure \ref{figure:openzeka-race-course}.
   \item The mini car shall slow down to 0.5 m/s average speed on traffic signs
-      and signals given in Figure \ref{figure:openzeka-traffic-signs}.
+    and signals given in Figure \ref{figure:openzeka-traffic-signs}.
   \item The mini car shall overtake a waiting car on the right lane and steer
-      back to the right lane.
+    back to the right lane.
   \item The mini car shall reactively avoid obstacles.
   \item The car shall climb up and climb down the bridge given in Figure
-      \ref{figure:openzeka-race-course}.
+    \ref{figure:openzeka-race-course}.
   \item The mini car shall choose to go straight straight when it encounters
-      Straight or Right Turn sign given in.
+    Straight or Right Turn sign given in.
   \item The mini car shall stop on red light and move on green light.
   \item The mini car shall change left when it is close to a construction zone
-      on the right lane as indicated by Keep Left sign.
+    on the right lane as indicated by Keep Left sign.
   \item The mini car shall pass the loose road section indicated by a Loose
-      Road sign.
+    Road sign.
   \item The mini car shall wait for pedestrians on crosswalks indicated by a
-      Crosswalk sign.
+    Crosswalk sign.
   \item The mini car shall turn right after Parking sign into the parking lot
-      given in Figure \ref{figure:openzeka-race-course}.
+    given in Figure \ref{figure:openzeka-race-course}.
   \item The mini car shall stop on any of the free parking slots.
 \end{itemize}
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=.8\textwidth]{figures/openzeka-race-course.jpeg}
+  \includegraphics[width=.8\textwidth]{figures/openzeka-race-course.jpeg}
   \caption{OpenZeka 2019 MARC race course.}
   \label{figure:openzeka-race-course}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=.8\textwidth]{figures/openzeka-traffic-signs.pdf}
+  \includegraphics[width=.8\textwidth]{figures/openzeka-traffic-signs.pdf}
   \caption{Traffic signs and light specifically design for mini cars by
   OpenZeka.}
   \label{figure:openzeka-traffic-signs}
@@ -111,43 +111,42 @@ Our requirements are mostly derived from the competition rules as follows:
 The main contribution of our study is as follows:
 
 \begin{itemize}
-    \item \textbf{Pixel classification dataset for mini cars:} Existing traffic
-        scene datasets exclusively for real-scale cars \cite{Huang2018TheAD,
-        Cordts2016TheCD, Geiger2012AreWR, Neuhold2017TheMV}. This poses a
-        difficulty for on-road testing of the novel methods on mini-cars. We
-        present a dataset with pixel-level annotations for mini cars.
-    \item \textbf{Extended traffic sign and signal classification dataset:} We
-        merge existing traffic sign classification datasets \cite{cite11,
-        cite12, Shakhuro2016RussianTS, Serna2018ClassificationOT,
-        MaldonadoBascn2007RoadSignDA} for our scenarios and semi-automatically
-        extend the dataset by cropping the segmented sign regions from our left
-        camera images.
-    \item \textbf{Development of a lane detector:} We build our lane detector
-        on the approach proposed in \cite{cite9}. This approach essentially
-        segments the road into ego lane, parallel lane, and opposite lane. It
-        then extracts a center line for the ego lane. For our scenarios, we
-        skip the opposite lane and further segment the parallel lane into right
-        and left lanes.  Unlike \cite{cite9}, we are interested in finding
-        center line curves for ego lane and also the neighboring parallel
-        lanes. Our apprach saves us from analyzing the parallel lane pixels for
-        right and left categorization for the curve estimation.
-    \item \textbf{Local optimal trajectory planner for structured
-        environments:} It is common that state-of-art autonomous vehicles
-        relies on detailed maps to provide a reference line to the local
-        planner for structural environments (i.e., environments with explicit
-        drivable corridors), often by means of a global planner
-        \cite{Thrun2006StanleyTR, cite1, Kato2018Autoware0B}. We implemented a
-        Frenet optimal trajectory planner \cite{cite14} without a map using
-        exclusively the online computed lane centers as a source of the
-        reference line.
-    \item
-        \textbf{Decomposed architecture for autonomous driving:} Autonomous
-        vehicle architectures span wide range of computer science research
-        areas including but not limited to computer vision, path planning,
-        automata theory, control theory, and distributed systems.  Each of
-        these areas comes with many problems and various alternative solutions
-        to those problems. We put together a decomposed architecture
-        with a selected set of solutions from different domains.
+  \item \textbf{Pixel classification dataset for mini cars:} Existing traffic
+    scene datasets exclusively for real-scale cars \cite{Huang2018TheAD,
+    Cordts2016TheCD, Geiger2012AreWR, Neuhold2017TheMV}. This poses a
+    difficulty for on-road testing of the novel methods on mini-cars. We
+    present a dataset with pixel-level annotations for mini cars.
+  \item \textbf{Extended traffic sign and signal classification dataset:} We
+    merge existing traffic sign classification datasets
+    \cite{Timofte2009MultiviewTS, Stallkamp2012ManVC, Shakhuro2016RussianTS,
+    Serna2018ClassificationOT, MaldonadoBascn2007RoadSignDA} for our scenarios
+    and semi-automatically extend the dataset by cropping the segmented sign
+    regions from our left camera images.
+  \item \textbf{Development of a lane detector:} We build our lane detector on
+    the approach proposed in \cite{Meyer2018DeepSL}. This approach essentially
+    segments the road into ego lane, parallel lane, and opposite lane. It then
+    extracts a center line for the ego lane. For our scenarios, we skip the
+    opposite lane and further segment the parallel lane into right and left
+    lanes.  Unlike \cite{Meyer2018DeepSL}, we are interested in finding center
+    line curves for ego lane and also the neighboring parallel lanes. Our
+    apprach saves us from analyzing the parallel lane pixels for right and left
+    categorization for the curve estimation.
+  \item \textbf{Local optimal trajectory planner for structured environments:}
+    It is common that state-of-art autonomous vehicles relies on detailed maps
+    to provide a reference line to the local planner for structural
+    environments (i.e., environments with explicit drivable corridors), often
+    by means of a global planner \cite{Thrun2006StanleyTR,
+    Montemerlo2009JuniorTS, Kato2018AutowareOB}. We implemented a Frenet
+    optimal trajectory planner \cite{Werling2010OptimalTG} without a map using
+    exclusively the online computed lane centers as a source of the reference
+    line.
+  \item \textbf{Decomposed architecture for autonomous driving:} Autonomous
+    vehicle architectures span wide range of computer science research areas
+    including but not limited to computer vision, path planning, automata
+    theory, control theory, and distributed systems.  Each of these areas comes
+    with many problems and various alternative solutions to those problems. We
+    put together a decomposed architecture with a selected set of solutions
+    from different domains.
 \end{itemize}
 
 \section{Organization}

@@ -15,40 +15,42 @@ the equivalent hardware components as shown in Figure
 Table \ref{table:hardware-configuration}.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=.8\textwidth]{figures/hardware-configuration.pdf}
-\caption{Hardware components on the mini driverless car.}
-\label{figure:hardware-configuration}
+  \centering
+  \includegraphics[width=.8\textwidth]{figures/hardware-configuration.pdf}
+  \caption{Hardware components on the mini driverless car.}
+  \label{figure:hardware-configuration}
 \end{figure}
 
 \begin{table}[h]
-\caption{Mini driverless car hardware configuration details.}
-\label{table:hardware-configuration}
-\resizebox{\textwidth}{!}{\begin{tabular}{||c c||}
- \hline
- Component & Description \\ [0.5ex]
- \hline\hline
- Vehicle & TRAXXAS SLASH 4X4 PLATINUM EDITION \\ 
- \hline
- Central Computer & NVIDIA Jetson TX2 Developer Kit \\
- \hline
- Stereo Camera & Stereolabs ZED Camera \\
- \hline
- 2D LIDAR & Scanse Sweep LIDAR \\
- \hline
- ESC & Vedder Electronic Speed Controller \\
- \hline
- IMU & SparkFun 9 DoF Razor IMU M0 \\
- \hline
- USB3.0 Hub & USB 3.0 7-Port Hub with 2 Charging Ports UH720 \\
- \hline
- Joystick & Logitech F710 Wireless Gamepad (940-000142) \\
- \hline
- LiPo Battery & 4200 mAh 7,4V 25C \\
- \hline
- NiMH Battery & MARC Power Lite 3400mAh 16V and 12V outputs \\ [1ex]
- \hline
-\end{tabular}}
+  \begin{center}
+    \caption{Mini driverless car hardware configuration details.}
+    \label{table:hardware-configuration}
+    \begin{tabular}{|c|c|}
+      \hline
+      \textbf{Component} & \textbf{Description} \\
+      \hline
+      Vehicle            & TRAXXAS SLASH 4X4 PLATINUM EDITION \\ 
+      \hline
+      Central Computer   & NVIDIA Jetson TX2 Developer Kit \\
+      \hline
+      Stereo Camera      & Stereolabs ZED Camera \\
+      \hline
+      2D LIDAR           & Scanse Sweep LIDAR \\
+      \hline
+      ESC                & Vedder Electronic Speed Controller \\
+      \hline
+      IMU                & SparkFun 9 DoF Razor IMU M0 \\
+      \hline
+      USB3.0 Hub         & USB 3.0 7-Port Hub with 2 Charging Ports UH720 \\
+      \hline
+      Joystick           & Logitech F710 Wireless Gamepad (940-000142) \\
+      \hline
+      LiPo Battery       & 4200 mAh 7,4V 25C \\
+      \hline
+      NiMH Battery       & MARC Power Lite 3400mAh 16V and 12V outputs \\
+      \hline
+    \end{tabular}
+  \end{center}
 \end{table}
 
 The central computer runs various sophisticated algorithms to fuse raw data
@@ -59,44 +61,44 @@ from the commands and feeds them to servo and DC motors to control steering
 angle and speed, respectively. We replace the stock ESC that ships with the
 vehicle with a different speed controller known as VESC, an open source ESC,
 since it is highly configurable and thus supports full control at lower speeds
-\cite{cite2}. The hardware setup also provides a joystick control in order to
-acquire dataset from a human driver and take over the control during the
-autonomous drive in case of an emergency. We use two different batteries to
+\cite{Vesc2015ESC}. The hardware setup also provides a joystick control in
+order to acquire dataset from a human driver and take over the control during
+the autonomous drive in case of an emergency. We use two different batteries to
 power the vehicle.  While NiMH battery powers the central computer and sensors
 through the USB 3.0 Hub, LiPo battery supplies current to the actuators as they
 need a more consistent power source in both quality and quantity.
 
 \section{Software Architecture}
 
-We use Robot Operating System (ROS) \cite{cite3} to implement our architecture.
-ROS defines notion of nodes and allows nodes to communicate through
-publish/subscribe and reply/request mechanisms. Similar to \cite{cite1}, we
-also rely on publish/subscribe mechanism for the data flow between our nodes.
-Nodes subscribe to the message streams from other nodes. The result of the
-computation of a node is then published to the other nodes. This asyncrononous
-messaging alows the software to act as a data processing pipeline. The
-architecture is roughly grouped into four modules.
+We use Robot Operating System (ROS) \cite{Quigley2009ROSAO} to implement our
+architecture.  ROS defines notion of nodes and allows nodes to communicate
+through publish/subscribe and reply/request mechanisms. Similar to
+\cite{Montemerlo2009JuniorTS}, we also rely on publish/subscribe mechanism for
+the data flow between our nodes.  Nodes subscribe to the message streams from
+other nodes. The result of the computation of a node is then published to the
+other nodes. This asyncrononous messaging alows the software to act as a data
+processing pipeline. The architecture is roughly grouped into four modules.
 
 \begin{itemize}
-    \item \textbf{sensor interface --} The sensor interface reads raw data from
-        individual sensors, converts them to meaningful engineering data, then
-        feeds them to the other modules.
-    \item \textbf{scene interpretation --} The scene interpretation module
-        makes sense of the the the environment by finding traffic lanes,
-        detecting obstacles, and classifying the traffic signs. Once the
-        objects of interests are detected and classified, the module also
-        locates the these objects in the real world coordinates with respect to
-        car's body frame. Then it decides on a high-level behavior that best
-        fits to its current perception of the environment such as keeping a
-        lane or stopping on a red light.
-    \item \textbf{navigation --} The navigation module first takes the
-        kinematic constraints, traffic rules, and nearby obstacles into account
-        and generates an optimal trajectory to realize the high-level behavior.
-        Then it computes steering angle and speed values in order to follow the
-        optimal trajectory as close as possible.
-    \item \textbf{actuator --} A pre-configured firmware in the VESC converts
-        steering and speed commands into electronic signals to drive the
-        motors.
+  \item \textbf{sensor interface --} The sensor interface reads raw data from
+    individual sensors, converts them to meaningful engineering data, then
+    feeds them to the other modules.
+  \item \textbf{scene interpretation --} The scene interpretation module
+    makes sense of the the the environment by finding traffic lanes,
+    detecting obstacles, and classifying the traffic signs. Once the
+    objects of interests are detected and classified, the module also
+    locates the these objects in the real world coordinates with respect to
+    car's body frame. Then it decides on a high-level behavior that best
+    fits to its current perception of the environment such as keeping a
+    lane or stopping on a red light.
+  \item \textbf{navigation --} The navigation module first takes the
+    kinematic constraints, traffic rules, and nearby obstacles into account
+    and generates an optimal trajectory to realize the high-level behavior.
+    Then it computes steering angle and speed values in order to follow the
+    optimal trajectory as close as possible.
+  \item \textbf{actuator --} A pre-configured firmware in the VESC converts
+    steering and speed commands into electronic signals to drive the
+    motors.
 \end{itemize}
 
 Figure \ref{figure:software-architecture} illustrates the overall data flow in
@@ -105,10 +107,10 @@ actuator modules are already provided as ROS packages. They are not implemented
 but configured within the scope of this thesis.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=.9\textwidth]{figures/software-architecture.pdf}
-\caption{Software architecture overview.}
-\label{figure:software-architecture}
+  \centering
+  \includegraphics[width=.9\textwidth]{figures/software-architecture.pdf}
+  \caption{Software architecture overview.}
+  \label{figure:software-architecture}
 \end{figure}
 
 Zed camera node is configured to publish visual odometry, RGB, and depth topics
@@ -164,15 +166,15 @@ scene.
 \begin{figure}[h]
   \centering
   \begin{subfigure}[b]{0.4\linewidth}
-      \includegraphics[width=\linewidth]{figures/simulation-environment1.png}
+    \includegraphics[width=\linewidth]{figures/simulation-environment1.png}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\linewidth}
-      \includegraphics[width=\linewidth]{figures/simulation-environment2.png}
+    \includegraphics[width=\linewidth]{figures/simulation-environment2.png}
     \caption{}
   \end{subfigure}
   \caption{(a) Gazebo simulation environment top view. (b) The car, traffic
-  signs, and the bridge in the simulation environment.}
+    signs, and the bridge in the simulation environment.}
   \label{figure:simulation-environment}
 \end{figure}
 
@@ -185,11 +187,11 @@ comparison.
 \begin{figure}[h]
   \centering
   \begin{subfigure}[b]{0.4\linewidth}
-      \includegraphics[width=\linewidth]{figures/actual-camera-view.jpg}
+    \includegraphics[width=\linewidth]{figures/actual-camera-view.jpg}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\linewidth}
-      \includegraphics[width=\linewidth]{figures/simulated-camera-view.jpg}
+    \includegraphics[width=\linewidth]{figures/simulated-camera-view.jpg}
     \caption{}
   \end{subfigure}
   \caption{(a) Actual camera view. (b) Simulated camera view.}
