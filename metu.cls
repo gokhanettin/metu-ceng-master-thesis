@@ -613,7 +613,7 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 \def\@proftitlename{Prof. Dr.}\def\@tproftitlename{Prof. Dr.}
 \def\@assocproftitlename{Assoc. Prof. Dr.}\def\@tassocproftitlename{Doç. Dr.}
-\def\@assistproftitlename{Assist. Prof. Dr.}\def\@tassistproftitlename{Dr. Öğr. Üyesi.}
+\def\@assistproftitlename{Assist. Prof. Dr.}\def\@tassistproftitlename{Dr. Öğr. Üyesi}
 \def\@drtitlename{Dr.}\def\@tdrtitlename{Dr.}
 
 \def\@director{} 
@@ -806,7 +806,7 @@ to\hsize{\hfil\box\@tempboxa\hfil}
  \begin{tabular}{c}
  \@tdegree, {\@tdepartment} Bölümü\\[0.2cm]
  Tez Y\"{o}neticisi: \expthr@@{\@turkishsupervisor} \\[0.2cm]
- \ifexist@co Ortak Tez Y\"{o}neticisi & : \expthr@@{\@turkishcosupervisor}\fi \\[0.2cm]
+ \ifexist@co Ortak Tez Y\"{o}neticisi: \expthr@@{\@turkishcosupervisor}\fi \\[0.2cm]
 \end{tabular}
 \vskip \baselineskip \ifx\@date\kernel@date \@tdate \else \@datetotur{\@date} \fi, \pageref{LastPage} sayfa\end{center}
 \vskip \baselineskip \oneandhalfspacing
@@ -844,7 +844,7 @@ to\hsize{\hfil\box\@tempboxa\hfil}
  \begin{tabular}{c}
  \@shortdegree, Department of \@department \\[0.2cm]
  Supervisor: \expthr@@{\@supervisor} \\[0.2cm]
- \ifexist@co Co-Supervisor & : \expthr@@{\@cosupervisor}\fi\\[0.2cm]
+ \ifexist@co Co-Supervisor: \expthr@@{\@cosupervisor}\fi\\[0.2cm]
 \end{tabular}
 \vskip \baselineskip \@date, \pageref{LastPage} pages\end{center}
 \vskip \baselineskip 
