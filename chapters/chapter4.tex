@@ -77,7 +77,7 @@ classes, which is 6 in our case including the background class.
   \includegraphics[width=1.0\textwidth]{figures/unet-architecture.pdf}
   \caption{Modified U-net architecture for semantic segmentation. Each blue box
     corresponds to a multi-channel feature map. The number of channels is
-    denoted on top of each box. The width x height sizes are provided at the
+    given on the top of each box. The width x height sizes are provided at the
     lower left edge of each block of layers. White boxes denote the
     concatenated feature maps from the contracting side. The arrows denote
     different operations.}
@@ -93,7 +93,7 @@ paper. Note that as opposed to the original architecture, we use paddings for
 the convolutional layers so that the output of a convolution layer has the same
 width and height as the input. As a result, we don't crop contracting feature
 maps before concatenating them with the corresponding feature maps on the
-expanding side.  Another deviation from the original architecture is that we
+expanding side. Another deviation from the original architecture is that we
 train the model in batches(batch size of 8), so we apply batch normalization
 following each 3x3 and 1x1 convolutional layers. We also place additional
 dropout layers to the bottleneck section and expansive side. We use Adam
