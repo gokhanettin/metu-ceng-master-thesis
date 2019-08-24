@@ -66,11 +66,11 @@ classification dataset is presented in Table
       \hline
       \textbf{Course}   & \textbf{Training} & \textbf{Testing} \\
       \hline
-      Course 1          & 1107              & 1171 \\ 
+      Course 1          & 1107              & 1171 \\
       \hline
-      Course 2          & 221               & 3 \\ 
+      Course 2          & 221               & 3 \\
       \hline
-      Course 3          & 120               & 102 \\ 
+      Course 3          & 120               & 102 \\
       \hline
       Course 4          & 0                 & 273 \\
       \hline
@@ -84,31 +84,31 @@ classification dataset is presented in Table
     \label{table:classification-dataset}
     \begin{tabular}{|c|c|c|c|}
       \hline
-      \textbf{Class}    & \textbf{Training} & \textbf{Testing} & \textbf{Auto-cropped} \\
+      \textbf{Class}     & \textbf{Training} & \textbf{Testing} & \textbf{Auto-cropped} \\
       \hline
-      CrossRoad         & 704               & 89               & 470 \\ 
+      PedestrianCrossing & 704               & 89               & 470 \\
       \hline
-      KeepLeft          & 832               & 83               & 582 \\ 
+      KeepLeft           & 832               & 83               & 582 \\
       \hline
-      LooseRoad         & 473               & 60               & 533\\ 
+      LooseGravel        & 473               & 60               & 533\\
       \hline
-      NoEntry           & 502               & 83               & 306 \\ 
+      NoEntry            & 502               & 83               & 306 \\
       \hline
-      Parking           & 497               & 90               & 237 \\ 
+      Parking            & 497               & 90               & 237 \\
       \hline
-      ParkingSlot       & 1728              & 60               & 1788 \\ 
+      ParkingSlot        & 1728              & 60               & 1788 \\
       \hline
-      RoadWork          & 1728              & 86               & 224 \\ 
+      RoadWork           & 1728              & 86               & 224 \\
       \hline
-      StraightOrRight   & 1105              & 89               & 847 \\ 
+      StraightOrRight    & 1105              & 89               & 847 \\
       \hline
-      TrafficLightGreen & 422               & 76               & 192 \\ 
+      TrafficLightGreen  & 422               & 76               & 192 \\
       \hline
-      TrafficLightRed   & 1145              & 72               & 1093 \\ 
+      TrafficLightRed    & 1145              & 72               & 1093 \\
       \hline
-      TurnLeft          & 811               & 93               & 496 \\
+      TurnLeft           & 811               & 93               & 496 \\
       \hline
-      Negative          & 963               & 60               & 1023 \\
+      Negative           & 963               & 60               & 1023 \\
       \hline
     \end{tabular}
   \end{center}
@@ -158,11 +158,11 @@ Course 4 only and the whole test set, respectively.
       \hline
       \textbf{Class} & \textbf{IoU} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
       \hline
-      Ego Lane       & 81.42\%      & 95.00\%            & 84.30\%         & 89.32\% \\ 
+      Ego Lane       & 81.42\%      & 95.00\%            & 84.30\%         & 89.32\% \\
       \hline
-      Right Lane     & 34.36\%      & 61.87\%            & 51.96\%         & 56.49\% \\ 
+      Right Lane     & 34.36\%      & 61.87\%            & 51.96\%         & 56.49\% \\
       \hline
-      Left Lane      & 54.82\%      & 63.23\%            & 82.38\%         & 71.55\% \\ 
+      Left Lane      & 54.82\%      & 63.23\%            & 82.38\%         & 71.55\% \\
       \hline
       Traffic Sign   & 39.66\%      & 67.21\%            & 50.70\%         & 57.80\% \\
       \hline
@@ -178,11 +178,11 @@ Course 4 only and the whole test set, respectively.
       \hline
       \textbf{Class} & \textbf{IoU} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
       \hline
-      Ego Lane       & 82.27\%      & 89.35\%            & 88.86\%         & 89.10\% \\ 
+      Ego Lane       & 82.27\%      & 89.35\%            & 88.86\%         & 89.10\% \\
       \hline
-      Right Lane     & 39.02\%      & 55.07\%            & 65.90\%         & 60.00\% \\ 
+      Right Lane     & 39.02\%      & 55.07\%            & 65.90\%         & 60.00\% \\
       \hline
-      Left Lane      & 68.96\%      & 76.41\%            & 88.16\%         & 81.86\% \\ 
+      Left Lane      & 68.96\%      & 76.41\%            & 88.16\%         & 81.86\% \\
       \hline
       Traffic Sign   & 36.08\%      & 70.17\%            & 43.82\%         & 53.95\% \\
       \hline
@@ -204,31 +204,31 @@ run.
     \label{table:classification-metrics1}
     \begin{tabular}{|c|c|c|c|}
       \hline
-      \textbf{Class}    & \textbf{Precision} & \textbf{Recall}  & \textbf{F1-score} \\
+      \textbf{Class}     & \textbf{Precision} & \textbf{Recall}  & \textbf{F1-score} \\
       \hline
-      CrossRoad         & 100.00\%           & 100.00\%         &  100.00\% \\ 
+      PedestrianCrossing & 100.00\%           & 100.00\%         &  100.00\% \\
       \hline
-      KeepLeft          & 100.00\%           & 100.00\%         & 100.00\% \\ 
+      KeepLeft           & 100.00\%           & 100.00\%         & 100.00\% \\
       \hline
-      LooseRoad         &   N/A              &  N/A             &  N/A     \\ 
+      LooseGravel        &   N/A              &  N/A             &  N/A     \\
       \hline
-      NoEntry           & 100.00\%           & 100.00\%         &  100.00\% \\ 
+      NoEntry            & 100.00\%           & 100.00\%         &  100.00\% \\
       \hline
-      Parking           & 100.00\%           & 100.00\%         &  100.00\% \\ 
+      Parking            & 100.00\%           & 100.00\%         &  100.00\% \\
       \hline
-      ParkingSlot       &   N/A              & N/A              &    N/A   \\ 
+      ParkingSlot        &   N/A              & N/A              &    N/A   \\
       \hline
-      RoadWork          & 100.00\%           & 100.00\%         &  100.00\% \\ 
+      RoadWork           & 100.00\%           & 100.00\%         &  100.00\% \\
       \hline
-      StraightOrRight   & 100.00\%           & 100.00\%         & 100.00\%  \\ 
+      StraightOrRight    & 100.00\%           & 100.00\%         & 100.00\%  \\
       \hline
-      TrafficLightGreen & 100.00\%           & 100.00\%         & 100.00\%  \\ 
+      TrafficLightGreen  & 100.00\%           & 100.00\%         & 100.00\%  \\
       \hline
-      TrafficLightRed   & 92.30\%            & 100.00\%         & 96.00\%  \\ 
+      TrafficLightRed    & 92.30\%            & 100.00\%         & 96.00\%  \\
       \hline
-      TurnLeft          & 100.00\%           & 96.97\%          & 98.46\%  \\
+      TurnLeft           & 100.00\%           & 96.97\%          & 98.46\%  \\
       \hline
-      Negative          & N/A                & N/A              & N/A      \\
+      Negative           & N/A                & N/A              & N/A      \\
       \hline
     \end{tabular}
   \end{center}
@@ -244,31 +244,31 @@ gives the metrics for the second classification test.
     \label{table:classification-metrics2}
     \begin{tabular}{|c|c|c|c|}
       \hline
-      \textbf{Class}    & \textbf{Precision} & \textbf{Recall}  & \textbf{F1-score} \\
+      \textbf{Class}     & \textbf{Precision} & \textbf{Recall}  & \textbf{F1-score} \\
       \hline
-      CrossRoad         & 96.00\%            & 97.75\%          & 97.21\% \\ 
+      PedestrianCrossing & 96.00\%            & 97.75\%          & 97.21\% \\
       \hline
-      KeepLeft          & 100.00\%           & 98.80\%          & 100.00\% \\ 
+      KeepLeft           & 100.00\%           & 98.80\%          & 100.00\% \\
       \hline
-      LooseRoad         & 98.36\%            & 100.00\%         & 99.17\% \\ 
+      LooseGravel        & 98.36\%            & 100.00\%         & 99.17\% \\
       \hline
-      NoEntry           & 95.29\%            & 97.59\%          & 96.43\% \\
+      NoEntry            & 95.29\%            & 97.59\%          & 96.43\% \\
       \hline
-      Parking           & 97.80\%            & 98.89\%          & 98.34\% \\ 
+      Parking            & 97.80\%            & 98.89\%          & 98.34\% \\
       \hline
-      ParkingSlot       & 89.23\%            & 96.97\%          & 92.80\%  \\ 
+      ParkingSlot        & 89.23\%            & 96.97\%          & 92.80\%  \\
       \hline
-      RoadWork          & 96.51\%            & 96.51\%          & 96.51\% \\ 
+      RoadWork           & 96.51\%            & 96.51\%          & 96.51\% \\
       \hline
-      StraightOrRight   & 100.00\%           & 98.87\%          & 99.43\%  \\ 
+      StraightOrRight    & 100.00\%           & 98.87\%          & 99.43\%  \\
       \hline
-      TrafficLightGreen & 98.67\%            & 97.37\%          & 98.01\%  \\ 
+      TrafficLightGreen  & 98.67\%            & 97.37\%          & 98.01\%  \\
       \hline
-      TrafficLightRed   & 100.00\%           & 97.56\%          & 98.76\%  \\ 
+      TrafficLightRed    & 100.00\%           & 97.56\%          & 98.76\%  \\
       \hline
-      TurnLeft          & 96.74\%            & 95.70\%          & 96.22\%  \\
+      TurnLeft           & 96.74\%            & 95.70\%          & 96.22\%  \\
       \hline
-      Negative          & 98.21\%            & 91.67\%          & 94.83\%  \\
+      Negative           & 98.21\%            & 91.67\%          & 94.83\%  \\
       \hline
     \end{tabular}
   \end{center}

@@ -207,7 +207,7 @@ mistakenly classified as a traffic sign, we also put them into a special
 negative class folder.  Augmentating our classification dataset in this manner
 siginificantly improves our classifier as it learns from its own mistakes.
 
-We classify \textit{CrossRoad}, \textit{KeepLeft}, \textit{LooseRoad},
+We classify \textit{PedestrianCrossing}, \textit{KeepLeft}, \textit{LooseGravel},
 \textit{NoEntry}, \textit{Parking}, \textit{ParkingSlot}, \textit{RoadWork},
 \textit{StraightOrRight}, \textit{TrafficLightGreen}, \textit{TrafficLightRed},
 \textit{TurnLeft}, and \textit{Negative} classes. Figure
@@ -225,7 +225,7 @@ traffic sign segmentation mask.
 \begin{figure}[h]
   \centering
   \begin{subfigure}[b]{0.15\linewidth}
-    \includegraphics[width=\linewidth]{figures/signs/CrossRoad.jpg}
+    \includegraphics[width=\linewidth]{figures/signs/PedestrianCrossing.jpg}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{0.15\linewidth}
@@ -233,7 +233,7 @@ traffic sign segmentation mask.
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{0.15\linewidth}
-    \includegraphics[width=\linewidth]{figures/signs/LooseRoad.jpg}
+    \includegraphics[width=\linewidth]{figures/signs/LooseGravel.jpg}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{0.15\linewidth}
@@ -273,7 +273,7 @@ traffic sign segmentation mask.
     \caption{}
   \end{subfigure}
   \caption{Classified and saved traffic sign images from real and simulation
-    training courses. (a) CrossRoad, (b) KeepLeft, (c) LooseRoad, (d)
+    training courses. (a) PedestrianCrossing, (b) KeepLeft, (c) LooseGravel, (d)
     NoEntry, (e) Parking, (f) ParkingSlot, (g) RoadWork, (h) StraightOrRight,
     (i) TrafficLightGreen, (j) TrafficLightRed, (k) TurnLeft, and (l)
     Negative.} \label{figure:traffic-sign-classes}
@@ -410,21 +410,22 @@ It transitions the car into appropriate states depending on the hierarchical
 finite state machine given in Figure \ref{figure:hfsm} as the events arrive.
 When the car is in WAIT state, if there is no obstacle ahead and red light is
 not observed, transition 1 is executed and the car starts driving itself. While
-the car is moving, if it observes a crossroad sign or a red light, it performs
-transition 2 and starts waiting until transition 1 conditions are satisfied. In
-DRIVE state, the default behavior is to follow the lanes at normal speed, 0.7
-m/s. When the car come across any of straight or turn right, turn left, or park
-signs, it stops lane following by sourcing predefined waypoints for these signs
-to the trajectory planner instead of the waypoints extracted from the lanes. In
-the event that the last predefined waypoint is reached or a manual intervention
-through a joystick for an emergency while following a predefined path, runs
-transition 4 to put the car back into the lane following state. If any of
-LooseRoad, KeepLeft, RoadWork or DangerousObstacle events reported while
-driving at the normal speed, the car goes into SLOW SPEED state through
-transition 5 and starts driving at 0.5 m/s. When none of these events are
-reported, the car switches back to the NORMAL SPEED state. Finally, when the
-car sees a parking slot sign on the ground, it performs transition 7 into the
-PARK state, in which the car moves into the parking slot and stops.
+the car is moving, if it observes a pedestrian crossing sign or a red light, it
+performs transition 2 and starts waiting until transition 1 conditions are
+satisfied. In DRIVE state, the default behavior is to follow the lanes at
+normal speed, 0.7 m/s. When the car come across any of straight or turn right,
+turn left, or park signs, it stops lane following by sourcing predefined
+waypoints for these signs to the trajectory planner instead of the waypoints
+extracted from the lanes. In the event that the last predefined waypoint is
+reached or a manual intervention through a joystick for an emergency while
+following a predefined path, runs transition 4 to put the car back into the
+lane following state. If any of LooseGravel, KeepLeft, RoadWork or
+DangerousObstacle events reported while driving at the normal speed, the car
+goes into SLOW SPEED state through transition 5 and starts driving at 0.5 m/s.
+When none of these events are reported, the car switches back to the NORMAL
+SPEED state. Finally, when the car sees a parking slot sign on the ground, it
+performs transition 7 into the PARK state, in which the car moves into the
+parking slot and stops.
 
 \begin{figure}[h]
 \centering
