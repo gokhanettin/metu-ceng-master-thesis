@@ -64,11 +64,8 @@ of the final classification dataset is presented in Table
     \begin{tabular}{|c|c|c|}
       \hline
       \textbf{Course}   & \textbf{Training} & \textbf{Testing} \\
-      \hline
       Course 1          & 2249              & 212              \\
-      \hline
       Course 2          & 169               & 10               \\
-      \hline
       Course 3          & 230               & 29               \\
       \hline
       \textbf{Total}    & 2648              & 251              \\
@@ -87,27 +84,16 @@ of the final classification dataset is presented in Table
       \textbf{Class}     & \textbf{Training} & \textbf{Testing} & \textbf{Auto-cropped} \\
       \hline
       PedestrianCrossing & 704               & 89               & 470 \\
-      \hline
       KeepLeft           & 844               & 83               & 594 \\
-      \hline
       LooseGravel        & 533               & 60               & 593\\
-      \hline
       NoEntry            & 502               & 83               & 306 \\
-      \hline
       Parking            & 497               & 90               & 237 \\
-      \hline
       ParkingSlot        & 1730              & 60               & 1790 \\
-      \hline
       RoadWork           & 1741              & 86               & 237 \\
-      \hline
       StraightOrRight    & 1106              & 89               & 848 \\
-      \hline
       TrafficLightGreen  & 422               & 76               & 192 \\
-      \hline
       TrafficLightRed    & 1147              & 72               & 1095 \\
-      \hline
       TurnLeft           & 817               & 93               & 502 \\
-      \hline
       Negative           & 984               & 60               & 1044 \\
       \hline
       \textbf{Total}     & 11027             & 961              & 7908 \\
@@ -152,14 +138,15 @@ often located towards the edge of the images.
       Road Side      & 71.97\%      & 78.49\%            & 89.58\%         & 83.67\%      \\
       Right Lane     & 51.32\%      & 55.60\%            & 90.19\%         & 68.79\%      \\
       Traffic Sign   & 58.12\%      & 79.52\%            & 71.81\%         & 75.47\%      \\
-      All            & 74.64\%      & 81.92\%            & 89.28\%         & 84.80\%      \\
+      \hline
+      \textbf{All}   & 74.64\%      & 81.92\%            & 89.28\%         & 84.80\%      \\
       \hline
     \end{tabular}
   \end{center}
 \end{table}
 
 For traffic sign detection, we run a classification model on the top of the
-semantic segmentation model that proposes regions to the classification
+semantic segmentation that proposes regions to the classification
 network. Table \ref{table:classification-metrics} presents the detailed
 performance metrics of our 97.45\% accuracy classifier.
 
@@ -173,33 +160,22 @@ can still be classified as a traffic sign as shown in Figure
 \begin{table}[h]
   \begin{center}
     \caption{Traffic sign classification test.}
-    \label{table:classification-metrics}.
+    \label{table:classification-metrics}
     \begin{tabular}{|c|c|c|c|}
       \hline
       \textbf{Class}     & \textbf{Precision} & \textbf{Recall}  & \textbf{F1-score} \\
       \hline
       KeepLeft           & 100.00\%           & 100.00\%         & 100.00\%  \\
-      \hline
       LooseGravel        & 100.00\%           & 100.00\%         &  100.00\% \\
-      \hline
       NoEntry            & 95.40\%            & 100.00\%         &  97.65\%  \\
-      \hline
       Parking            & 98.86\%            & 96.67\%          &  97.75\%  \\
-      \hline
-      ParkingSlot        & 84.51\%            & 100.00\%         & 91.60\%   \\
-      \hline
+      ParkingSlot        & 84.51\%            & 100.00\%         &  91.60\%  \\
       PedestrianCrossing & 97.72\%            & 69.63\%          &  97.17\%  \\
-      \hline
       RoadWork           & 95.50\%            & 98.84\%          &  97.14\%  \\
-      \hline
       StraightOrRight    & 100.00\%           & 97.75\%          & 98.86\%   \\
-      \hline
       TrafficLightGreen  & 98.68\%            & 97.37\%          & 98.01\%   \\
-      \hline
       TrafficLightRed    & 100.00\%           & 97.22\%          & 98.60\%   \\
-      \hline
       TurnLeft           & 98.91\%            & 97.85\%          & 98.37\%   \\
-      \hline
       Negative           & 100.00\%           & 85.00\%          & 91.90\%   \\
       \hline
     \end{tabular}
@@ -235,9 +211,9 @@ class.
 
 
 
-Figure \ref{figure:real-course-detection-good},
+Figure \ref{figure:real-course-detection-good} and Figure
 \ref{figure:real-course-detection-bad} visualize segmentation and sign
-detection results from the test images taken from real courses, Course 1 and
+detection results on the test images taken from real courses, Course 1 and
 Course 2.
 
 \begin{figure}[h]
