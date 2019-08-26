@@ -302,7 +302,7 @@ traffic sign segmentation mask.
     \For{$contour$ \textbf{in} $contours$}
       \State $rect \gets cv2.boundingRect(contour)$
       \Comment{Use OpenCV to get a bounding rectangle of each contour}
-      \If{$distance(rect, rects[i]) < 32$}
+      \If{$distance(rect, rects[i]) < 48$}
         \State $rects[i] \gets merge(rect, rects[i])$
         \Comment{Merge rectangles if they are too close}
       \EndIf
@@ -312,9 +312,9 @@ traffic sign segmentation mask.
     \State $t \gets currentTime()$
     \For{$class$ \textbf{in} $classes$}
       \State $events[class] \gets \textbf{False}$
-      \If{$t - last(tracks[class]).t > 2$}
-        \State \textbf{del} $tracks[class]$
-        \Comment{Remove more than 2 second old tracks}
+      \If{$t - last(detections[class]).t > 2$}
+        \State \textbf{del} $detections[class]$
+        \Comment{Remove more than 2 second old detections}
       \EndIf
     \EndFor
       \algstore{classification}
@@ -334,8 +334,8 @@ traffic sign segmentation mask.
         \State $z \gets mean(depth[v:v+h, u:u+w])$
         \State $x \gets z\frac{u-c_x}{f_x}$
         \State $y \gets z\frac{v-c_y}{f_y}$
-        \State $tracks[class].append(x, y, z, t)$
-        \If{$len(tracks[class]) > 3$ \textbf{and} $last(tracks[class]).x < 2.$}
+        \State $detections[class].append(x, y, z, t)$
+        \If{$len(detections[class]) > 3$ \textbf{and} $last(detections[class]).x < 2.$}
           \Comment{We see the sign more than 3 times with enough confidance within
           a range of 2 meters, so we can safely report that we are tracking it}
           \State $objects[class] \gets (x, y, z, t)$
@@ -348,7 +348,7 @@ traffic sign segmentation mask.
         \EndIf
       \EndIf
     \EndFor
-    \State \textbf{return} $tracks, objects, events$
+    \State \textbf{return} $detections, objects, events$
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
