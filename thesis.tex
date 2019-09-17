@@ -136,14 +136,14 @@
   traffic scene parsing,
   traffic sign classification,
   optimal trajectory planning,
-  pure pursuit controller
+  path tracking
 }
 \anahtarklm{
   otonom araç,
   trafik sahnesi ayrıştırma,
-  trafik işareti sınıflandırması,
-  optimal yörünge planlayıcı,
-  pure pursuit kontrolcüsü
+  trafik işareti sınıflandırma,
+  optimal yörünge planlama,
+  yol takibi
 }
 %
 % Abstract in English
@@ -152,66 +152,64 @@
   Autonomous cars capable of driving in city traffic has been long studied in
   decomposed architectures consisting of perception, planning, and control
   components. Recent advances in deep learning techniques considerably
-  contributed to the perception component of this approach. These advances
-  also led to evolution of other approaches such as end-to-end learning
-  steering commands from camera images and more recently, learning driving
-  affordances. Though the latter approaches are promising to simplify the
-  overall architecture, the former is found more persuasive constituting the
-  majority of today's state-of-the-art, market-oriented driverless cars.
-  However, studies on small-scale autonomous cars, which can be considered as
-  low-cost and rapid prototyping platforms, are not on a par with research on
-  the modern decomposed architectures. These studies often remain limited to
-  end-to-end approaches or resort to traditional image processing techniques
-  in over-simplified traffic scenarios. In this work, we present a decomposed
+  contributed to the perception component of this approach. These advances also
+  led to evolution of other approaches such as end-to-end learning of steering
+  commands and learning driving affordances from camera images. Though the
+  latter approaches are promising to simplify the overall architecture, the
+  former is found more persuasive constituting the majority of today's
+  state-of-the-art, market-oriented driverless cars. However, studies on
+  small-scale autonomous cars, which can be considered as low-cost and rapid
+  prototyping platforms, are not on a par with research on the modern
+  decomposed architectures. These studies often remain limited to end-to-end
+  approaches or resort to traditional image processing techniques in
+  over-simplified traffic scenarios. In this thesis, we present a decomposed
   architecture for small-scale cars covering extended traffic scenarios with
   seven traffic signs, traffic lights, lane changes, cloverleaf interchange,
   pedestrian crossings, and parking. To realize this architecture, we created
-  segmentation and classification datasets. We trained two deep learning
-  models for learning lane semantics and classifying traffic signs and
-  lights. We developed a rule-based behavior planner to decide on the best
-  behavior primitives for traffic scenes. Based on these behavior primitives,
-  we implemented a trajectory planner to find optimal trajectories along the
-  lanes and a controller to follow these trajectories. With our novel lane
-  segmentation scheme, 97\% accuracy classifier, robust planner and
-  controller algorithms, we achieved successful drives on simulated and real
-  courses.
+  segmentation and classification datasets. We trained two deep learning models
+  for learning lane semantics and classifying traffic signs and lights. We
+  developed a behavior planner to decide on the best behavior primitives for
+  traffic scenes. Based on these behavior primitives, we implemented a
+  trajectory planner to find optimal trajectories along the lanes and a
+  controller to follow these trajectories. With our novel lane segmentation
+  scheme, 97\% accurate classifier, robust planner and controller algorithms,
+  we achieved successful drives on simulated and real courses.
 }
 %
 % Turkish Abstract
 %
 \oz{
-  Şehir trafiğinde sürüş yapabilen otonom araçlar algılama, planlama ve
-  kontrol bileşenlerinden oluşan ayrışmış mimariler olarak uzun zamandır
+  Şehir trafiğinde sürüş yapabilen otonom araçlar algılama, planlama ve kontrol
+  bileşenlerinden oluşan ayrışmış mimariler olarak uzun zamandır
   çalışılmaktadır. Derin öğrenme tekniklerindeki son gelişmeler bu yaklaşımın
   algılama bileşenine büyük ölçüde katkıda bulunmuştur. Bu gelişmeler ayrıca
-  kamera görüntüsü üzerinden uçtan uca yönelim komutlarını ve daha güncel
-  olarak sürüş sağlarlıklarını öğrenmek gibi yeni yaklaşımların gelişimini de
-  beraberinde getirmiştir. Sonraki yaklaşımlar genel mimariyi sadeleştirmek
-  için ümit verici olsa da bugünün en gelişmiş, pazara yönelik sürücüsüz
-  araçlarının çoğunluğunu oluşturan ilk yaklaşım daha ikna edici
-  bulunmaktadır. Bununla birlikte, düşük maliyetli ve hızlı prototip
-  oluşturma platformları olarak düşünülebilecek küçük ölçekli otonom araçlar
-  üzerinde yapılan çalışmalar, modern ayrışmış mimariler üzerine yapılan
-  araştırmalarla aynı düzeyde değildir. Bu çalışmalar genellikle uçtan uca
-  yaklaşımlarla sınırlı kalmakta veya aşırı basitleştirilmiş trafik
-  senaryoları içinde geleneksel görüntü işleme yöntemlerine başvurmaktadır.
-  Bu çalışmada, küçük ölçekli araçlar için yedi trafik işareti, trafik
-  ışıkları, şerit değişikliği, yonca yaprağı kavşağı, yaya geçitleri ve park
-  işlemi ile genişletilmiş trafik senaryolarını kapsayan ayrışmış bir mimari
-  sunuyoruz. Bu mimariyi gerçekleştirmek için bölütleme ve sınıflandırma veri
-  setleri oluşturduk. Şerit anlamlarını öğrenmek ve trafik levha ve
-  ışıklarını sınıflandırmak için iki derin öğrenme modeli eğittik. Trafik
-  sahnelerine göre en iyi davranış temellerine karar veren kural tabanlı bir
-  davranış planlayıcısı geliştirdik. Bu davranış temellerine dayanarak, şerit
-  boyunca en uygun yörüngeleri bulan bir yörünge planlayıcısı ve bu
-  yörüngeleri takip etmek için bir denetleyici gerçekledik. Özgün şerit
-  bölümleme tasarımız, \%97 doğruluklu sınıflandırıcımız, dayanıklı
-  planlayıcı ve kontrolcü algoritmalarımızla benzetimli ve gerçek
-  güzergahlarda başarılı sürüşler gerçekleştirdik.
+  kamera görüntüsü üzerinden uçtan uca yönelim komutlarını ve sürüş
+  sağlarlıklarını öğrenmek gibi yeni yaklaşımların gelişimini de beraberinde
+  getirmiştir. Sonraki yaklaşımlar genel mimariyi sadeleştirmek için ümit
+  verici olsa da bugünün en gelişmiş, pazara yönelik sürücüsüz araçlarının
+  çoğunluğunu oluşturan ilk yaklaşım daha ikna edici bulunmaktadır. Bununla
+  birlikte, düşük maliyetli ve hızlı prototip oluşturma platformları olarak
+  düşünülebilecek küçük ölçekli otonom araçlar üzerinde yapılan çalışmalar,
+  modern ayrışmış mimariler üzerine yapılan araştırmalarla aynı düzeyde
+  değildir. Bu çalışmalar genellikle uçtan uca yaklaşımlarla sınırlı kalmakta
+  veya aşırı basitleştirilmiş trafik senaryoları içinde geleneksel görüntü
+  işleme yöntemlerine başvurmaktadır. Bu tezde, küçük ölçekli araçlar için
+  yedi trafik işareti, trafik ışıkları, şerit değişikliği, yonca yaprağı
+  kavşağı, yaya geçitleri ve park işlemi ile genişletilmiş trafik senaryolarını
+  kapsayan ayrışmış bir mimari sunuyoruz. Bu mimariyi gerçekleştirmek için
+  bölütleme ve sınıflandırma veri setleri oluşturduk. Şerit anlamlarını
+  öğrenmek ve trafik levha ve ışıklarını sınıflandırmak için iki derin öğrenme
+  modeli eğittik. Trafik sahnelerine göre en iyi davranış temellerine karar
+  veren bir davranış planlayıcısı geliştirdik. Bu davranış temellerine
+  dayanarak, şerit boyunca en uygun yörüngeleri bulan bir yörünge planlayıcısı
+  ve bu yörüngeleri takip etmek için bir denetleyici gerçekledik. Özgün şerit
+  bölümleme tasarımız, \%97 doğru sınıflandırıcımız, dayanıklı planlayıcı ve
+  kontrolcü algoritmalarımızla benzetimli ve gerçek güzergahlarda başarılı
+  sürüşler gerçekleştirdik.
 }
 %
 % Dedication
-\dedication{To people who take time to read this page}
+\dedication{To those who cannot do without Vim key bindings.}
 %
 %
 % Acknowledgements
