@@ -56,40 +56,41 @@ Table \ref{table:hardware-configuration}.
 \end{table}
 
 The central computer runs various sophisticated algorithms to fuse raw data
-from sensors to achieve situational awareness, select the best possible action
-accordingly, and finally send speed and steering angle commands to the ESC.  in
-order to execute the action. The ESC generates necessary electronic signals
-from the commands and feeds them to servo and DC motors to control steering
-angle and speed, respectively. We replace the stock ESC that ships with the
-vehicle with a different speed controller known as VESC, an open source ESC,
-since it is highly configurable and thus supports full control at lower speeds
-\cite{Vesc2015ESC}. The hardware setup also provides a joystick control in
-order to acquire dataset from a human driver and take over the control during
-the autonomous drive in case of an emergency. We use two different batteries to
-power the vehicle.  While NiMH battery powers the central computer and sensors
-through the USB 3.0 Hub, LiPo battery supplies current to the actuators as they
-need a more consistent power source in both quality and quantity.
+from sensors to achieve environmental perception, select the best possible
+action accordingly, and finally send speed and steering angle commands to the
+ESC in order to execute the action. The ESC generates necessary electronic
+signals from the commands and feeds them to servo and DC motors to control
+steering angle and speed, respectively. We replace the stock ESC that ships
+with the vehicle with a different speed controller known as VESC, an open
+source ESC, since it is highly configurable and thus supports full control at
+lower speeds \cite{Vesc2015ESC}. The hardware setup also provides a joystick
+control in order to acquire dataset from a human driver and take over the
+control during the autonomous drive in case of an emergency. We use two
+different batteries to power the vehicle. While NiMH battery powers the
+central computer and sensors through the USB 3.0 Hub, LiPo battery supplies
+current to the actuators as they need a more consistent power source.
 
 \section{Software Architecture}
 
 We use Robot Operating System (ROS) \cite{Quigley2009ROSAO} to implement our
-architecture.  ROS defines notion of nodes and allows nodes to communicate
-through publish/subscribe and reply/request mechanisms. Similar to
-\cite{Montemerlo2009JuniorTS}, we also rely on publish/subscribe mechanism for
-the data flow between our nodes.  Nodes subscribe to the message streams from
-other nodes. The result of the computation of a node is then published to the
-other nodes. This asyncrononous messaging alows the software to act as a data
-processing pipeline. The architecture is roughly grouped into four modules.
+architecture. ROS defines notion of nodes and allows nodes to communicate
+through publish/subscribe and reply/request mechanisms. Similar to previous
+studies \cite{ Thrun2006StanleyTR, Montemerlo2009JuniorTS, Kato2018AutowareOB},
+we also rely on publish/subscribe mechanism for the data flow between our
+nodes. Nodes subscribe to the message streams from other nodes. The result of
+the computation of a node is then published to the other nodes. This
+asyncrononous messaging alows the software to act as a data processing
+pipeline. The architecture is roughly grouped into four modules.
 
 \begin{itemize}
   \item \textbf{sensor interface --} The sensor interface reads raw data from
     individual sensors, converts them to meaningful engineering data, then
     feeds them to the other modules.
   \item \textbf{scene interpretation --} The scene interpretation module
-    makes sense of the the the environment by finding traffic lanes,
+    makes sense of the the environment by finding traffic lanes,
     detecting obstacles, and classifying the traffic signs. Once the
     objects of interests are detected and classified, the module also
-    locates the these objects in the real world coordinates with respect to
+    locates these objects in the real world coordinates with respect to
     car's body frame. Then it decides on a high-level behavior that best
     fits to its current perception of the environment such as keeping a
     lane or stopping on a red light.
@@ -116,21 +117,21 @@ but configured within the scope of this thesis.
 \end{figure}
 
 Zed camera node is configured to publish visual odometry, RGB, and depth topics
-at the rate of 15 Hz. Message types flow through this topics are well-defined
-in ROS. An odometry message contains position, orientation, linear and angular
-velocities with respect to the starting point, i.e. with respect to the
-odometry frame. RGB image message is a rectified color image from the left zed
-camera, which is used for image segmentation and classification. Because zed
-camera features stereo images, it can also publish a depth image, which is used
-to locate the traffic signs with respect to the body frame.
+at a rate of 15 Hz. Message types that flow through these topics are
+well-defined in ROS. An odometry message contains position, orientation, and
+linear and angular velocities with respect to the starting point. RGB image
+message is a rectified color image from the left zed camera, which is used for
+image segmentation and classification. Because zed camera features stereo
+images, it can also publish a depth image, which is used to locate the traffic
+signs with respect to the body frame.
 
 LIDAR node is configured to provide scan data to the costmap nodes in the scene
 interpretation module at 5 Hz rotational speed. The costmap nodes then
-publishes local occupancy grid maps that indicate nearby objects. Scene
+publish local occupancy grid maps that indicate nearby objects. Scene
 interpretation maintains two local maps in different sizes. The small map is
-used in navigation module for collision avoidance.  The larger map is
+used in navigation module for collision avoidance. The larger map is
 internally used by the scene interpretation module for behavior planning to
-guide the trajectory planner before the navigation module observe the
+guide the trajectory planner before the navigation module observes the
 obstacles.
 
 Behavior planner component decides if the car should stop or in which speed
@@ -150,20 +151,19 @@ publishes the recommended speed and steering commands to the actuator module.
 \section{Simulation Environment}
 
 It is not always practical to try new ideas on the target platform for several
-reasons. First, it is too risky to run an updated version of software in the
-target platform as it would crash into an obstacle. Second, the batteries have
-certain life time and we do not want to drain them for each immature update to
-the code base. Third, deploying ad testing the software on the target is time
-consuming. The last but not least, because running the software on the target
-requires a large enough spacial area with various traffic signs, lanes, a
-bridge and many other urban conditions, which we could barely afford a few, we
-had no better option than creating a simulated environment.
+reasons. First, it is too risky to run an updated version of the software in
+the target platform as it might crash into an obstacle. Second, the batteries
+have certain life time and we do not want to drain them for each immature
+update to the code base. Third, deploying and testing the software on the car
+is time consuming. Last but not least, running the software on the car requires
+a large enough space with various traffic signs, lanes, a bridge and many other
+urban conditions, which we could barely afford a few, therefore, we had no
+better option than creating a simulated environment.
 
 We used Gazebo to model our simulation world and robot car. Figure
 \ref{figure:simulation-environment} shows the simulated urban area. It
 simulates every case in OpenZeka MARC 2019 except that we have to manually
-replace red and green lights, and manually remove the pedestrian from the
-scene.
+toggle red and green lights, and manually walk the pedestrian out of the scene.
 
 \begin{figure}[h]
   \centering
@@ -207,5 +207,5 @@ not even a joystick as it supports keyboard commands. We trained our
 segmentation and classification models on those datasets and tested in the
 simulation environment. We also developed our trajectory planning and control
 algorithms in the simulation, which drastically reduced the risk of damaging
-any equipment. On the whole, the simulation did not replace the real world, but
-rather served as a flexible testbed.
+any equipment. In a nutshell, the simulation was not a replacement for the real
+world, but rather served as a flexible testbed.

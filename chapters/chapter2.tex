@@ -1,22 +1,22 @@
-\chapter{Related Work and Background}
+\chapter{Background and Related Work}
 \label{chp:b2}
 
 In this chapter, we review prominent autonomous driving architectures together
 with the algorithms they are composed of. Along the way, we also briefly
 discuss the historical development of self-driving cars, particularly two most
 significant self-driving car competitions that paved the way for today's
-driverless car technologies, DARPA Grand Challenge and DARPA Urban Challenge.
+driverless car technologies; DARPA Grand Challenge and DARPA Urban Challenge.
 
-In DARPA Grand Challenge 2004, no team saw the finishing line of the race
-course out of 15 teams. In DARPA Grand Challenge 2005, Stanley, a robot car
-developed by Stanford Racing Team, was the first car to complete the race
-course.  Thrun et al. \cite{Thrun2006StanleyTR} presents the details of the
-competition rules and the software design of Stanley. According to Thrun et
-al., a description of the race course was given to the participants in a
-DARPA-defined format, RDDF two hours before the race. The RDDF contained a list
-of longitudes, latitudes, road segment widths and a list of speed limits
-associated with the road segments. In addition, the autonomous cars didn't need
-to deal with dynamic obstacles.
+In DARPA Grand Challenge 2004, none of the 15 teams saw the finishing line of
+the race course. In DARPA Grand Challenge 2005, Stanley, a robot car developed
+by Stanford Racing Team, was the first car to complete the race course. Thrun
+et al. \cite{Thrun2006StanleyTR} presents the details of the competition rules
+and the software design of Stanley. According to Thrun et al., a description of
+the race course was given to the participants in a DARPA-defined format, namely
+RDDF, two hours before the race. The RDDF contained a list of longitudes,
+latitudes, road segment widths and a list of speed limits associated with the
+road segments. In addition, the autonomous cars didn't need to deal with
+dynamic obstacles.
 
 The authors state that Stanley's software is designed as a data processing
 pipeline and processing nodes communicate through a publish/subscribe
@@ -31,14 +31,14 @@ process and measurement noise covariances are learned in a discriminative
 fashion by coordinate ascent algorithm.
 
 As opposed to laser terrain analysis, Stanley uses generative learning
-algorithm for camera based terrain analysis. Drivable quadrilaterals ahead of
-the vehicle extracted using the laser data is projected into the camera image.
+algorithm for camera based terrain analysis. Drivable quadrilaterals (ahead of
+the vehicle, extracted from laser data) are projected onto the camera image.
 The pixels inside the quadrilateral are then used as training samples. From
 these samples, Stanley learns and maintains a database of Gaussians in RGB
-space that corresponds to wide variety of drivable surfaces. The reach of a
-laser range is smaller than that of the camera. On the other hand, vision based
-terrain analysis is susceptible to olcor and lighting changes in the
-environment.  Therefore, Stanley uses the laser based terrain analysis for
+space that corresponds to wide variety of drivable surfaces. The range of a
+laser sensor is shorter than that of the camera. On the other hand, vision
+based terrain analysis is susceptible to color and lighting changes in the
+environment. Therefore, Stanley uses the laser based terrain analysis for
 steering control and vision based analysis for speed control so that the vision
 module acts as an early warning system when an obstacle is ahead but not within
 the range of the lasers.
@@ -65,8 +65,8 @@ Figure \ref{figure:stanley-control}.
   \centering
   \includegraphics[width=.8\textwidth]{figures/stanley-control.png}
   \caption[Stanley controller algorithm]{The geometrical relation between the
-    trajectory and the car used by Stanley controller algorithm. Taken from
-    \cite{Thrun2006StanleyTR}.}
+    trajectory and the car used by Stanley controller algorithm. (Figure
+    source: Thrun et al. \cite{Thrun2006StanleyTR})}
   \label{figure:stanley-control}
 \end{figure}
 
@@ -82,27 +82,26 @@ where $k$ is a gain parameter, $u(t)$ is the car speed, and $\psi(t)$ denotes
 the orientation of the nearest trajectory segment relative to the car's
 orientation. The intuition behind the controller is that as the cross-track
 error $x(t)$ increases, the controller produces stronger steering angle
-$\delta(t)$ towards the trajectory.  Likewise, as the speed $u(t)$ increases,
+$\delta(t)$ towards the trajectory. Likewise, as the speed $u(t)$ increases,
 the controller avoids sudden strong maneuvers. Hoffmann et al. studies the
-Stanley controller algorithm in greater detail in
-\cite{Hoffmann2007AutonomousAT}.
+Stanley controller algorithm in greater detail \cite{Hoffmann2007AutonomousAT}.
 
 In 2007, DARPA Urban Challenge took place. Montemerlo et al.
-\cite{Montemerlo2009JuniorTS} presents the competition details and the software
+\cite{Montemerlo2009JuniorTS} present the competition details and the software
 architecture of Junior, Stanford's another robot car and the second best car in
 the challenge. This time rules were more complex including overtaking parking
 or moving vehicles, precedence handling at intersections possibly with stop
 signs, merging into fast moving traffic, left turns, parking and U-turns when
 the road is completely blocked. Participants were provided with a road network
-description file or RNDF which contained lane information, stop signs, parking
-lots, and special checkpoints. In addition, the teams were also provided with a
-high resolution aerial image of the race course so that they can further
-improve the RNDF. In the competition, the vehicles were given multiple missions
-as a sequence of checkpoints in the RNDF.
+description file, or RNDF, which contained lane information, stop signs,
+parking lots, and special checkpoints. In addition, the teams were also
+provided with a high resolution aerial image of the race course so that they
+can further improve the RNDF. In the competition, the vehicles were given
+multiple missions as a sequence of checkpoints in the RNDF.
 
-Like Stanley, Junior's software software architecture is made of sensor
-interfaces, perception, navigation, and drive-by-wire interfaces at the core.
-The design is again based on data processing endpoints communicating with
+Like Stanley, Junior's software architecture is made of sensor interfaces,
+perception, navigation, and drive-by-wire interfaces at the core. The design
+is again based on data processing endpoints communicating with
 publish/subscribe paradigm. Unlike Stanley, Junior's modules are far more
 advanced. Junior's perception module segments the environment data into moving
 vehicles and static obstacles. Its navigation features a global path planner
@@ -119,11 +118,11 @@ angles and computes a score based on the continuous state. The continuous state
 is represented by x-y position of the car, heading direction, and the
 direction, either forward or reverse. Whereas the path found by the regular A*
 and Field D* algorithms cannot be executed due to their discrete nature, hybrid
-A* can find executable paths that the nonholonomic constaints of the vehicle.
-Hybrid A* uses dual admissible heuristics. One heuristic is nonholonomic
-without obstacles, and the other is holonomic with obstacles. Once a solution
-is found, it is smoothed for a better driving experience. Extensive study and
-experiments show that hybrid A* produces near-optimal solutions
+A* can find executable paths that accounts for the nonholonomic constaints of
+the vehicle. Hybrid A* uses dual admissible heuristics. One heuristic is
+nonholonomic without obstacles, and the other is holonomic with obstacles. Once
+a solution is found, it is smoothed for a better driving experience. Extensive
+study and experiments show that hybrid A* produces near-optimal solutions
 \cite{Dolgov2010PathPF, Petereit2012Application}. Figure
 \ref{figure:hybridastar-comparison} demonstrates the difference between regular
 A*, Field D*, and hybrid A* algorithms.
@@ -132,22 +131,22 @@ A*, Field D*, and hybrid A* algorithms.
   \centering
   \includegraphics[width=.8\textwidth]{figures/hybridastar-comparison.png}
   \caption[A*, Field D* and Hybrid A* algorithms]{Left: Regular A* solutions
-    passes through only the center of grids.  Center: Field D* solutions can
-    have arbitrary linear paths from cell to cell.  Right: Hybrid A* associates
-    a continuous state with each cell and compute a score for the continuous
-    state. Taken from \cite{Dolgov2010PathPF}.}
+    pass through only the center of grids. Center: Field D* solutions can
+    have arbitrary linear paths from cell to cell. Right: Hybrid A* associates
+    a continuous state with each cell and computes a score for the continuous
+  state. (Figure source: Dolgov et al. \cite{Dolgov2010PathPF})}
   \label{figure:hybridastar-comparison}
 \end{figure}
 
 Junior uses a different planner for normal on-road navigation. It performs
 internal simulations with different steering parameters. The internal
-simulations generate candidate trajectories according a reference path. This
-reference path is essentially the smoothed center of the lane obtained from
-RNDF. The planner evaluates the candidate trajectories by a cost function and
-finally selects the best trajectory. The cost function also regulates the lane
-change or overtaking behavior of Junior. When the right lane is blocked, the
-car chooses to shift left. When the overtaking is complete, it steers back to
-the right lane as it would be more costly to occupy the left lane.
+simulations generate candidate trajectories with respect to a reference path.
+This reference path is essentially the smoothed center of the lane obtained
+from RNDF. The planner evaluates the candidate trajectories by a cost function
+and finally selects the best trajectory. The cost function also regulates the
+lane change or overtaking behavior of Junior. When the right lane is blocked,
+the car chooses to shift left. When overtaking is complete, it steers back
+to the right lane as it would be more costly to occupy the left lane.
 
 Driving behavior of Junior is governed by a hierarchical finite state machine.
 The state machine decides on the U-turns, handles intersection precedence and
@@ -155,39 +154,40 @@ stop signs, prevents the car from getting stuck, switches to parking navigation
 in a parking lot or chooses the true planner for the current scenario in
 general.
 
-Werling et al. \cite{Werling2010OptimalTG} reports that they generated optimal
-trajectories in Frenet frame and tested it on Junior without obstacles. They
+Werling et al. \cite{Werling2010OptimalTG} report that they generated optimal
+trajectories in Frenet frame and tested on Junior without obstacles. They
 also present their obstacle avoidance experiments in simulation. In their
 method, they suggest integrating trajectory generation with a behavioral layer
 that decides on the high level as to whether the car should keep a constant
-velocity, follow the car in front with a constant distance, merging into
-traffic or stoping at a point. Figure \ref{figure:frenet-velocity-keeping}
+velocity, follow the car in front with a constant distance, merge into
+traffic or stop at a point. Figure \ref{figure:frenet-velocity-keeping}
 demonstrates a velocity keeping instance in this approach.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/frenet-velocity-keeping.png}
-  \caption[An example optimal trajectory generated in Frenet frame]{An exmaple
+  \caption[A sample optimal trajectory generated in Frenet frame]{A sample
     optimal trajectory generated in Frenet frame in velocity keeping mode.
-    Colors from red to yellow represent increasing lateral cost.  Colors from
+    Colors from red to yellow represent increasing lateral cost. Colors from
     grey to black represent increasing longitudinal cost. Green and light grey
-    colors represent the optimal trajectory, which leads the car to the reference
-    line and desired speed. Taken from \cite{Werling2010OptimalTG}.}
+    colors represent the optimal trajectory, which leads the car to the
+    reference line and desired speed. (Figure source: Werling et al.
+    \cite{Werling2010OptimalTG})}
   \label{figure:frenet-velocity-keeping}
 \end{figure}
 
-Yoneda et al. \cite{Yoneda2018TrajectoryOA} further extends the method in
-\cite{Werling2010OptimalTG} introducing an additional adjust mode while
-switching from velocity keeping mode or cruise mode to distance keeping in an
+Yoneda et al. \cite{Yoneda2018TrajectoryOA} further extend the method developed
+by Werling et al. \cite{Werling2010OptimalTG} introducing an additional adjust
+mode while switching from velocity keeping mode to distance keeping in an
 affort to eliminate strong acceleration and deceleration during the mode
-switching in the quest of a more natural driving experience.
+switching in quest of a more natural driving experience.
 
 Fast forward to the present day, Autoware \cite{Kato2018AutowareOB}, being one
-of the modern open source self-driving car platform is based on ROS
-\cite{Quigley2009ROSAO}. ROS is a commonly used, extendible, component based,
+of the modern open source self-driving car platforms is based on ROS
+\cite{Quigley2009ROSAO}. ROS is a commonly used, extensible, component based,
 higly modular middleware framework with many reusable packages and
 visualization tools that dramatically accelerated today's robot development and
-prototyping processes.  Unsurprisingly, publish/subscribe mechanism is at the
+prototyping processes. Unsurprisingly, publish/subscribe mechanism is at the
 core of ROS communication patterns. Autoware implements perception,
 decision-making, planning and path tracking capabilities. Figure
 \ref{figure:autoware} illustrates the the Autoware architecture at a high
@@ -197,19 +197,19 @@ level.
   \centering
   \includegraphics[width=.8\textwidth]{figures/autoware.png}
   \caption[Autoware high level architecture]{Autoware high level architecture
-    and data flow. Taken from \cite{Kato2018AutowareOB}.}
+    and data flow. (Figure source: Kato et al. \cite{Kato2018AutowareOB})}
   \label{figure:autoware}
 \end{figure}
 
 Perception capabilities are made of localization, detection, and prediction
 modules. For the localization, Autoware relies on high definition 3D maps. It
-localizes itself appling scan matching between the 3D map and LiDAR scans.
+localizes itself by appling scan matching between the 3D map and LiDAR scans.
 Therefore, a 3D map of the environment should be created beforehand using SLAM
-technologies, in which scan matching is applied against previous LiDAR scans
+techniques, in which scan matching is applied against previous LiDAR scans
 instead of a 3D map such that a transformation between the LiDAR scans are
 obtained and a cumulative point cloud is continually updated. Other perception
-modules are also rely on the localization. For example, the car is localized in
-the 3D map, it projects 3D map fatures into the front view camera images to
+modules also rely on the localization. For example, the car is localized in
+the 3D map, it projects 3D map features into the front view camera images to
 define a ROI for traffic light detection and classification in order to
 eliminate full image search on every image frame. The detection module supports
 both deep learning and traditional image processing and machine learning
@@ -222,21 +222,21 @@ perception modules, Autoware makes decisions in response to the environmental
 changes. The decision-making scheme is captured in a finite state machine
 similar to Junior.
 
-Autoware features two set of planners, a mission planner and motion planners.
-The mission planner is responsible for a rough global path from the current
-location to the destination in the map. Motion planners, on the other hand,
-generates local trajectories taking the global plan as a reference. In
+Autoware features two sets of planners, a mission planner and motion planners.
+The mission planner is responsible for creating a rough global path from the
+current location to the destination in the map. Motion planners, on the other
+hand, generate local trajectories taking the global plan as a reference. In
 unstructured environments such as parking lots, hybrid A* is used similar to
 Junior. For well-structured environment scenarios such as navigating on the
 lanes, state lattice based algorithms are preferred. Pivtoraiko et al.
-\cite{Pivtoraiko2009DifferentiallyCM} introduces space lattice based planning.
+\cite{Pivtoraiko2009DifferentiallyCM} introduce space lattice based planning.
 The state lattice is made of motion primitives of a specific car. The motion
 primitives are generated offline by a precise trajectory generator respecting
 the mobility model of the vehicle such as steering limits and wheelbase. Then,
-the lattice search space could be search by D* algorithms for optimal
-trajectories. This method also successfully used in DARPA Urban Challenge by
-the winner vehicle, Carnegie Mellon University's Tartan Racing for navigating
-in unstructural environments \cite{Urmson2007TartanRA}. Figure
+the lattice search space could be searched by D* algorithms for optimal
+trajectories. This method was also successfully used in DARPA Urban Challenge
+by the winner vehicle, Carnegie Mellon University's Tartan Racing for
+navigating in unstructural environments \cite{Urmson2007TartanRA}. Figure
 \ref{figure:state-lattice} illustrates a state lattice. McNaughton et al.
 \cite{McNaughton2011MotionPF} later extended this approach and applied it to
 structural environments.
@@ -245,17 +245,18 @@ structural environments.
   \centering
   \includegraphics[width=.8\textwidth]{figures/state-lattice.png}
   \caption[An example state lattice]{An example state lattice without reverse
-    motions. Taken from \cite{Pivtoraiko2009DifferentiallyCM}.}
+    motions. (Figure source: Pivtoraiko et al.
+    \cite{Pivtoraiko2009DifferentiallyCM})}
   \label{figure:state-lattice}
 \end{figure}
 
 Autoware uses pure pursuit controller to generate low level steering commands
 to execute the given trajectory from the motion planners. Kim et al.
 \cite{Kim2013SensorbasedMP} studies the controller with its geometrical
-derivation and also gives some useful pointers on tuning.
+derivation and also give some useful pointers on tuning.
 
 Backed by Baidu, Apollo is another open source autonomous driving platform with
-its giant dataset \cite{Huang2018TheAD}. Similar to other decompositioned
+its giant dataset \cite{Huang2018TheAD}. Similar to other decomposed
 architectures, Apollo is also made of localization, perception, prediction,
 routing, motion planner, and vehicle control components as shown in Figure
 \ref{figure:apollo}. Like Autoware, Apollo also relies on high definition 3D
@@ -265,7 +266,7 @@ maps for location and perception \cite{Fan2018BaiduAE}.
   \centering
   \includegraphics[width=.8\textwidth]{figures/apollo.png}
   \caption[Apollo high level architecture]{Apollo high level architecture and
-    data flow. Taken from \cite{Fan2018BaiduAE}.}
+    data flow. (Figure source: Fan et al. \cite{Fan2018BaiduAE})}
   \label{figure:apollo}
 \end{figure}
 
@@ -275,11 +276,11 @@ lane-based motion planner is quite different. Apollo does not directly use
 this global plan as a reference path for trajectory generation, but rather it
 generates multiple lane level reference lines from it taking traffic
 regulations (e.g., traffic signs, signals and lane markings) and safety
-measures into account.  During lane level motion planning, Frenet frames are
-constructed based on the given reference lines.  Lane level path and speed
+measures into account. During lane level motion planning, Frenet frames are
+constructed based on the given reference lines. Lane level path and speed
 optimizers generate the optimal trajectories in Frenet frame for each lane.
 Finally, a trajectory decider chooses the best trajectory for the maneuver
-given the cost of each trajectory, car status, traffic regulations.  This
+given the cost of each trajectory, car status, traffic regulations. This
 approach allows for dealing with different traffic regulations that apply for
 different lanes of the same road \cite{Fan2018BaiduAE}.
 
@@ -289,9 +290,9 @@ to steering angle and speed commands in an end-to-end manner. Bojarski et al.
 car with the modern deep learning techniques. They collected 72 hours data
 with different cars in different weather and lighting conditions from various
 places. For the data acqusition, they installed three cameras on the car behind
-the windshild and recorded timestamped videos from the left, right and center
+the windshield and recorded timestamped videos from the left, right and center
 cameras along with the steering commands controlled by a human driver. During
-training, they agumented the dataset by random shifting and rotating the images
+training, they augmented the dataset by random shifting and rotating the images
 and adjusting the recorded commands accordingly. The trained model then
 successfully steered the car by using the images only from the central camera.
 Figure \ref{figure:end-to-end-network} demonstrates the training and testing
@@ -308,12 +309,12 @@ steps of this approach.
     \caption{}
   \end{subfigure}
   \caption[End-to-end training and inference]{(a) End-to-end training scheme.
-    (b) Steering command inference from raw camera images. Taken from
-    \cite{Bojarski2016EndTE}.}
+    (b) Steering command inference from raw camera images. (Figure source:
+    Bojarski et al. \cite{Bojarski2016EndTE})}
   \label{figure:end-to-end-network}
 \end{figure}
 
-Bechtel et al. \cite{Bechtel2017DeepPicarAL} replicated the work
+Bechtel et al. \cite{Bechtel2017DeepPicarAL} replicated the study
 \cite{Bojarski2016EndTE} with a small-scale, low-cost platform using a web
 camera and a Raspberry Pi 3 for inference. They conducted successful
 experiments in a specially built test course for their RC car.
@@ -326,36 +327,36 @@ basic lane following, they also learned to turn left or right when the
 corresponding traffic sign is encountered. The traffic sign diameter was 15 cm
 in their experiments.
 
-There are several traffic scene segmentation segmentation datasets available.
-Currently, the largest and the most comprehensive is ApolloSpace
+There are several traffic scene segmentation datasets available. Currently,
+the largest and the most comprehensive one is ApolloScape
 \cite{Huang2018TheAD}. It is followed by Cityscapes \cite{Cordts2016TheCD},
 KITTI \cite{Geiger2012AreWR}, and Mapillary Vistas \cite{Neuhold2017TheMV}
-datasets. Because these datasets are created for real-sized cars on the real
-roads, they were not much useful for us, so we had to create our own
-segmentation dataset. The existing traffic sign and signal classification
-datasets \cite{Timofte2009MultiviewTS, Stallkamp2012ManVC, Shakhuro2016RussianTS,
+datasets. Because these datasets are created for real-sized cars on real roads,
+they were not suitable for us, so we had to create our own segmentation
+dataset. The existing traffic sign and signal classification datasets
+\cite{Timofte2009MultiviewTS, Stallkamp2012ManVC, Shakhuro2016RussianTS,
 Serna2018ClassificationOT, MaldonadoBascn2007RoadSignDA}, on the other hand,
 was useful to train an initial classifier as they are mostly independent of the
 scene and car size.
 
-Sakai et al. \cite{Kim2013SensorbasedMP} presents a collection of various
+Sakai et al. \cite{Kim2013SensorbasedMP} present a collection of various
 autonomous navigation algorithms implemented in Python Programming Language in
-their basic forms. The collection includes aforementioned hybrid A*, frenet
-optimal trajectory planner, state lattice planner, stanley controller, and pure
+their basic forms. The collection includes aforementioned hybrid A*, Frenet
+optimal trajectory planner, state lattice planner, Stanley controller, and pure
 pursuit controller algorithms.
 
 Unlike Stanley, Junior, Autoware and Apollo, we don't have a detailed map of
 the driving course. As a result, our best option is to follow the lanes unless
-a traffic sign or another conditions mandate otherwise. For the same reason, we
-have to create our reference paths for our local trajectory generation either
-from the online detected lane centers or according to the traffic regulations.
-Meyer et al. \cite{Meyer2018DeepSL} studies semantic lane segmentation for
-mapless driving, which bears similaries to our lane detection approach.
-Autohors motivation is the fact that as the high definition maps quickly gets
-out of date due to constructions an autonomous car should also be able to
-perform basic navigation tasks without a precise map, but possibly with a
-course map, specifically for intersections. They start with creating their own
-dataset by extending Cityscape \cite{Cordts2016TheCD}. Their approach is to
+a traffic sign or some other condition mandates otherwise. For the same reason,
+we have to create our reference paths for our local trajectory generation
+either from the online detected lane centers or according to the traffic
+regulations. Meyer et al. \cite{Meyer2018DeepSL} study semantic lane
+segmentation for mapless driving, which bears similaries to our lane detection
+approach. Authors' motivation is the fact that as the high definition maps
+quickly get out of date due to constructions an autonomous car should also be
+able to perform basic navigation tasks without a precise map, but possibly with
+a coarse map, specifically for intersections. They start with creating their
+own dataset by extending Cityscape \cite{Cordts2016TheCD}. Their approach is to
 annotate the road surface as ego lane, parallel lane, and opposite lane and
 learn these regions with a semantic segmentation model.
 
@@ -365,5 +366,5 @@ Junior guarantees a smooth trajectory by smoothing already known center
 reference lines or post processing the output of hybrid A*. We cannot guarantee
 a smooth path as we use discontinuous predefined path in response to traffic
 signs and signals or due to instantaneous segmentation errors in the lane
-detection.  Conversely, as pure pursuit controller drives along an arc it is
-less likely to be affected by discontinueties.
+detection. Conversely, as pure pursuit controller drives along an arc it is
+less likely to be affected by discontinuities.

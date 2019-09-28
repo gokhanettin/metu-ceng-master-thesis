@@ -3,12 +3,13 @@
 
 This thesis aimed to investigate autonomous car software architectures for
 urban driving scenarios. Based on the existing studies, decomposed
-architectures prove more success in city traffic compared to end-to-end
-solutions. As a budget-friendly alternative, we developed a mini autonomous car
-with this a decomposed architecture for urban scenarios including seven
-different traffic signs, traffic signals, bridge, overtaking a stationary car,
-an parking with no predefined map. These scenarios together makes the problem
-too complicated to be addressed with the existing mini autonomous car studies.
+architectures prove to be more successful in city traffic compared to
+end-to-end solutions. As a budget-friendly alternative, we developed a mini
+autonomous car with a decomposed architecture for urban scenarios including
+seven different traffic signs, traffic signals, bridge, overtaking a stationary
+car, and parking with no predefined map. These scenarios together makes the
+problem too complicated to be addressed with the existing mini autonomous car
+solutions.
 
 Due to lack of traffic scene segmentation datasets for mini cars, we started
 with creating a dataset. Then we trained a U-net based model to learn ego lane,
@@ -20,7 +21,7 @@ We showed that we achieved 88\% IoU for the ego lane, which is comparable to
 the related work.
 
 For the traffic sign and signal classification, we first implemented a region
-proposal algorithm relying on precision of the traffic sign segmentation.  Then
+proposal algorithm relying on precision of the traffic sign segmentation. Then
 we merged existing relevant datasets for our scenarios and augmented it by
 cropping the sign region proposals. Finally, we trained another relatively
 small deep learing model with the final dataset and achieved 97\% accuracy.
@@ -34,12 +35,12 @@ to a red light.
 Our work can be improved in a number of ways. For the perception side, the sign
 detection clearly has room for improvement. There are many different approaches
 to sign detection with varying resource demands. These approaches can be
-evaluated on the target platform modifying the approaches if necessary. An
+evaluated on the target platform, by modifying the approaches if necessary. An
 interesting approach would be to train a multi-task model for learn lane
 semantics as well as detecting and classifying traffic signs. For the planning
 side, although our trajectory planner works well for structural environments,
-it is not suitable for unstructural environments such as parking lots.
-Algorithms such as hybrid A* and state lattice planner would be a better choice
+it is not suitable for unstructured environments such as parking lots.
+Algorithms such as hybrid A* and state lattice planner would be better choices
 for parking lot navigation. In addition, we only deal with static obstacles in
 the current study. For responding to dynamic obstacles, we need an additional
 prediction component that estimates the trajectories of moving objects. The
@@ -48,5 +49,5 @@ the trajectory planner should be extended with distance keeping mode so that
 the behavior planner can choose to follow moving vehicles with a safety margin.
 Last, we only follow lanes and directions provided by traffic signs with no
 sense of global direction. Integration of a coarse map would enable the car
-making global plans between current and destination locations so that it could
+to make global plans between current and destination locations so that it could
 evaluate multiple directions to find the shortest path to the destination.

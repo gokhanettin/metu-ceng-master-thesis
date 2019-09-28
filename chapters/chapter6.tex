@@ -14,11 +14,11 @@ course provided by OpenZeka  two days before the competition, so it was not
 available for use during the development. The second course is the one we
 constructed in our laboratory, which is spatially no larger than the bridge
 area of the actual competition course. We used it to collect simple images and
-test our hardware setup to ensure the car is moving. The third one was
-developed in Gazebo simulation environment similar to the competition course.
-We developed the fourth course in the simulation to semi-automatically collect
-extra traffic sign images. Figure \ref{figure:annotated-courses} illustrates
-the courses with semantic segmentation annotations.
+test our hardware setup to ensure the car is functioning properly. The third
+one was developed in Gazebo simulation environment similar to the competition
+course. We developed the fourth course in the simulation to semi-automatically
+collect extra traffic sign images. Figure \ref{figure:annotated-courses}
+illustrates the courses with semantic segmentation annotations.
 
 \begin{figure}[h]
   \centering
@@ -109,16 +109,17 @@ of the final classification dataset is presented in Table
 We evaluate our semantic segmentation model using IoU, Precision, Recall, and
 F1 scores for each class given in Table
 \ref{table:semantic-segmentation-test-results}. Despite the fact that we used
-our own dataset, we compare our lane segmentation results to
-\cite{Barnes2016FindYO} and  \cite{Meyer2018DeepSL} as they are mostly
-relevant. For ego lane, which is the main enabler for driving,
-\cite{Barnes2016FindYO} achieves up to 85\% IoU and \cite{Meyer2018DeepSL}
-achieves 80\% IoU. We achieved 88\% IoU on our dataset. However, note that our
-lanes are more obvious compared to real traffic scenes. In real scenes, lane
-lines are often obscured or worn-out. For the same reason, our metrics for
-neighboring lanes (i.e., right and left lanes) are better the corresponding
-metrics given by \cite{Meyer2018DeepSL} for opposite and parallel lanes. Our
-ego lane precision, recall and F1 scores are also comparable to the results
+our own dataset, we compare our lane segmentation results to the results
+reported by Barnes et al. \cite{Barnes2016FindYO} and Meyer et al.
+\cite{Meyer2018DeepSL} as they are mostly relevant. For ego lane, which is the
+main enabler for driving, Barnes et al. \cite{Barnes2016FindYO} achieve up to
+85\% IoU and Meyer et al. \cite{Meyer2018DeepSL} achieve 80\% IoU. We achieved
+88\% IoU on our dataset. However, note that our lanes are more obvious
+compared to real traffic scenes. In real scenes, lane lines are often obscured
+or worn-out. For the same reason, our results for neighboring lanes (i.e.,
+right and left lanes) are better than the corresponding results presented by
+Meyer et al. \cite{Meyer2018DeepSL} for opposite and parallel lanes. Our ego
+lane precision, recall, and F1 scores are also comparable to the results
 provided by these studies.
 
 One can notice from Table \ref{table:semantic-segmentation-test-results} that
@@ -126,7 +127,7 @@ the right lane IoU is considerably smaller than that of the other lanes and
 road side. This is because right lane is underrepresented in the dataset as we
 most of the time drive the car on the right lane, effectively using it as the
 ego lane. The same reason is also applicable for traffic signs. Traffic signs
-are small and rare often located towards the edge of the images.
+are small, rare, and often located towards the edge of the images.
 
 \begin{table}[h]
   \begin{center}
@@ -149,10 +150,10 @@ are small and rare often located towards the edge of the images.
   \end{center}
 \end{table}
 
-For traffic sign detection, we run a classification model on the top of the
+For traffic sign detection, we run a classification model on top of the
 semantic segmentation that proposes regions to the classification
 network. Table \ref{table:classification-test-results} presents the detailed
-performance metrics of our 97.45\% accuracy classifier.
+performance metrics of our 97.45\% accurate classifier.
 
 We find adding an extra negative class helpful to improve overall
 classification performance. Nonetheless, \textit{Negative} class also has false
@@ -187,13 +188,13 @@ region can still be classified as a traffic sign as shown in Figure
   \end{center}
 \end{table}
 
-In order to evalute our traffic sign detection performance we use mAP measure
+In order to evaluate our traffic sign detection performance we use mAP measure
 defined in PASCAL VOC 2012 competition \cite{Everingham2010ThePV}. Detected
-signs are first sorted by decreasing classification confidance and matched up
+signs are first sorted by decreasing classification confidence and matched up
 with ground truth signs. If the matched pair achieves IoU $\ge$ 0.5 and has the
 same class label, the match is considered to be a true positive. Then using
 this information, we build a precision/recall curve with monotonically
-decreasing precision. Next, AP for the class label is computed by numeraically
+decreasing precision. Next, AP for the class label is computed by numerically
 integrating the area under the curve. Finally, we compute mAP as the mean of
 all APs \cite{Cartucho2019MAP}. Figure \ref{figure:average-precision} shows APs
 for all classes and their false positive rates excluding \textit{Negative}
@@ -318,9 +319,8 @@ back to the right lane.
 
 
 Figures \ref{figure:normal-driving}, \ref{figure:lane-change}, and
-\ref{figure:stop} further illustrate various driving scenarios by proving 3D
+\ref{figure:stop} further illustrate various driving scenarios by providing 3D
 point cloud of traffic scenes and processed front view camera images.
-
 
 \section{Driving Tasks}
 

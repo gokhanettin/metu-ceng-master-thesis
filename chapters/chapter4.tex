@@ -7,11 +7,11 @@ high-level driving behaviors by means of a rule-based system. We first discuss
 our semantic segmentation model and semantic segmentation classes. Second, we
 explain the methods we used to locate the right and left lanes with respect to
 the body frame. Third, we describe our relatively small classification model
-that runs on the top of the segmentation results to classify traffic signs and
+that runs on top of the segmentation results to classify traffic signs and
 lights. Then, we demonstrate our local maps that are used for locating nearby
 obstacles. Finally, we introduce our behavior planner, which relates the given
-the environmental perception with the traffic rules and picks a primitive
-driving pattern accordingly.
+environmental perception with the traffic rules and picks a primitive driving
+pattern accordingly.
 
 \section{Environmental Perception}
 
@@ -20,14 +20,14 @@ driving pattern accordingly.
 Semantic segmentation is the backbone of our visual perception component. We
 deploy a semantic segmentation deep learning model for which we manually
 annotate each camera image into ego lane, right lane, left lane, roadside and
-traffic sign classes using an image annotation tool, labelme
+traffic sign classes using an image annotation tool, namely \textit{labelme}
 \cite{Ketaro2016LM}. Once trained, the segmentation model classifies each pixel
 of the input image into these classes. In order to visualize the labels, we
-assign a color for each class.  Figure \ref{figure:label-visualization}
+assign a color for each class. Figure \ref{figure:label-visualization}
 illustrates segmentation labels blended on the camera images. We annotate
 traffic lights and traffic signs with green, ego lane with blue, left lane with
 yellow, right lane with red, roadside with pink and all other pixels are
-considered background and assigned to black color.
+considered background and assigned black color.
 
 \begin{figure}[h]
   \centering
@@ -55,30 +55,32 @@ considered background and assigned to black color.
 \end{figure}
 
 We adopt U-net architecture for our traffic scene segmentation task inspired
-from \cite{Srihari2018SS}. U-net works well with a few training images and
-yields fast and precise segmentations \cite{Ronneberger2015UNetCN}. As shown in
-Figure \ref{figure:unet-architecture}, the U-net architecture is in shape of U,
-thus the name U-net. Our slightly modified architecture inputs an RGB image of
-size 128x128x3 and encodes it in the contraction side through applying multiple
-blocks of layers. Each block takes an input and applies two 3x3 convolutions,
-each followed by a batch normalization, ReLU activation, and a 2x2 max pooling
-with stride 2 for downsampling. After each downsampling step, we double the
-number of feature maps (i.e., the number of filters or channels).  Expansive
-side decodes the captured features in the bottleneck section and also is made
-of multiple blocks. Each expansive block applies a 2x2 up-convolution for
-upsampling, halves the number of feature maps, concatenates the corresponding
-feature maps from contracting and expansive sides, and finally applies two 3x3
-convolutions, each followed by a batch normalization and ReLU activation. At
-the output layer, we use a 1x1 convolution followed by a batch normalization
-and softmax to map the resulting 16 feature maps to the desired number of
-classes, which is 6 in our case including the background class.
+from Srihari Humbarwadi \cite{Srihari2018SS}. U-net works well with a few
+training images and yields fast and precise segmentations
+\cite{Ronneberger2015UNetCN}. As shown in Figure
+\ref{figure:unet-architecture}, the U-net architecture is in shape of U, thus
+the name U-net. Our slightly modified architecture inputs an RGB image of size
+128$\times$128$\times$3 and encodes it in the contraction side through applying
+multiple blocks of layers. Each block takes an input and applies two 3$\times$3
+convolutions, each followed by a batch normalization, ReLU activation, and a
+2$\times$2 max pooling with stride 2 for downsampling. After each downsampling
+step, we double the number of feature maps (i.e., the number of filters or
+channels). Expansive side decodes the captured features in the bottleneck
+section and also is made of multiple blocks. Each expansive block applies a
+2$\times$2 up-convolution for upsampling, halves the number of feature maps,
+concatenates the corresponding feature maps from contracting and expansive
+sides, and finally applies two 3$\times$3 convolutions, each followed by a
+batch normalization and ReLU activation. At the output layer, we use a
+1$\times$1 convolution followed by a batch normalization and softmax to map the
+resulting 16 feature maps to the desired number of classes, which is 6 in our
+case including the background class.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=1.0\textwidth]{figures/unet-architecture.pdf}
   \caption[Modified U-net semantic segmentation architecture]{Modified U-net
     architecture for semantic segmentation. Each blue box corresponds to a
-    multi-channel feature map. The number of channels is given on the top of
+    multi-channel feature map. The number of channels is given at the top of
     each box. The width $\times$ height sizes are provided at the lower left
     edge of each block of layers. White boxes denote the concatenated feature
     maps from the contracting side. The arrows denote different operations.}
@@ -89,24 +91,25 @@ In order to meet smooth driving experience requirements, the segmentation
 inference shall run at 10 Hz and share the limited resources on the central
 computer, which sets an upper bound for the size of our segmentation model.
 Therefore, we resize down the camera images from 672x376 to 128x128. We also
-lower the initial number of filters to 16, which is 64 in the original U-net
-paper. Note that as opposed to the original architecture, we use paddings for
-the convolutional layers so that the output of a convolution layer has the same
-width and height as the input. As a result, we don't crop contracting feature
-maps before concatenating them with the corresponding feature maps on the
-expanding side. Another deviation from the original architecture is that we
-train the model in batches(batch size of 8), so we apply batch normalization
-following each 3x3 and 1x1 convolutional layers. We also place additional
-dropout layers to the bottleneck section and expansive side. We use Adam
-optimizer with sparse categorical cross entropy loss function from Keras which
-ships with TensorFlow as a high-level API \cite{Abadi2015TF, Chollet2015Keras}.
+lower the initial number of filters to 16, which is 64 as described in the
+original U-net paper. Note that as opposed to the original architecture, we use
+paddings for the convolutional layers so that the output of a convolution layer
+has the same width and height as the input. As a result, we don't crop
+contracting feature maps before concatenating them with the corresponding
+feature maps on the expanding side. Another deviation from the original
+architecture is that we train the model in batches (batch size of 8), so we
+apply batch normalization following each 3x3 and 1x1 convolutional layer. We
+also place additional dropout layers to the bottleneck section and expansive
+side. We use Adam optimizer with sparse categorical cross entropy loss function
+from Keras which ships with TensorFlow as a high-level API \cite{Abadi2015TF,
+Chollet2015Keras}.
 
 \subsection{Lane Detection}
 
 Because we are trying to navigate without a prior map of the environment as in
-\cite{Meyer2018DeepSL}, the lane detection is used not only for adhering to the
-traffic rules, but also for the whole navigation task until the car encounters
-a traffic sign to change direction.
+the study of Meyer et al. \cite{Meyer2018DeepSL}, the lane detection is used
+not only for adhering to the traffic rules, but also for the whole navigation
+task until the car encounters a traffic sign to change direction.
 
 Our strategy for the lane detection is based on the semantic segmentation. We
 first run an argmax on the output segmentation map across the channel axis and
@@ -115,9 +118,9 @@ assign a color to each channel as shown in Figure
 obtain birdseye view as in Figure \ref{figure:inverse-perspective-mapping}.
 The corners of the quadrilaterals in Figure
 \ref{figure:inverse-perspective-mapping} are selected such that each pixel in
-the birdseye view represents a 1x1 $cm^2$ in the world. Finally, we create a
-point cloud from the birdeye view by downsampling it by a factor of 2 for
-faster second order polynomial fitting to the lanes. The resultant birdseye
+the birdseye view represents a 1$\times$1 $cm^2$ in the world. Finally, we
+create a point cloud from the birdseye view by downsampling it by a factor of 2
+for faster second order polynomial fitting to the lanes. The resultant birdseye
 point cloud is also given in Figure \ref{figure:inverse-perspective-mapping}.
 
 \begin{figure}[h]
@@ -178,7 +181,7 @@ for each lane are the waypoints that describe the lanes on the road.
 \subsection{Sign Detection}
 
 Traffic signs and lights regulate the car's behavior on certain conditions and
-ensure the car travel the entire course with appropriate direction indications.
+ensure the car travels the entire course with appropriate direction indications.
 We treat the traffic lights the same way as the traffic signs, so the methods
 used for the traffic signs also apply to the traffic lights.
 
@@ -190,7 +193,7 @@ requirements at 10 Hz challenge us to use a more resource-friendly approach.
 Instead of running an object detection model, we run a much simpler classifier
 model on the segmented traffic sign patches. This approach also saves us from
 labelling the whole dataset for the object detection in addition to the
-semantic segmentation annotations. On the downside, we can not detect the signs
+semantic segmentation annotations. On the downside, we cannot detect the signs
 in an end-to-end fasion without resorting to computer vision techiques for
 finding bounding rectangles for each sign patch in the segmentation output
 \cite{Bradski2000CV}.
@@ -205,21 +208,21 @@ a new classification dataset by cropping and saving the classified traffic sign
 patches. We later manually go through the saved image patches and ensure they
 are in the correct class folder. Whenever an inappropriate image patch is
 mistakenly classified as a traffic sign, we also put them into a special
-negative class folder.  Augmentating our classification dataset in this manner
+negative class folder. Augmenting our classification dataset in this manner
 siginificantly improves our classifier as it learns from its own mistakes.
 
-We classify \textit{PedestrianCrossing}, \textit{KeepLeft}, \textit{LooseGravel},
+We use \textit{PedestrianCrossing}, \textit{KeepLeft}, \textit{LooseGravel},
 \textit{NoEntry}, \textit{Parking}, \textit{ParkingSlot}, \textit{RoadWork},
 \textit{StraightOrRight}, \textit{TrafficLightGreen}, \textit{TrafficLightRed},
 \textit{TurnLeft}, and \textit{Negative} classes. Figure
 \ref{figure:traffic-sign-classes} illustrates these classes with image patches
 automatically cropped from the training courses. The paches are converted to
-grayscale and resized to 32x32 before fed into the classification model. The
-classification architecture is depicted in Figure
+grayscale and resized to 32$\times$32 before being fed into the classification
+model. The classification architecture is depicted in Figure
 \ref{figure:classification-architecture}. We train the model using Adam
 optimizer with cross entropy loss in 32 batches applying shift, rescale, shear,
 zoom, and brightness augmentation methods from Keras during
-training\cite{Abadi2015TF, Chollet2015Keras}. Algorithm
+training \cite{Abadi2015TF, Chollet2015Keras}. Algorithm
 \ref{algorithm:classification} explains the overall classification process on a
 traffic sign segmentation mask.
 
@@ -284,9 +287,8 @@ traffic sign segmentation mask.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.9\textwidth]{figures/classification-architecture.pdf}
-  \caption[Classification architecture]{Classification architecture. Shape
-    dimensions width $\times$ height $\times$ channel
-    are given on each layer.}
+  \caption[Classification architecture]{Classification architecture. Layer
+    shapes are given on the corresponding layers.}
   \label{figure:classification-architecture}
 \end{figure}
 
@@ -294,7 +296,8 @@ traffic sign segmentation mask.
   \caption{Classification of segmented traffic signs.}
   \label{algorithm:classification}
   \begin{algorithmic}[1]
-    \Procedure{PARSE-TRAFFIC-SIGNS}{$mask,rgb,depth,intrinsic,record,classes$}
+    \Procedure{PARSE-TRAFFIC-SIGNS}{$mask,rgb,depth,intrinsic,record,$
+      $classes$}
     \State $cx, cy, fx, fy \gets intrinsic$
     \Comment{Unpack camera intrinsic parameters}
     \State $rects \gets list()$
@@ -396,10 +399,10 @@ these events.
     \State $diffx, diffy \gets obstaclex - x, obstacley - y$
     \State $angles \gets arctan(\frac{diffy}{diffx})$
     \State $angles \gets rad2deg(\theta - angles)$
-    \State $mask = (angles < 10.) \& (angles > -10)$
+    \State $mask = (angles < 10) \& (angles > -10)$
     \State $events[ObstacleAhead] \gets count\_nonzero(mask) > 0$
     \State $distances \gets \sqrt{diffx^2 + diffy^2}$
-    \State $mask = (angles < 10.) \& (angles > -10) \& (distances < 0.7)$
+    \State $mask = (angles < 10) \& (angles > -10) \& (distances < 0.7)$
     \State $events[DangerousObstacle] \gets count\_nonzero(mask) > 0$
     \State \textbf{return} $events$
     \EndProcedure
@@ -408,34 +411,34 @@ these events.
 
 \section{Behavior Planning}
 
-Behavior planner consumes the events generated from the perception component.
-It transitions the car into appropriate states depending on the hierarchical
+Behavior planner consumes the events generated by the perception component. It
+transitions the car into appropriate states depending on the hierarchical
 finite state machine given in Figure \ref{figure:hfsm} as the events arrive.
 When the car is in WAIT state, if there is no obstacle ahead and red light is
 not observed, transition 1 is executed and the car starts driving itself. While
 the car is moving, if it observes a pedestrian crossing sign or a red light, it
 performs transition 2 and starts waiting until transition 1 conditions are
 satisfied. In DRIVE state, the default behavior is to follow the lanes at
-normal speed, 0.9 m/s. When the car come across any of straight or turn right,
-turn left, or park signs, it stops lane following by sourcing predefined
+normal speed, 0.9 m/s. When the car comes across any of straight-or-turn-right,
+turn-left, or park signs, it stops lane following by sourcing predefined
 waypoints for these signs to the trajectory planner instead of the waypoints
-extracted from the lanes. In the event that the last predefined waypoint is
+extracted from the lanes. In the case that the last predefined waypoint is
 reached or a manual intervention through a joystick for an emergency while
-following a predefined path, runs transition 4 to put the car back into the
-lane following state. If any of LooseGravel, KeepLeft, RoadWork or
-DangerousObstacle events reported while driving at the normal speed, the car
-goes into SLOW SPEED state through transition 5 and starts driving at 0.5 m/s.
-When none of these events are reported, the car switches back to the NORMAL
-SPEED state. Finally, when the car sees a parking slot sign on the ground, it
-performs transition 7 into the PARK state, in which the car moves into the
-parking slot and stops.
+following a predefined path occurs, it executes transition 4 to put the car
+back into the lane following state. If any of LooseGravel, KeepLeft, RoadWork
+or DangerousObstacle events is reported while driving at the normal speed, the
+car goes into SLOW SPEED state through transition 5 and starts driving at 0.5
+m/s. When none of these events are reported, the car switches back to the
+NORMAL SPEED state. Finally, when the car sees a parking slot frame on the
+ground, it performs transition 7 into the PARK state, in which the car moves
+into the parking slot and stops.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=.8\textwidth]{figures/hfsm.pdf}
 \caption[Hierarchical finite state machine]{Hierarchical finite state machine
   that governs the high-level behavior of the car. The numbered arrows 1 to 7
-  denote the transitions between states.  DRIVE state has two sub-states to
+  denote the transitions between states. DRIVE state has two sub-states to
   control speed profile and waypoint source to the navigation module. PARK is
   the terminal state.}
 \label{figure:hfsm}

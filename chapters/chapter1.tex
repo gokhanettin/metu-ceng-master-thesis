@@ -12,8 +12,8 @@ where the cars survived a simple form of everyday traffic scenarios including
 highway driving, overtaking, intersections, and parking. These challenges led
 to state-of-the-art software architectures which decompose the driving problem
 into components such as perception, planner, and controller. Each of these
-components was also powered by state-of-the-art algorithms that shaped the
-today's autonomous vehicles.
+components was also powered by state-of-the-art algorithms that shaped today's
+autonomous vehicles.
 
 Meanwhile, the progress in deep learning techniques along with the increase of
 storage and computational power in the computer market made a breakthrough in
@@ -26,23 +26,23 @@ road, and distance to the other cars so that steering and speed commands can be
 computed with a dedicated controller based on these affordances
 \cite{Chen2015DeepDrivingLA}.
 
-Being an elegant and promising solution, learning affordances from the raw
+Being an elegant and promising solution, learning affordances from raw
 images requires additional tooling for data acqusition in order to compute and
 record affordance indicators per image. The choice of affordance indicators for
-a smooth driving experience also presents its own challenge.
+a smooth driving experience also presents its own challenges.
 
 Learning a direct mapping to the steering commands quickly reaches its limit
 when the driving scenario becomes more complicated than tracking a curvy
 road. Introduction of traffic regulations, overtaking, and lane keeping
-policies remains too abstract to be captured in such a mapping. Furthermore,
+policies remain too abstract to be captured in such a mapping. Furthermore,
 human drivers tend to take different actions at different times even for the
-same scenarios. Different actions on the similar raw images in the training set
+same scenarios. Different actions on similar raw images in the training set
 easily confuses the model \cite{Chen2015DeepDrivingLA}. Last but not least,
 end-to-end nature of this approach presents difficulties in understanding and
 debugging the behavior of the vehicle.
 
 Existing decomposition-based approaches heavily depend on a high-definition map
-of the driving environment, which often loses its validity due the changing
+of the driving environment, which often loses its validity due to changing
 streets or constructions on the roads. Autonomous driving in urban scenarios
 without an accurate map has been studied extending an existing traffic scene
 segmentation dataset with ego lane, parallel lane, and opposite lane
@@ -69,8 +69,8 @@ Our requirements are mostly derived from the competition rules as follows:
 
 \begin{itemize}
   \item The mini car shall follow lanes at up to 0.9 m/s speed in a two-lane
-    road given in Figure \ref{figure:openzeka-race-course}.
-  \item The mini car shall detect traffic light and signs given in Figure
+    road as depicted in Figure \ref{figure:openzeka-race-course}.
+  \item The mini car shall detect traffic light and signs shown in Figure
     \ref{figure:openzeka-traffic-signs}.
   \item The mini car shall overtake a waiting car on the right lane and steer
     back to the right lane.
@@ -81,7 +81,7 @@ Our requirements are mostly derived from the competition rules as follows:
     right turn sign.
   \item The mini car shall stop on red light and move on green light.
   \item The mini car shall change to the left lane when it is close to a
-    construction zone on the right lane as indicated by keep left signs.
+    construction zone on the right lane as indicated by keep-left signs.
   \item The mini car shall be capable of passing a rough road section indicated
     by a loose gravel sign.
   \item The mini car shall wait for pedestrians on crosswalks indicated by
@@ -112,7 +112,7 @@ The main contribution of our study is as follows:
 
 \begin{itemize}
   \item \textbf{Pixel classification dataset for mini cars:} Existing traffic
-    scene datasets exclusively for real-scale cars \cite{Huang2018TheAD,
+    scene datasets are exclusively for real-scale cars \cite{Huang2018TheAD,
     Cordts2016TheCD, Geiger2012AreWR, Neuhold2017TheMV}. This poses a
     difficulty for on-road testing of the novel methods on mini-cars. We
     present a dataset with pixel-level annotations for mini cars.
@@ -121,16 +121,16 @@ The main contribution of our study is as follows:
     \cite{Timofte2009MultiviewTS, Stallkamp2012ManVC, Shakhuro2016RussianTS,
     Serna2018ClassificationOT, MaldonadoBascn2007RoadSignDA} for our scenarios
     and semi-automatically extend the dataset by cropping the segmented sign
-    regions from our left camera images.
+    regions from our camera images.
   \item \textbf{Development of a novel lane detector:} We build our lane
-    detector on the approach proposed in \cite{Meyer2018DeepSL}. This approach
-    essentially segments the road into ego lane, parallel lane, and opposite
-    lane. It then extracts a center line for the ego lane. For our scenarios,
-    we skip the opposite lane and further segment the parallel lane into right
-    and left lanes.  Unlike \cite{Meyer2018DeepSL}, we are interested in
-    finding center line curves for neighboring parallel lanes along with the
-    ego lane. Our apprach saves us from analyzing the parallel lane pixels for
-    right or left categorization.
+    detector on the approach proposed by Meyer et al. \cite{Meyer2018DeepSL}.
+    This approach essentially segments the road into ego lane, parallel lane,
+    and opposite lane. It then extracts a center line for the ego lane. For our
+    scenarios, we skip the opposite lane and further segment the parallel lane
+    into right and left lanes. Unlike Meyer et al. \cite{Meyer2018DeepSL}, we
+    are interested in finding center line curves for neighboring parallel lanes
+    along with the ego lane. Our apprach saves us from analyzing the parallel
+    lane pixels for right or left categorization.
   \item \textbf{Local optimal trajectory planner for structured environments:}
     It is common that state-of-the-art autonomous vehicles rely on detailed
     maps to provide a reference line to their local planner for structural
@@ -141,7 +141,7 @@ The main contribution of our study is as follows:
     exclusively the online computed lane centers as a source of the reference
     line.
   \item \textbf{Decomposed architecture for autonomous driving:} Autonomous
-    vehicle architectures span wide range of computer science research areas
+    vehicle architectures span a wide range of computer science research areas
     including but not limited to computer vision, path planning, automata
     theory, control theory, and distributed systems. Each of these areas comes
     with many problems and various alternative solutions to those problems. We
@@ -151,9 +151,10 @@ The main contribution of our study is as follows:
 
 \section{Organization}
 
-The organization of this thesis as follows. Chapter 2 discusses various
-autonomous driving approaches and algorithms used in search of autonomy
-hightlighting their advantages and disadvantages.
+The organization of this thesis as follows:
+
+Chapter 2 discusses various autonomous driving approaches and algorithms used
+in search of autonomy highlighting their advantages and disadvantages.
 
 Chapter 3 presents our hardware configuration and software architecture at a
 high level. In Chapter 3, we also introduce our simulation environment that
@@ -163,7 +164,7 @@ Chapter 4 provides a detailed description of our scene interpretation module in
 which we implement perception and behavior planning capabilities of the car.
 First, we present our segmentation model which is used to parse the current
 scene into lanes and traffic signs. Second, we introduce our lane center line
-extraction method based the parsed lane semantics. Third, we discuss our
+extraction method based on the parsed lane semantics. Third, we discuss our
 traffic sign classification approach on the sign regions proposed by
 segmentation model. Next, we review our obstacle detection method. Finally,
 we explain our behavioral layer that implements a hierarchical finite state
