@@ -38,11 +38,11 @@ the courses with semantic segmentation annotations.
     \includegraphics[width=\linewidth]{figures/course4.jpg}
     \caption{Course 4}
   \end{subfigure}
-  \caption{Example scenes from the courses. Course 1 is the official
-    competition course. Course 2 is a small track constructed in the
-    laboratory. Course 3 is a simulation of Course 1. Course 4 is used to
-    semi-automatically collect extra traffic sign images. It is not used for
-    training or testing the semantic segmentation model.}
+  \caption[Real and simulated course scenes]{Example scenes from the courses.
+    Course 1 is the official competition course. Course 2 is a small track
+    constructed in the laboratory. Course 3 is a simulation of Course 1. Course
+    4 is used to semi-automatically collect extra traffic sign images. It is
+    not used for training or testing the semantic segmentation model.}
   \label{figure:annotated-courses}
 \end{figure}
 
@@ -59,7 +59,8 @@ of the final classification dataset is presented in Table
 
 \begin{table}[h]
   \begin{center}
-    \caption{Traffic scene semantic segmentation dataset.}
+    \caption[Traffic scene semantic segmentation dataset]{Traffic scene
+      semantic segmentation dataset.}
     \label{table:semantic-segmentation-dataset}
     \begin{tabular}{|c|c|c|}
       \hline
@@ -77,7 +78,8 @@ of the final classification dataset is presented in Table
 
 \begin{table}[h]
   \begin{center}
-    \caption{Traffic sign classification dataset.}
+    \caption[Traffic sign classification dataset]{Traffic sign classification
+      dataset.}
     \label{table:classification-dataset}
     \begin{tabular}{|c|c|c|c|}
       \hline
@@ -105,30 +107,32 @@ of the final classification dataset is presented in Table
 \section{Perception Evaluation}
 
 We evaluate our semantic segmentation model using IoU, Precision, Recall, and
-F1 scores for each class given in Table \ref{table:segmentation-metrics}.
-Despite the fact that we used our own dataset, we compare our lane segmentation
-results to \cite{Barnes2016FindYO} and  \cite{Meyer2018DeepSL} as they are
-mostly relevant. For ego lane, which is the main enabler for driving,
+F1 scores for each class given in Table
+\ref{table:semantic-segmentation-test-results}. Despite the fact that we used
+our own dataset, we compare our lane segmentation results to
+\cite{Barnes2016FindYO} and  \cite{Meyer2018DeepSL} as they are mostly
+relevant. For ego lane, which is the main enabler for driving,
 \cite{Barnes2016FindYO} achieves up to 85\% IoU and \cite{Meyer2018DeepSL}
 achieves 80\% IoU. We achieved 88\% IoU on our dataset. However, note that our
 lanes are more obvious compared to real traffic scenes. In real scenes, lane
 lines are often obscured or worn-out. For the same reason, our metrics for
 neighboring lanes (i.e., right and left lanes) are better the corresponding
-metrics given by \cite{Meyer2018DeepSL} for opposite and parallel lanes. Our ego
-lane precision, recall and F1 scores are also comparable to the results
+metrics given by \cite{Meyer2018DeepSL} for opposite and parallel lanes. Our
+ego lane precision, recall and F1 scores are also comparable to the results
 provided by these studies.
 
-One can notice from Table \ref{table:segmentation-metrics} that the right lane
-IoU is considerably smaller than that of the other lanes and road side. This is
-because right lane is underrepresented in the dataset as we most of the time
-drive the car on the right lane, effectively using it as the ego lane. The same
-reason is also applicable for traffic signs. Traffic signs are small and rare
-often located towards the edge of the images.
+One can notice from Table \ref{table:semantic-segmentation-test-results} that
+the right lane IoU is considerably smaller than that of the other lanes and
+road side. This is because right lane is underrepresented in the dataset as we
+most of the time drive the car on the right lane, effectively using it as the
+ego lane. The same reason is also applicable for traffic signs. Traffic signs
+are small and rare often located towards the edge of the images.
 
 \begin{table}[h]
   \begin{center}
-    \caption{Semantic segmentation evalutation metrics.}
-    \label{table:segmentation-metrics}
+    \caption[Semantic segmentation test results]{Semantic segmentation
+      test results.}
+    \label{table:semantic-segmentation-test-results}
     \begin{tabular}{|c|c|c|c|c|}
       \hline
       \textbf{Class} & \textbf{IoU} & \textbf{Precision} & \textbf{Recall} & \textbf{F1}  \\
@@ -147,36 +151,37 @@ often located towards the edge of the images.
 
 For traffic sign detection, we run a classification model on the top of the
 semantic segmentation that proposes regions to the classification
-network. Table \ref{table:classification-metrics} presents the detailed
+network. Table \ref{table:classification-test-results} presents the detailed
 performance metrics of our 97.45\% accuracy classifier.
 
 We find adding an extra negative class helpful to improve overall
 classification performance. Nonetheless, \textit{Negative} class also has false
 negatives lowering its recall as given in Table
-\ref{table:classification-metrics}. In other words, a non-traffic sign region
-can still be classified as a traffic sign as shown in Figure
+\ref{table:classification-test-results}. In other words, a non-traffic sign
+region can still be classified as a traffic sign as shown in Figure
 \ref{figure:real-course-detection-bad}.
 
 \begin{table}[h]
   \begin{center}
-    \caption{Traffic sign classification test.}
-    \label{table:classification-metrics}
+    \caption[Traffic sign classification test results]{Traffic sign
+      classification test results.}
+    \label{table:classification-test-results}
     \begin{tabular}{|c|c|c|c|}
       \hline
       \textbf{Class}     & \textbf{Precision} & \textbf{Recall}  & \textbf{F1-score} \\
       \hline
-      KeepLeft           & 100.00\%           & 100.00\%         & 100.00\%  \\
-      LooseGravel        & 100.00\%           & 100.00\%         &  100.00\% \\
-      NoEntry            & 95.40\%            & 100.00\%         &  97.65\%  \\
-      Parking            & 98.86\%            & 96.67\%          &  97.75\%  \\
-      ParkingSlot        & 84.51\%            & 100.00\%         &  91.60\%  \\
-      PedestrianCrossing & 97.72\%            & 69.63\%          &  97.17\%  \\
-      RoadWork           & 95.50\%            & 98.84\%          &  97.14\%  \\
-      StraightOrRight    & 100.00\%           & 97.75\%          & 98.86\%   \\
-      TrafficLightGreen  & 98.68\%            & 97.37\%          & 98.01\%   \\
-      TrafficLightRed    & 100.00\%           & 97.22\%          & 98.60\%   \\
-      TurnLeft           & 98.91\%            & 97.85\%          & 98.37\%   \\
-      Negative           & 100.00\%           & 85.00\%          & 91.90\%   \\
+      KeepLeft           & 100.00\%           & 100.00\%         & 100.00\% \\
+      LooseGravel        & 100.00\%           & 100.00\%         & 100.00\% \\
+      NoEntry            & 95.40\%            & 100.00\%         &  97.65\% \\
+      Parking            & 98.86\%            & 96.67\%          &  97.75\% \\
+      ParkingSlot        & 84.51\%            & 100.00\%         &  91.60\% \\
+      PedestrianCrossing & 97.72\%            & 69.63\%          &  97.17\% \\
+      RoadWork           & 95.50\%            & 98.84\%          &  97.14\% \\
+      StraightOrRight    & 100.00\%           & 97.75\%          &  98.86\% \\
+      TrafficLightGreen  & 98.68\%            & 97.37\%          &  98.01\% \\
+      TrafficLightRed    & 100.00\%           & 97.22\%          &  98.60\% \\
+      TurnLeft           & 98.91\%            & 97.85\%          &  98.37\% \\
+      Negative           & 100.00\%           & 85.00\%          &  91.90\% \\
       \hline
     \end{tabular}
   \end{center}
@@ -204,11 +209,11 @@ class.
     \includegraphics[width=\linewidth]{figures/experiments/detection-results-info.png}
     \caption{}
   \end{subfigure}
-  \caption{(a)Average Precision for traffic sign detection.  (b) True and false
-    prediction rates for each sign class.}
+  \caption[Evaluation of traffic sign detection and recognition]{(a)Average
+    precision for traffic sign detection. (b) True and false prediction rates
+    for each sign class.}
   \label{figure:average-precision}
 \end{figure}
-
 
 
 Figure \ref{figure:real-course-detection-good} and Figure
@@ -242,7 +247,8 @@ Course 2.
   \begin{subfigure}[b]{0.45\linewidth}
     \includegraphics[width=\linewidth]{figures/experiments/real/trafficlightred.jpg}
   \end{subfigure}
-  \caption{Sample true sign detections on real courses.}
+  \caption[True sign detections on real courses]{Sample true sign
+    detections on real courses.}
   \label{figure:real-course-detection-good}
 \end{figure}
 
@@ -273,7 +279,8 @@ Course 2.
   \begin{subfigure}[b]{0.45\linewidth}
     \includegraphics[width=\linewidth]{figures/experiments/real/fp-turnleft2.jpg}
   \end{subfigure}
-  \caption{Sample false sign detections on real courses.}
+  \caption[False sign detections on real courses]{Sample false sign
+    detections on real courses.}
   \label{figure:real-course-detection-bad}
 \end{figure}
 
@@ -304,7 +311,8 @@ back to the right lane.
     \includegraphics[width=\linewidth]{figures/experiments/position-plot.png}
     \caption{Position x-y plot.}
   \end{subfigure}
-  \caption{Comparison between autonomous driving and a human driver.}
+  \caption[Comparison between autonomous driving and a human driver]{Comparison
+    between autonomous driving and a human driver.}
   \label{figure:driving-comparison}
 \end{figure}
 
@@ -336,10 +344,11 @@ point cloud of traffic scenes and processed front view camera images.
   \begin{subfigure}[b]{0.45\linewidth}
     \includegraphics[width=\linewidth]{figures/experiments/loose-gravel-pc.png}
   \end{subfigure}
-  \caption{Straight road driving scenarios. For the first row, the car is
-    configured to follow lanes and detect signs without taking any action for
-    detections. Note that the preception component is not trained to
-    drive on this course, but it can still manages to drive.}
+  \caption[Straight road driving scenarios]{Straight road driving scenarios.
+    For the first row, the car is configured to follow lanes and detect signs
+    without taking any action for detections. Note that the perception
+    component is not trained to drive on this course, but it still manages to
+    drive.}
   \label{figure:normal-driving}
 \end{figure}
 
@@ -357,7 +366,7 @@ point cloud of traffic scenes and processed front view camera images.
   \begin{subfigure}[b]{0.45\linewidth}
     \includegraphics[width=\linewidth]{figures/experiments/parking-pc.png}
   \end{subfigure}
-  \caption{Sharp turning scenarios.}
+  \caption[Sharp turning scenarios]{Sharp turning scenarios.}
   \label{figure:sharp-turns}
 \end{figure}
 
@@ -381,7 +390,7 @@ point cloud of traffic scenes and processed front view camera images.
   \begin{subfigure}[b]{0.45\linewidth}
     \includegraphics[width=\linewidth]{figures/experiments/overtaking4-pc.png}
   \end{subfigure}
-  \caption{Lane change scenarios.}
+  \caption[Lane change scenarios]{Lane change scenarios.}
   \label{figure:lane-change}
 \end{figure}
 
@@ -417,6 +426,6 @@ point cloud of traffic scenes and processed front view camera images.
   \begin{subfigure}[b]{0.45\linewidth}
     \includegraphics[width=\linewidth]{figures/experiments/parking-slot-pc.png}
   \end{subfigure}
-  \caption{Stopping scenarios.}
+  \caption[Stopping scenarios]{Stopping scenarios.}
   \label{figure:stop}
 \end{figure}

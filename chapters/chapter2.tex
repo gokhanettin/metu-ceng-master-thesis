@@ -64,8 +64,9 @@ Figure \ref{figure:stanley-control}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/stanley-control.png}
-  \caption{The geometrical relation between the trajectory and the car used by
-  Stanley controller algorithm. Taken from \cite{Thrun2006StanleyTR}.}
+  \caption[Stanley controller algorithm]{The geometrical relation between the
+    trajectory and the car used by Stanley controller algorithm. Taken from
+    \cite{Thrun2006StanleyTR}.}
   \label{figure:stanley-control}
 \end{figure}
 
@@ -130,11 +131,12 @@ A*, Field D*, and hybrid A* algorithms.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/hybridastar-comparison.png}
-  \caption{Left: Regular A* solutions passes through only the center of grids.
-    Center: Field D* solutions can have arbitrary linear paths from cell to cell.
-    Right: Hybrid A* associates a continuous state with each cell and compute a
-    score for the continuous state. Taken from \cite{Dolgov2010PathPF}.}
-\label{figure:hybridastar-comparison}
+  \caption[A*, Field D* and Hybrid A* algorithms]{Left: Regular A* solutions
+    passes through only the center of grids.  Center: Field D* solutions can
+    have arbitrary linear paths from cell to cell.  Right: Hybrid A* associates
+    a continuous state with each cell and compute a score for the continuous
+    state. Taken from \cite{Dolgov2010PathPF}.}
+  \label{figure:hybridastar-comparison}
 \end{figure}
 
 Junior uses a different planner for normal on-road navigation. It performs
@@ -165,12 +167,13 @@ demonstrates a velocity keeping instance in this approach.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/frenet-velocity-keeping.png}
-  \caption{An exmaple optimal trajectory generated in Frenet frame in velocity
-    keeping mode. Colors from red to yellow represent increasing lateral cost.
-    Colors from grey to black represent increasing longitudinal cost. Green and
-    light grey colors represent the optimal trajectory, which leads the car to
-    the reference line and desired speed. Taken from \cite{Werling2010OptimalTG}.}
-    \label{figure:frenet-velocity-keeping}
+  \caption[An example optimal trajectory generated in Frenet frame]{An exmaple
+    optimal trajectory generated in Frenet frame in velocity keeping mode.
+    Colors from red to yellow represent increasing lateral cost.  Colors from
+    grey to black represent increasing longitudinal cost. Green and light grey
+    colors represent the optimal trajectory, which leads the car to the reference
+    line and desired speed. Taken from \cite{Werling2010OptimalTG}.}
+  \label{figure:frenet-velocity-keeping}
 \end{figure}
 
 Yoneda et al. \cite{Yoneda2018TrajectoryOA} further extends the method in
@@ -193,8 +196,8 @@ level.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/autoware.png}
-  \caption{Autoware high level architecture and data flow. Taken from
-    \cite{Kato2018AutowareOB}.}
+  \caption[Autoware high level architecture]{Autoware high level architecture
+    and data flow. Taken from \cite{Kato2018AutowareOB}.}
   \label{figure:autoware}
 \end{figure}
 
@@ -241,8 +244,8 @@ structural environments.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/state-lattice.png}
-  \caption{An example state lattice without reverse motions. Taken from
-    \cite{Pivtoraiko2009DifferentiallyCM}.}
+  \caption[An example state lattice]{An example state lattice without reverse
+    motions. Taken from \cite{Pivtoraiko2009DifferentiallyCM}.}
   \label{figure:state-lattice}
 \end{figure}
 
@@ -261,9 +264,9 @@ maps for location and perception \cite{Fan2018BaiduAE}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/apollo.png}
-  \caption{Apollo high level architecture and data flow. Taken from
-    \cite{Fan2018BaiduAE}.}
-    \label{figure:apollo}
+  \caption[Apollo high level architecture]{Apollo high level architecture and
+    data flow. Taken from \cite{Fan2018BaiduAE}.}
+  \label{figure:apollo}
 \end{figure}
 
 The routing component finds a global plan from the current location
@@ -304,9 +307,10 @@ steps of this approach.
     \includegraphics[width=\linewidth]{figures/end-to-end-inference.png}
     \caption{}
   \end{subfigure}
-  \caption{(a) End-to-end training scheme. (b) Steering command inference from
-    raw camera images. Taken from \cite{Bojarski2016EndTE}.}
-    \label{figure:end-to-end-network}
+  \caption[End-to-end training and inference]{(a) End-to-end training scheme.
+    (b) Steering command inference from raw camera images. Taken from
+    \cite{Bojarski2016EndTE}.}
+  \label{figure:end-to-end-network}
 \end{figure}
 
 Bechtel et al. \cite{Bechtel2017DeepPicarAL} replicated the work

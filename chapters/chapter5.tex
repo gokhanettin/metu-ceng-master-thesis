@@ -28,8 +28,8 @@ obtain a trajectory.
 \begin{figure}[h]
   \centering
   \includegraphics[width=1.0\textwidth]{figures/frenet-frame.pdf}
-  \caption{Frenet frame based on the right reference path extracted
-  from the right lane.}
+  \caption[Frenet frame]{Frenet frame based on the right reference path
+    extracted from the right lane.}
   \label{figure:frenet}
 \end{figure}
 
@@ -133,12 +133,13 @@ evaluations.
     \includegraphics[width=\linewidth]{figures/frenet-shift-right-lane.pdf}
     \caption{}
   \end{subfigure}
-  \caption{Example multi-lane driving scenario. The thick blue trajectory is
-    the optimal trajectory for different cases. (a) The right lane is
-    blocked, so the car attempts to change lane to the left for overtaking.
-    (b) The right lane is still blocked, so the car keeps occupying the left
-    lane. (c) Because the right lane is less costly when both lanes are
-    available, the car shifts back to right lane.}
+  \caption[Example frenet frame optimal trajectories]{Example multi-lane
+    driving scenarios. The thick blue trajectory is the optimal trajectory for
+    different cases. (a) The right lane is blocked, so the car attempts to
+    change lane to the left for overtaking.  (b) The right lane is still
+    blocked, so the car keeps occupying the left lane. (c) Because the right
+    lane is less costly when both lanes are available, the car shifts back to
+    right lane.}
   \label{figure:frenet-lanes}
 \end{figure}
 
@@ -170,8 +171,8 @@ Equation \eqref{eq:steering}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/pure-pursuit-steering.pdf}
-  \caption{Estimation of steering angle in terms of turning radius $R$ and
-  wheelbase $L_b$.}
+  \caption[Steering angle geometry in pure pursuit controller]{Estimation of
+    steering angle in terms of turning radius $R$ and wheelbase $L_b$.}
   \label{figure:steering}
 \end{figure}
 
@@ -183,7 +184,8 @@ distance greater than a lookahead distance $L$. This is illustrated in Figure
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/pure-pursuit-radius.pdf}
-  \caption{Illustration of lookahead distance $L$ and feedback angle $\alpha$.}
+  \caption[Illustration of lookahead distance and feedback angle]{Illustration
+    of lookahead distance $L$ and feedback angle $\alpha$.}
   \label{figure:radius}
 \end{figure}
 
@@ -255,8 +257,9 @@ $R_{min}$ and $L$.
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/pure-pursuit-lookahead.pdf}
-  \caption{Illustration of lookahead distance $L$ and minimum turning radius
-  $R_{min}$ for tuning the pure pursuit controller.}
+  \caption[Pure pursuit controller tuning]{Illustration of lookahead distance
+  $L$ and minimum turning radius $R_{min}$ for tuning the pure pursuit
+  controller.}
   \label{figure:lookahead}
 \end{figure}
 

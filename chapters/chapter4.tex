@@ -47,9 +47,10 @@ considered background and assigned to black color.
     \includegraphics[width=\linewidth]{figures/label-visualization4.jpg}
     \caption{}
   \end{subfigure}
-  \caption{(a) Traffic light, ego lane, left lane, and roadside labels. (b)
-    Traffic signs, ego lane, left lane, and roadside labels. (c) Ego lane, right
-    lane, and roadside labels. (d) Labels on a curvy road segment.}
+  \caption[Visualization of semantic segmentation labels]{(a) Traffic light,
+    ego lane, left lane, and roadside labels. (b) Traffic signs, ego lane, left
+    lane, and roadside labels. (c) Ego lane, right lane, and roadside labels.
+    (d) Labels on a curvy road segment.}
   \label{figure:label-visualization}
 \end{figure}
 
@@ -75,12 +76,12 @@ classes, which is 6 in our case including the background class.
 \begin{figure}[h]
   \centering
   \includegraphics[width=1.0\textwidth]{figures/unet-architecture.pdf}
-  \caption{Modified U-net architecture for semantic segmentation. Each blue box
-    corresponds to a multi-channel feature map. The number of channels is
-    given on the top of each box. The width x height sizes are provided at the
-    lower left edge of each block of layers. White boxes denote the
-    concatenated feature maps from the contracting side. The arrows denote
-    different operations.}
+  \caption[Modified U-net semantic segmentation architecture]{Modified U-net
+    architecture for semantic segmentation. Each blue box corresponds to a
+    multi-channel feature map. The number of channels is given on the top of
+    each box. The width $\times$ height sizes are provided at the lower left
+    edge of each block of layers. White boxes denote the concatenated feature
+    maps from the contracting side. The arrows denote different operations.}
   \label{figure:unet-architecture}
 \end{figure}
 
@@ -133,10 +134,10 @@ point cloud is also given in Figure \ref{figure:inverse-perspective-mapping}.
     \includegraphics[width=\linewidth]{figures/birdseye-point-cloud.png}
     \caption{}
   \end{subfigure}
-  \caption{(a) Before inverse perspective mapping. (b) Birdseye view after
-    inverse perspective mapping. (c) Birdseye view point cloud with ego and
-    left lane curves in orange.}
-    \label{figure:inverse-perspective-mapping}
+  \caption[Visualization of inverse perspective mapping]{(a) Before inverse
+    perspective mapping. (b) Birdseye view after inverse perspective mapping.
+    (c) Birdseye view point cloud with ego and left lane curves in orange.}
+  \label{figure:inverse-perspective-mapping}
 \end{figure}
 
 In order to find midpoints along the lanes and make it more robust to erroneous
@@ -166,11 +167,11 @@ for each lane are the waypoints that describe the lanes on the road.
     \includegraphics[width=\linewidth]{figures/guided-search.png}
     \caption{}
   \end{subfigure}
-  \caption{(a) Segmentation birdseye view image. (b) Sliding window search for
-    the ego lane. (c) Guided search for the ego lane on the next image frame
-    after the the sliding window search. The green color denotes the sliding
-    windows and guided search area. The orange color denotes the averaged
-    polynomial curve.}
+  \caption[Lane searching in birdseye view]{(a) Segmentation birdseye view
+    image. (b) Sliding window search for the ego lane. (c) Guided search for
+    the ego lane on the next image frame after the the sliding window search.
+    The green color denotes the sliding windows and guided search area. The
+    orange color denotes the averaged polynomial curve.}
   \label{figure:lane-searches}
 \end{figure}
 
@@ -272,18 +273,20 @@ traffic sign segmentation mask.
     \includegraphics[width=\linewidth]{figures/signs/Negative.jpg}
     \caption{}
   \end{subfigure}
-  \caption{Classified and saved traffic sign images from real and simulation
-    training courses. (a) PedestrianCrossing, (b) KeepLeft, (c) LooseGravel, (d)
-    NoEntry, (e) Parking, (f) ParkingSlot, (g) RoadWork, (h) StraightOrRight,
-    (i) TrafficLightGreen, (j) TrafficLightRed, (k) TurnLeft, and (l)
-    Negative.} \label{figure:traffic-sign-classes}
+  \caption[Auto-cropped traffic signs and lights]{Classified and saved traffic
+    sign images from real and simulation training courses. (a)
+    PedestrianCrossing, (b) KeepLeft, (c) LooseGravel, (d) NoEntry, (e)
+    Parking, (f) ParkingSlot, (g) RoadWork, (h) StraightOrRight, (i)
+    TrafficLightGreen, (j) TrafficLightRed, (k) TurnLeft, and (l) Negative.}
+  \label{figure:traffic-sign-classes}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=.9\textwidth]{figures/classification-architecture.pdf}
-  \caption{Classification architecture. $width \times height\times channel$ is
-  given on each layer.}
+  \caption[Classification architecture]{Classification architecture. Shape
+    dimensions width $\times$ height $\times$ channel
+    are given on each layer.}
   \label{figure:classification-architecture}
 \end{figure}
 
@@ -368,7 +371,7 @@ car moves.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.8\textwidth]{figures/costmaps.png}
-  \caption{The small and large local occupancy grids.}
+  \caption[Occupancy grids]{The small and large local occupancy grids.}
   \label{figure:costmaps}
 \end{figure}
 
@@ -430,9 +433,10 @@ parking slot and stops.
 \begin{figure}[h]
 \centering
 \includegraphics[width=.8\textwidth]{figures/hfsm.pdf}
-\caption{Hierarchical finite state machine that governs the high-level behavior
-of the car. The numbered arrows 1 to 7 denote the transitions between states.
-DRIVE state has two sub-states to control speed profile and waypoint source to
-the navigation module. PARK is the terminal state.}
+\caption[Hierarchical finite state machine]{Hierarchical finite state machine
+  that governs the high-level behavior of the car. The numbered arrows 1 to 7
+  denote the transitions between states.  DRIVE state has two sub-states to
+  control speed profile and waypoint source to the navigation module. PARK is
+  the terminal state.}
 \label{figure:hfsm}
 \end{figure}
