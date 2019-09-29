@@ -471,6 +471,9 @@ original to this work.}
  \def\symb@l[##1]{\def\@symb@l{##1}\he@dgl@}%
 \@ifnextchar[{\symb@l}{\symb@l[\@loab]}%
 \addcontentsline{toc}{leads}{\protect\numberline {}\@loab}
+\@starttoc{loab}
+\addtocontents{loab}{\protect\numberline{}ABBREVIATIONS}
+\addtocontents{loab}{\par}
 \begin{list}{}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth %labelsep 0.1cm
  \advance\leftmargin\labelsep \itemsep \z@}\def\makelabel##1{##1 \hfil}}%
 \def\endtheglossary{\end{list}\if@restonecol\onecolumn\else\clearpage\fi}
