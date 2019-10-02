@@ -471,6 +471,9 @@ original to this work.}
  \def\symb@l[##1]{\def\@symb@l{##1}\he@dgl@}%
 \@ifnextchar[{\symb@l}{\symb@l[\@loab]}%
 \addcontentsline{toc}{leads}{\protect\numberline {}\@loab}
+\@starttoc{loab}
+\addtocontents{loab}{\protect\numberline{}ABBREVIATIONS}
+\addtocontents{loab}{\par}
 \begin{list}{}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth %labelsep 0.1cm
  \advance\leftmargin\labelsep \itemsep \z@}\def\makelabel##1{##1 \hfil}}%
 \def\endtheglossary{\end{list}\if@restonecol\onecolumn\else\clearpage\fi}
@@ -733,10 +736,12 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 \vskip0.5cm plus0pt minus2mm \nointerlineskip
 \ifexist@co
   \vbox{
-  \parbox{11cm}{\singlespacing \expthr@@{\@cosupervisor}\\ \@cosupervisorlabel, {\bf
-\expthr@@{\@dispdepartmentofcosupervisor}}} \hfill \parbox{3cm}{\singlespacing \begin{center} \rule{3cm}{1pt} \end{center}\nointerlineskip}}
+      \parbox{14.25cm}{\singlespacing \expthr@@{\@cosupervisor}\\
+      \@cosupervisorlabel, {\bf \expthr@@{\@dispdepartmentofcosupervisor}} \hfill
+                        \rule{3cm}{1pt}
+                        }}
 \else
-  \vbox{\parbox{11cm}{~\\~} \hfill \parbox{3cm}{~\\~}}
+  \vbox{\parbox{14.25cm}{~\\~} \hfill \parbox{3cm}{~\\~}}
 \fi
 \vskip1.5cm plus0pt minus2mm \nointerlineskip
  \vbox{\bf{\@committeelabel:}}

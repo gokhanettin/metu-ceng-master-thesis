@@ -5,38 +5,41 @@ In this chapter, we focus on our trajectory planning and control algorithms.
 The trajectory planner receives a primitive behavior mode, for our case, either
 stop or cruise mode, along with a set of waypoints as a reference path and
 delivers a safe, feasible trajectory consisting of another set of waypoints
-each has a recommended speed to the control block. The conrol block executes
+each with a recommended speed to the control block. The conrol block executes
 the trajectory by adjusting the steering angle to closely follow the waypoints
 at recommended speeds.
 
 \section{Trajectory Planning}
 
-We build a cubic spline curve from the reference waypoints to represent the
-reference path. In order to generate trajectories along the reference path, we
-use frenet frame as in \cite{Werling2010OptimalTG, Yoneda2018TrajectoryOA}.
-Because the map of the environment is not known a priori for our scenario, the
-reference paths are either extracted from the lanes or predefined for a
-specific traffic sign. We define normal trajectory $d(t)$ and tangential
-trajectory $s(t)$ to our reference path $\vec{r}(s)$ as shown in Figure
-\ref{figure:frenet}. To use the same convention as
-\cite{Yoneda2018TrajectoryOA}, we also let $d(t)$ and $s(t)$ be offset pattern
-and distance pattern, respectively. While the offset pattern corresponds to
-lateral dispacement, distance pattern corresponds to longitudinal acceleration
-and deceleration. We combine the two by Equation \eqref{eq:trajectory} to
-obtain a trajectory.
+We build cubic spline curves from reference waypoints to represent reference
+paths. Because the map of the environment is not known a priori for our
+scenarios, the reference waypoints are either extracted from the lanes or
+predefined for a specific traffic sign. In order to generate trajectories
+along a reference path, we use Frenet frame \cite{Werling2010OptimalTG,
+Yoneda2018TrajectoryOA} defined by normal and tangential vectors $\vec{n}_r$,
+$\vec{t}_r$ on the reference path.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1.0\textwidth]{figures/frenet-frame.pdf}
-  \caption{Frenet frame based on the right reference path extracted
-  from the right lane.}
-  \label{figure:frenet}
-\end{figure}
+We define normal trajectory $d(t)$ and tangential trajectory $s(t)$ to the
+reference path $\vec{r}(s)$ as shown in Figure \ref{figure:frenet}. To use the
+same convention as Yoneda et al. \cite{Yoneda2018TrajectoryOA}, we also let
+$d(t)$ and $s(t)$ be offset pattern and distance pattern, respectively. While
+the offset pattern corresponds to lateral dispacement, distance pattern
+corresponds to longitudinal acceleration and deceleration. We combine the two
+by Equation \eqref{eq:trajectory} to obtain a trajectory $\vec{x}$ in Cartesian
+coordinates.
 
 \begin{equation}
   \vec{x}(s(t), d(t)) = \vec{r}(s(t)) + d(t)\vec{n}_r(s(t))
   \label{eq:trajectory}
 \end{equation}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/frenet-frame.pdf}
+  \caption[Frenet frame]{Frenet frame based on the right reference path
+    extracted from the right lane.}
+  \label{figure:frenet}
+\end{figure}
 
 Offset and distance patterns are represented by 5-degree polynomials
 in Equations \eqref{eq:dt} and \eqref{eq:st}.
@@ -58,33 +61,32 @@ using initial conditions $[d_0, \dot{d}_0, \ddot{d}_0]$, $[s_0, \dot{s}_0,
 $[s_1, \dot{s}_1, \ddot{s}_1]$ at $t_1 = t_0 + \Delta T$, where $\Delta T$ is a
 preview time in seconds. We use $4 < \Delta T < 6$ with $0.2$ second increments
 for our offset and distance patterns. The offset pattern is defined as a
-quintic function to control the lateral position.  The distance pattern is
-defined using quartic and quintic function for cruise mode and stop mode,
+quintic function to control the lateral position. The distance pattern is
+defined using quartic and quintic functions for cruise mode and stop mode,
 respectively. In cruise mode, we don't pay attention to the terminal conditions
 at longitudinal positions, but rather we focus on keeping the speed constant
 around the speed profile set by the behavior planner; therefore, we set $b_5 =
 0$. On the other hand, we specify a longitudinal position as a terminal
-condition for the stop mode expecting the car to confortably slow down and
+condition for the stop mode expecting the car to comfortably slow down and
 eventually stop at the specified position.
 
 For the offset pattern, minimizing the lateral speed and accelaration leads to
-a more confortable driving experience, so  we choose the terminal conditions
+a more comfortable driving experience, so  we choose the terminal conditions
 $[\Delta d, 0, 0]$ for the candidate trajectories, where $\Delta d = \{-0.1, 0,
 1.0\}$ m. For cruise mode, we choose $[\dot{s}_1 + \Delta \dot{s}_1,
 \ddot{s}_1]$, where $\Delta \dot{s}_1 = \{-0.1, 0, 0.1\}$ m/s and $\dot{s}_1$
 is the target speed set by the behavior planner. For stop mode, we choose
 $[s_1, 0, 0]$ terminal conditions, where $s_1$ is the stop position.
 
-For all candidate trajectories, we apply a sanity check to see the candidate is
-actually drivable. If there is an overlap between an obstacle grid of the
+For all candidate trajectories, we apply a sanity check to see if the candidate
+is actually drivable. If there is an overlap between an obstacle grid of the
 occupancy grid map and the car's bounding circle along a trajectory, we
 conclude that the trajectory is not drivable. Non-drivable trajectories are
 eliminated from the trajectory set. If no drivable trajectory is left, we set
 the speed to zero until a valid trajectory is found again. Otherwise, the
 trajectory with the minimum cost is selected among the surviving trajectories
-as the best trajectory and forwarded to the controller for execution.
-The cost function $C$ is defined in Equations \eqref{eq:cost1} -
-\eqref{eq:cost3}.
+as the best trajectory and forwarded to the controller for execution. The cost
+function $C$ is defined in Equations \eqref{eq:cost1} - \eqref{eq:cost3}.
 
 \begin{equation}
   C = k_{path}C^i_{path} + k_dC_d + k_sC_s
@@ -110,7 +112,7 @@ The cost function $C$ is defined in Equations \eqref{eq:cost1} -
 where $C_d$ and $C_s$ are the costs from offset and distance patterns,
 respectively. Both terms include integral of jerks, preview times, and
 dispacement of terminal conditions. In multi-lane settings, $C^i_{path}$ is the
-lane cost for \textit{i}th lane. For our scenario, we have only two lanes;
+lane cost for \textit{i}th lane. For our scenarios, we have only two lanes;
 therefore, we assign a higher cost to the left lane so as to prevent the car
 from occupying the left lane when the right lane is free as shown in Figure
 \ref{figure:frenet-lanes}. In this way, the car automatically shifts to the
@@ -133,12 +135,13 @@ evaluations.
     \includegraphics[width=\linewidth]{figures/frenet-shift-right-lane.pdf}
     \caption{}
   \end{subfigure}
-  \caption{Example multi-lane driving scenario. The thick blue trajectory is
-    the optimal trajectory for different cases. (a) The right lane is
-    blocked, so the car attempts to change lane to the left for overtaking.
-    (b) The right lane is still blocked, so the car keeps occupying the left
-    lane. (c) Because the right lane is less costly when both lanes are
-    available, the car shifts back to right lane.}
+  \caption[Example frenet frame optimal trajectories]{Example multi-lane
+    driving scenarios. The thick blue trajectory is the optimal trajectory for
+    different cases. (a) The right lane is blocked, so the car attempts to
+    change lane to the left for overtaking. (b) The right lane is still
+    blocked, so the car keeps occupying the left lane. (c) Because the right
+    lane is less costly when both lanes are available, the car shifts back to
+    right lane.}
   \label{figure:frenet-lanes}
 \end{figure}
 
@@ -157,8 +160,8 @@ Equation \eqref{eq:nonholonomic}.
 
 such that longitudinal and lateral forces applied on the car tires are always
 smaller than the maximum friction between the tires and the ground
-\cite{Kim2013SensorbasedMP}.  In other words we assume the car does not slip.
-With this constaints, we estimate the steering angle in terms of turning radius
+\cite{Kim2013SensorbasedMP}. In other words we assume the car does not slip.
+With these constaints, we estimate the steering angle in terms of turning radius
 $R$ and the wheelbase of the car $L_b$ from Figure \ref{figure:steering} in
 Equation \eqref{eq:steering}.
 
@@ -170,8 +173,8 @@ Equation \eqref{eq:steering}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/pure-pursuit-steering.pdf}
-  \caption{Estimation of steering angle in terms of turning radius $R$ and
-  wheelbase $L_b$.}
+  \caption[Steering angle geometry in pure pursuit controller]{Estimation of
+    steering angle in terms of turning radius $R$ and wheelbase $L_b$.}
   \label{figure:steering}
 \end{figure}
 
@@ -183,7 +186,8 @@ distance greater than a lookahead distance $L$. This is illustrated in Figure
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/pure-pursuit-radius.pdf}
-  \caption{Illustration of lookahead distance $L$ and feedback angle $\alpha$.}
+  \caption[Illustration of lookahead distance and feedback angle]{Illustration
+    of lookahead distance $L$ and feedback angle $\alpha$.}
   \label{figure:radius}
 \end{figure}
 
@@ -225,8 +229,8 @@ radius $R$ in terms of feedback angle $\alpha$ and lookahead distance $L$.
   \label{eq:radius6}
 \end{equation}
 
-Feedback angle $\alpha$ is computed by the car configuration $\textbf{q} = [x y
-\theta]^T$ and the position of the lookahead point $(x_p, y_p)$ in the world
+Feedback angle $\alpha$ is computed by the car configuration $\textbf{q} = [x\
+y\ \theta]^T$ and the position of the lookahead point $(x_p, y_p)$ in the world
 coordinates. Note that we take the midpoint of the front axle as the car
 position in the world coordinates.
 
@@ -235,7 +239,7 @@ position in the world coordinates.
   \label{eq:alpha}
 \end{equation}
 
-Finally, using \eqref{eq:steering} and \eqref{eq:radius6}, we derivate the
+Finally, using \eqref{eq:steering} and \eqref{eq:radius6}, we derive the
 steering angle $\delta$ in terms of feedback angle $alpha$, constant wheelbase
 $L_b$, and lookahead distance $L$.
 
@@ -245,18 +249,18 @@ $L_b$, and lookahead distance $L$.
 \end{equation}
 
 In order to tune the controller, we need to choose a lookahead distance $L$.
-\cite{Kim2013SensorbasedMP} suggests $L = 2R_{min}$, where $R_{min} =
-\frac{L_b}{\tan({\delta_{max})}}$. For our car, the max steering angle
-$\delta_{max} = 0.34$ rads and the wheelbase $L_b = 0.25$ meters. Therefore, we
-use $L = 1.4$. Figure \ref{figure:lookahead} illustrates the relation between
-$R_{min}$ and $L$.
-
+Kim et al. \cite{Kim2013SensorbasedMP} suggests $L = 2R_{min}$, where $R_{min}
+= \frac{L_b}{\tan({\delta_{max})}}$. For our car, the max steering angle
+$\delta_{max} = 0.558$ radians and the wheelbase $L_b = 0.325$ meters.
+Therefore, we use $L = 1.04$ meters. Figure \ref{figure:lookahead} illustrates
+the relation between $R_{min}$ and $L$.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/pure-pursuit-lookahead.pdf}
-  \caption{Illustration of lookahead distance $L$ and minimum turning radius
-  $R_{min}$ for tuning the pure pursuit controller.}
+  \caption[Pure pursuit controller tuning]{Illustration of lookahead distance
+  $L$ and minimum turning radius $R_{min}$ for tuning the pure pursuit
+  controller.}
   \label{figure:lookahead}
 \end{figure}
 
