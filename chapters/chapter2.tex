@@ -10,7 +10,7 @@ driverless car technologies; DARPA Grand Challenge and DARPA Urban Challenge.
 In DARPA Grand Challenge 2004, none of the 15 teams saw the finishing line of
 the race course. In DARPA Grand Challenge 2005, Stanley, a robot car developed
 by Stanford Racing Team, was the first car to complete the race course. Thrun
-et al. \cite{Thrun2006StanleyTR} presents the details of the competition rules
+et al.\ \cite{Thrun2006StanleyTR} presents the details of the competition rules
 and the software design of Stanley. According to Thrun et al., a description of
 the race course was given to the participants in a DARPA-defined format, namely
 RDDF, two hours before the race. The RDDF contained a list of longitudes,
@@ -66,7 +66,7 @@ Figure \ref{figure:stanley-control}.
   \includegraphics[width=.8\textwidth]{figures/stanley-control.png}
   \caption[Stanley controller algorithm]{The geometrical relation between the
     trajectory and the car used by Stanley controller algorithm. (Figure
-    source: Thrun et al. \cite{Thrun2006StanleyTR})}
+    source: Thrun et al.\ \cite{Thrun2006StanleyTR})}
   \label{figure:stanley-control}
 \end{figure}
 
@@ -83,10 +83,10 @@ the orientation of the nearest trajectory segment relative to the car's
 orientation. The intuition behind the controller is that as the cross-track
 error $x(t)$ increases, the controller produces stronger steering angle
 $\delta(t)$ towards the trajectory. Likewise, as the speed $u(t)$ increases,
-the controller avoids sudden strong maneuvers. Hoffmann et al. studies the
+the controller avoids sudden strong maneuvers. Hoffmann et al.\ studies the
 Stanley controller algorithm in greater detail \cite{Hoffmann2007AutonomousAT}.
 
-In 2007, DARPA Urban Challenge took place. Montemerlo et al.
+In 2007, DARPA Urban Challenge took place. Montemerlo et al.\
 \cite{Montemerlo2009JuniorTS} present the competition details and the software
 architecture of Junior, Stanford's another robot car and the second best car in
 the challenge. This time rules were more complex including overtaking parking
@@ -134,7 +134,7 @@ A*, Field D*, and hybrid A* algorithms.
     pass through only the center of grids. Center: Field D* solutions can
     have arbitrary linear paths from cell to cell. Right: Hybrid A* associates
     a continuous state with each cell and computes a score for the continuous
-  state. (Figure source: Dolgov et al. \cite{Dolgov2010PathPF})}
+  state. (Figure source: Dolgov et al.\ \cite{Dolgov2010PathPF})}
   \label{figure:hybridastar-comparison}
 \end{figure}
 
@@ -154,7 +154,7 @@ stop signs, prevents the car from getting stuck, switches to parking navigation
 in a parking lot or chooses the true planner for the current scenario in
 general.
 
-Werling et al. \cite{Werling2010OptimalTG} report that they generated optimal
+Werling et al.\ \cite{Werling2010OptimalTG} report that they generated optimal
 trajectories in Frenet frame and tested on Junior without obstacles. They
 also present their obstacle avoidance experiments in simulation. In their
 method, they suggest integrating trajectory generation with a behavioral layer
@@ -171,13 +171,13 @@ demonstrates a velocity keeping instance in this approach.
     Colors from red to yellow represent increasing lateral cost. Colors from
     grey to black represent increasing longitudinal cost. Green and light grey
     colors represent the optimal trajectory, which leads the car to the
-    reference line and desired speed. (Figure source: Werling et al.
+    reference line and desired speed. (Figure source: Werling et al.\
     \cite{Werling2010OptimalTG})}
   \label{figure:frenet-velocity-keeping}
 \end{figure}
 
-Yoneda et al. \cite{Yoneda2018TrajectoryOA} further extend the method developed
-by Werling et al. \cite{Werling2010OptimalTG} introducing an additional adjust
+Yoneda et al.\ \cite{Yoneda2018TrajectoryOA} further extend the method developed
+by Werling et al.\ \cite{Werling2010OptimalTG} introducing an additional adjust
 mode while switching from velocity keeping mode to distance keeping in an
 affort to eliminate strong acceleration and deceleration during the mode
 switching in quest of a more natural driving experience.
@@ -197,7 +197,7 @@ level.
   \centering
   \includegraphics[width=.8\textwidth]{figures/autoware.png}
   \caption[Autoware high level architecture]{Autoware high level architecture
-    and data flow. (Figure source: Kato et al. \cite{Kato2018AutowareOB})}
+    and data flow. (Figure source: Kato et al.\ \cite{Kato2018AutowareOB})}
   \label{figure:autoware}
 \end{figure}
 
@@ -228,7 +228,7 @@ current location to the destination in the map. Motion planners, on the other
 hand, generate local trajectories taking the global plan as a reference. In
 unstructured environments such as parking lots, hybrid A* is used similar to
 Junior. For well-structured environment scenarios such as navigating on the
-lanes, state lattice based algorithms are preferred. Pivtoraiko et al.
+lanes, state lattice based algorithms are preferred. Pivtoraiko et al.\
 \cite{Pivtoraiko2009DifferentiallyCM} introduce space lattice based planning.
 The state lattice is made of motion primitives of a specific car. The motion
 primitives are generated offline by a precise trajectory generator respecting
@@ -237,7 +237,7 @@ the lattice search space could be searched by D* algorithms for optimal
 trajectories. This method was also successfully used in DARPA Urban Challenge
 by the winner vehicle, Carnegie Mellon University's Tartan Racing for
 navigating in unstructural environments \cite{Urmson2007TartanRA}. Figure
-\ref{figure:state-lattice} illustrates a state lattice. McNaughton et al.
+\ref{figure:state-lattice} illustrates a state lattice. McNaughton et al.\
 \cite{McNaughton2011MotionPF} later extended this approach and applied it to
 structural environments.
 
@@ -245,13 +245,13 @@ structural environments.
   \centering
   \includegraphics[width=.8\textwidth]{figures/state-lattice.png}
   \caption[An example state lattice]{An example state lattice without reverse
-    motions. (Figure source: Pivtoraiko et al.
+    motions. (Figure source: Pivtoraiko et al.\
     \cite{Pivtoraiko2009DifferentiallyCM})}
   \label{figure:state-lattice}
 \end{figure}
 
 Autoware uses pure pursuit controller to generate low level steering commands
-to execute the given trajectory from the motion planners. Kim et al.
+to execute the given trajectory from the motion planners. Kim et al.\
 \cite{Kim2013SensorbasedMP} studies the controller with its geometrical
 derivation and also give some useful pointers on tuning.
 
@@ -266,7 +266,7 @@ maps for location and perception \cite{Fan2018BaiduAE}.
   \centering
   \includegraphics[width=.8\textwidth]{figures/apollo.png}
   \caption[Apollo high level architecture]{Apollo high level architecture and
-    data flow. (Figure source: Fan et al. \cite{Fan2018BaiduAE})}
+    data flow. (Figure source: Fan et al.\ \cite{Fan2018BaiduAE})}
   \label{figure:apollo}
 \end{figure}
 
@@ -285,7 +285,7 @@ approach allows for dealing with different traffic regulations that apply for
 different lanes of the same road \cite{Fan2018BaiduAE}.
 
 A different approach to autonomous cars is to learn a mapping from input images
-to steering angle and speed commands in an end-to-end manner. Bojarski et al.
+to steering angle and speed commands in an end-to-end manner. Bojarski et al.\
 \cite{Bojarski2016EndTE} were the first to apply this method to a real-sized
 car with the modern deep learning techniques. They collected 72 hours data
 with different cars in different weather and lighting conditions from various
@@ -310,16 +310,16 @@ steps of this approach.
   \end{subfigure}
   \caption[End-to-end training and inference]{(a) End-to-end training scheme.
     (b) Steering command inference from raw camera images. (Figure source:
-    Bojarski et al. \cite{Bojarski2016EndTE})}
+    Bojarski et al.\ \cite{Bojarski2016EndTE})}
   \label{figure:end-to-end-network}
 \end{figure}
 
-Bechtel et al. \cite{Bechtel2017DeepPicarAL} replicated the study
+Bechtel et al.\ \cite{Bechtel2017DeepPicarAL} replicated the study
 \cite{Bojarski2016EndTE} with a small-scale, low-cost platform using a web
 camera and a Raspberry Pi 3 for inference. They conducted successful
 experiments in a specially built test course for their RC car.
 
-Do et al. \cite{Do2018RealTimeSC} also implemented a similar approach in
+Do et al.\ \cite{Do2018RealTimeSC} also implemented a similar approach in
 another RC car platform using Pi camera and Raspberry Pi 3 for inference.
 Instead of learning steering angles in a regression model, they learned a
 steering angle probability for discretized steering angle space. In addition to
@@ -339,7 +339,7 @@ Serna2018ClassificationOT, MaldonadoBascn2007RoadSignDA}, on the other hand,
 was useful to train an initial classifier as they are mostly independent of the
 scene and car size.
 
-Sakai et al. \cite{Kim2013SensorbasedMP} present a collection of various
+Sakai et al.\ \cite{Kim2013SensorbasedMP} present a collection of various
 autonomous navigation algorithms implemented in Python Programming Language in
 their basic forms. The collection includes aforementioned hybrid A*, Frenet
 optimal trajectory planner, state lattice planner, Stanley controller, and pure
@@ -350,7 +350,7 @@ the driving course. As a result, our best option is to follow the lanes unless
 a traffic sign or some other condition mandates otherwise. For the same reason,
 we have to create our reference paths for our local trajectory generation
 either from the online detected lane centers or according to the traffic
-regulations. Meyer et al. \cite{Meyer2018DeepSL} study semantic lane
+regulations. Meyer et al.\ \cite{Meyer2018DeepSL} study semantic lane
 segmentation for mapless driving, which bears similaries to our lane detection
 approach. Authors' motivation is the fact that as the high definition maps
 quickly get out of date due to constructions an autonomous car should also be
