@@ -65,6 +65,7 @@ of the final classification dataset is presented in Table
     \begin{tabular}{|c|c|c|}
       \hline
       \textbf{Course}   & \textbf{Training} & \textbf{Testing} \\
+      \hline
       Course 1          & 2249              & 212              \\
       Course 2          & 169               & 10               \\
       Course 3          & 230               & 29               \\
@@ -137,6 +138,7 @@ are small, rare, and often located towards the edge of the images.
     \begin{tabular}{|c|c|c|c|c|}
       \hline
       \textbf{Class} & \textbf{IoU} & \textbf{Precision} & \textbf{Recall} & \textbf{F1}  \\
+      \hline
       Background     & 94.43\%      & 97.81\%            & 96.43\%         & 97.12\%      \\
       Ego Lane       & 88.48\%      & 92.29\%            & 93.18\%         & 92.73\%      \\
       Left Lane      & 83.52\%      & 87.83\%            & 94.49\%         & 91.04\%      \\
@@ -210,7 +212,7 @@ class.
     \includegraphics[width=\linewidth]{figures/experiments/detection-results-info.png}
     \caption{}
   \end{subfigure}
-  \caption[Evaluation of traffic sign detection and recognition]{(a)Average
+  \caption[Evaluation of traffic sign detection and recognition]{(a) Average
     precision for traffic sign detection. (b) True and false prediction rates
     for each sign class.}
   \label{figure:average-precision}
@@ -318,11 +320,10 @@ back to the right lane.
 \end{figure}
 
 
-Figures \ref{figure:normal-driving}, \ref{figure:lane-change}, and
-\ref{figure:stop} further illustrate various driving scenarios by providing 3D
-point cloud of traffic scenes and processed front view camera images.
-
-\section{Driving Tasks}
+Figures \ref{figure:normal-driving}, \ref{figure:sharp-turns},
+\ref{figure:lane-change}, and \ref{figure:stop} further illustrate various
+driving scenarios by providing 3D point cloud of traffic scenes and processed
+front view camera images.
 
 \begin{figure}[h]
   \centering
@@ -426,6 +427,6 @@ point cloud of traffic scenes and processed front view camera images.
   \begin{subfigure}[b]{0.45\linewidth}
     \includegraphics[width=\linewidth]{figures/experiments/parking-slot-pc.png}
   \end{subfigure}
-  \caption[Stopping scenarios]{Stopping scenarios.}
+  \caption[Stop scenarios]{Stop scenarios.}
   \label{figure:stop}
 \end{figure}
