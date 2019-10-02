@@ -55,8 +55,8 @@ considered background and assigned black color.
 \end{figure}
 
 We adopt U-net architecture for our traffic scene segmentation task inspired
-from Srihari Humbarwadi \cite{Srihari2018SS}. U-net works well with a few
-training images and yields fast and precise segmentations
+by Srihari Humbarwadi \cite{Srihari2018SS}. U-net works well with a few
+training images and yields fast and precise segmentation results.
 \cite{Ronneberger2015UNetCN}. As shown in Figure
 \ref{figure:unet-architecture}, the U-net architecture is in shape of U, thus
 the name U-net. Our slightly modified architecture inputs an RGB image of size
@@ -172,7 +172,7 @@ for each lane are the waypoints that describe the lanes on the road.
   \end{subfigure}
   \caption[Lane searching in birdseye view]{(a) Segmentation birdseye view
     image. (b) Sliding window search for the ego lane. (c) Guided search for
-    the ego lane on the next image frame after the the sliding window search.
+    the ego lane on the next image frame after the sliding window search.
     The green color denotes the sliding windows and guided search area. The
     orange color denotes the averaged polynomial curve.}
   \label{figure:lane-searches}
@@ -188,13 +188,13 @@ used for the traffic signs also apply to the traffic lights.
 Though there exist multiple well-established object detection deep learning
 architectures with different size, performance and accuracy trade-offs
 \cite{Gupta2019PerformanceCO, Rezatofighi2019GeneralizedIO}, our limited
-resources in memory and computational power as well as the soft realtime
+resources in memory and computational power as well as the soft real-time
 requirements at 10 Hz challenge us to use a more resource-friendly approach.
 Instead of running an object detection model, we run a much simpler classifier
 model on the segmented traffic sign patches. This approach also saves us from
 labelling the whole dataset for the object detection in addition to the
 semantic segmentation annotations. On the downside, we cannot detect the signs
-in an end-to-end fasion without resorting to computer vision techiques for
+in an end-to-end fashion without resorting to computer vision techniques for
 finding bounding rectangles for each sign patch in the segmentation output
 \cite{Bradski2000CV}.
 
@@ -209,14 +209,14 @@ patches. We later manually go through the saved image patches and ensure they
 are in the correct class folder. Whenever an inappropriate image patch is
 mistakenly classified as a traffic sign, we also put them into a special
 negative class folder. Augmenting our classification dataset in this manner
-siginificantly improves our classifier as it learns from its own mistakes.
+significantly improves our classifier as it learns from its own mistakes.
 
 We use \textit{PedestrianCrossing}, \textit{KeepLeft}, \textit{LooseGravel},
 \textit{NoEntry}, \textit{Parking}, \textit{ParkingSlot}, \textit{RoadWork},
 \textit{StraightOrRight}, \textit{TrafficLightGreen}, \textit{TrafficLightRed},
 \textit{TurnLeft}, and \textit{Negative} classes. Figure
 \ref{figure:traffic-sign-classes} illustrates these classes with image patches
-automatically cropped from the training courses. The paches are converted to
+automatically cropped from the training courses. The patches are converted to
 grayscale and resized to 32$\times$32 before being fed into the classification
 model. The classification architecture is depicted in Figure
 \ref{figure:classification-architecture}. We train the model using Adam
@@ -342,7 +342,7 @@ traffic sign segmentation mask.
         \State $y \gets z\frac{v-c_y}{f_y}$
         \State $detections[class].append(x, y, z, t)$
         \If{$len(detections[class]) > 3$ \textbf{and} $last(detections[class]).x < 2.$}
-          \Comment{We see the sign more than 3 times with enough confidance within
+          \Comment{We see the sign more than 3 times with enough confidence within
           a range of 2 meters, so we can safely report that we are tracking it}
           \State $objects[class] \gets (x, y, z, t)$
           \State $events[class] \gets \textbf{True}$

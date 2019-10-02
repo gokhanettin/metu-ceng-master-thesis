@@ -117,7 +117,7 @@ angles and computes a score based on the continuous state. The continuous state
 is represented by x-y position of the car, heading direction, and the
 direction, either forward or reverse. Whereas the path found by the regular A*
 and Field D* algorithms cannot be executed due to their discrete nature, hybrid
-A* can find executable paths that accounts for the nonholonomic constaints of
+A* can find executable paths that accounts for the nonholonomic constraints of
 the vehicle. Hybrid A* uses dual admissible heuristics. One heuristic is
 nonholonomic without obstacles, and the other is holonomic with obstacles. Once
 a solution is found, it is smoothed for a better driving experience. Extensive
@@ -178,18 +178,18 @@ demonstrates a velocity keeping instance in this approach.
 Yoneda et al.\ \cite{Yoneda2018TrajectoryOA} further extend the method developed
 by Werling et al.\ \cite{Werling2010OptimalTG} introducing an additional adjust
 mode while switching from velocity keeping mode to distance keeping in an
-affort to eliminate strong acceleration and deceleration during the mode
+effort to eliminate strong acceleration and deceleration during the mode
 switching in quest of a more natural driving experience.
 
 Fast forward to the present day, Autoware \cite{Kato2018AutowareOB}, being one
 of the modern open source self-driving car platforms is based on ROS
 \cite{Quigley2009ROSAO}. ROS is a commonly used, extensible, component based,
-higly modular middleware framework with many reusable packages and
+highly modular middleware framework with many reusable packages and
 visualization tools that dramatically accelerated today's robot development and
 prototyping processes. Unsurprisingly, publish/subscribe mechanism is at the
 core of ROS communication patterns. Autoware implements perception,
 decision-making, planning and path tracking capabilities. Figure
-\ref{figure:autoware} illustrates the the Autoware architecture at a high
+\ref{figure:autoware} illustrates the Autoware architecture at a high
 level.
 
 \begin{figure}[h]
@@ -202,7 +202,7 @@ level.
 
 Perception capabilities are made of localization, detection, and prediction
 modules. For the localization, Autoware relies on high definition 3D maps. It
-localizes itself by appling scan matching between the 3D map and LiDAR scans.
+localizes itself by applying scan matching between the 3D map and LiDAR scans.
 Therefore, a 3D map of the environment should be created beforehand using SLAM
 techniques, in which scan matching is applied against previous LiDAR scans
 instead of a 3D map such that a transformation between the LiDAR scans are
@@ -235,7 +235,7 @@ the mobility model of the vehicle such as steering limits and wheelbase. Then,
 the lattice search space could be searched by D* algorithms for optimal
 trajectories. This method was also successfully used in DARPA Urban Challenge
 by the winner vehicle, Carnegie Mellon University's Tartan Racing for
-navigating in unstructural environments \cite{Urmson2007TartanRA}. Figure
+navigating in unstructured environments \cite{Urmson2007TartanRA}. Figure
 \ref{figure:state-lattice} illustrates a state lattice. McNaughton et al.\
 \cite{McNaughton2011MotionPF} later extended this approach and applied it to
 structural environments.
@@ -286,13 +286,13 @@ different lanes of the same road \cite{Fan2018BaiduAE}.
 A different approach to autonomous cars is to learn a mapping from input images
 to steering angle and speed commands in an end-to-end manner. Bojarski et al.\
 \cite{Bojarski2016EndTE} were the first to apply this method to a real-sized
-car with the modern deep learning techniques. They collected 72 hours data
-with different cars in different weather and lighting conditions from various
-places. For the data acqusition, they installed three cameras on the car behind
-the windshield and recorded timestamped videos from the left, right and center
-cameras along with the steering commands controlled by a human driver. During
-training, they augmented the dataset by random shifting and rotating the images
-and adjusting the recorded commands accordingly. The trained model then
+car with the modern deep learning techniques. They collected 72 hours data with
+different cars in different weather and lighting conditions from various
+places. For the data acquisition, they installed three cameras on the car
+behind the windshield and recorded timestamped videos from the left, right and
+center cameras along with the steering commands controlled by a human driver.
+During training, they augmented the dataset by random shifting and rotating the
+images and adjusting the recorded commands accordingly. The trained model then
 successfully steered the car by using the images only from the central camera.
 Figure \ref{figure:end-to-end-network} demonstrates the training and testing
 steps of this approach.
@@ -350,14 +350,14 @@ a traffic sign or some other condition mandates otherwise. For the same reason,
 we have to create our reference paths for our local trajectory generation
 either from the online detected lane centers or according to the traffic
 regulations. Meyer et al.\ \cite{Meyer2018DeepSL} study semantic lane
-segmentation for mapless driving, which bears similaries to our lane detection
-approach. Authors' motivation is the fact that as the high definition maps
-quickly get out of date due to constructions an autonomous car should also be
-able to perform basic navigation tasks without a precise map, but possibly with
-a coarse map, specifically for intersections. They start with creating their
-own dataset by extending Cityscape \cite{Cordts2016TheCD}. Their approach is to
-annotate the road surface as ego lane, parallel lane, and opposite lane and
-learn these regions with a semantic segmentation model.
+segmentation for mapless driving, which bears similarities to our lane
+detection approach. Authors' motivation is the fact that as the high definition
+maps quickly get out of date due to constructions an autonomous car should also
+be able to perform basic navigation tasks without a precise map, but possibly
+with a coarse map, specifically for intersections. They start with creating
+their own dataset by extending Cityscape \cite{Cordts2016TheCD}. Their approach
+is to annotate the road surface as ego lane, parallel lane, and opposite lane
+and learn these regions with a semantic segmentation model.
 
 Stanley controller algorithm is weak to discontinuities along the trajectory as
 it directly drives towards the closest point on the trajectory. Stanley and
