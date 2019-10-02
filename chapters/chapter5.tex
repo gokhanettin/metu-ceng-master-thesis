@@ -6,8 +6,8 @@ The trajectory planner receives a primitive behavior mode, for our case, either
 stop or cruise mode, along with a set of waypoints as a reference path and
 delivers a safe, feasible trajectory consisting of another set of waypoints
 each with a recommended speed to the control block. The conrol block executes
-the trajectory by adjusting the steering angle to closely follow the waypoints
-at recommended speeds.
+the trajectory by adjusting the steering angle in order to closely follow the
+waypoints at recommended speeds.
 
 \section{Trajectory Planning}
 
@@ -24,12 +24,12 @@ reference path $\vec{r}(s)$ as shown in Figure \ref{figure:frenet}. To use the
 same convention as Yoneda et al.\ \cite{Yoneda2018TrajectoryOA}, we also let
 $d(t)$ and $s(t)$ be offset pattern and distance pattern, respectively. While
 the offset pattern corresponds to lateral dispacement, distance pattern
-corresponds to longitudinal acceleration and deceleration. We combine the two
-by Equation \eqref{eq:trajectory} to obtain a trajectory $\vec{x}$ in Cartesian
-coordinates.
+corresponds to longitudinal acceleration and deceleration. In order to obtain a
+trajectory $\vec{x}$ in Cartesian coordinates, we combine the two patterns by
+the equation
 
 \begin{equation}
-  \vec{x}(s(t), d(t)) = \vec{r}(s(t)) + d(t)\vec{n}_r(s(t))
+  \vec{x}(s(t), d(t)) = \vec{r}(s(t)) + d(t)\vec{n}_r(s(t)).
   \label{eq:trajectory}
 \end{equation}
 
@@ -41,16 +41,16 @@ coordinates.
   \label{figure:frenet}
 \end{figure}
 
-Offset and distance patterns are represented by 5-degree polynomials
-in Equations \eqref{eq:dt} and \eqref{eq:st}.
+Offset and distance patterns are represented by 5-degree polynomials as
+given by the equations
 
 \begin{equation}
-  d(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
+  d(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5,
   \label{eq:dt}
 \end{equation}
 
 \begin{equation}
-  s(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5
+  s(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + a_4t^4 + a_5t^5.
   \label{eq:st}
 \end{equation}
 
@@ -86,15 +86,15 @@ eliminated from the trajectory set. If no drivable trajectory is left, we set
 the speed to zero until a valid trajectory is found again. Otherwise, the
 trajectory with the minimum cost is selected among the surviving trajectories
 as the best trajectory and forwarded to the controller for execution. The cost
-function $C$ is defined in Equations \eqref{eq:cost1} - \eqref{eq:cost3}.
+function $C$ is defined by the equations
 
 \begin{equation}
-  C = k_{path}C^i_{path} + k_dC_d + k_sC_s
+  C = k_{path}C^i_{path} + k_dC_d + k_sC_s,
 \label{eq:cost1}
 \end{equation}
 
 \begin{equation}
-  C_d = k_j\int_{t_0}^{t_1}\dddot{d}(t)dt + k_x\Delta T + k_y\Delta d^2
+  C_d = k_j\int_{t_0}^{t_1}\dddot{d}(t)dt + k_x\Delta T + k_y\Delta d^2,
 \label{eq:cost2}
 \end{equation}
 
@@ -149,9 +149,9 @@ evaluations.
 
 We use pure pursuit control algorithm to track the given optimal trajectory.
 The algorithm relies on the nonholonomic constraints of the car. Let car
-configuration be $\textbf{q} = [x\ y\ \theta]^T$, where $(x, y)$ is the position
-and $\theta$ is the orientation of the car. Nonholonomic constraints satisfy
-Equation \eqref{eq:nonholonomic}.
+configuration be $\textbf{q} = [x\ y\ \theta]^T$, where $(x, y)$ is the
+position and $\theta$ is the orientation of the car. Nonholonomic constraints
+satisfy the equation
 
 \begin{equation}
   \dot{x}\sin(\theta) - \dot{y}\cos(\theta) = 0
@@ -161,12 +161,12 @@ Equation \eqref{eq:nonholonomic}.
 such that longitudinal and lateral forces applied on the car tires are always
 smaller than the maximum friction between the tires and the ground
 \cite{Kim2013SensorbasedMP}. In other words we assume the car does not slip.
-With these constaints, we estimate the steering angle in terms of turning radius
-$R$ and the wheelbase of the car $L_b$ from Figure \ref{figure:steering} in
-Equation \eqref{eq:steering}.
+With these constaints, we estimate the steering angle in terms of turning
+radius $R$ and the wheelbase of the car $L_b$ from Figure \ref{figure:steering}
+by the equation
 
 \begin{equation}
-  \delta = \tan^{-1}(\frac{L_b}{R})
+  \delta = \tan^{-1}(\frac{L_b}{R}).
   \label{eq:steering}
 \end{equation}
 
@@ -194,22 +194,22 @@ distance greater than a lookahead distance $L$. This is illustrated in Figure
 From the figure, we write down the following equations:
 
 \begin{equation}
-  L^2 = x^2_L + y^2_L
+  L^2 = x^2_L + y^2_L,
   \label{eq:radius1}
 \end{equation}
 
 \begin{equation}
-  R^2 = a^2 + x^2_L
+  R^2 = a^2 + x^2_L,
   \label{eq:radius2}
 \end{equation}
 
 \begin{equation}
-  R = a + y_L
+  R = a + y_L,
   \label{eq:radius3}
 \end{equation}
 
 \begin{equation}
-  \sin{\alpha} = \frac{y_L}{L}
+  \sin{\alpha} = \frac{y_L}{L}.
   \label{eq:radius4}
 \end{equation}
 
@@ -217,43 +217,46 @@ Combining \eqref{eq:radius1}, \eqref{eq:radius2}, and \eqref{eq:radius3}, we
 obtain
 
 \begin{equation}
-  R = \frac{L^2}{2y_L}
+  R = \frac{L^2}{2y_L}.
   \label{eq:radius5}
 \end{equation}
 
-Substituting \eqref{eq:radius4} in \eqref{eq:radius5}, we obtain and turning
-radius $R$ in terms of feedback angle $\alpha$ and lookahead distance $L$.
+Substituting \eqref{eq:radius4} in \eqref{eq:radius5}, we obtain turning
+radius $R$ in terms of feedback angle $\alpha$ and lookahead distance $L$ as
+given by the equation
 
 \begin{equation}
-  R = \frac{L}{2\sin{\alpha}}
+  R = \frac{L}{2\sin{\alpha}}.
   \label{eq:radius6}
 \end{equation}
 
-Feedback angle $\alpha$ is computed by the car configuration $\textbf{q} = [x\
-y\ \theta]^T$ and the position of the lookahead point $(x_p, y_p)$ in the world
-coordinates. Note that we take the midpoint of the front axle as the car
-position in the world coordinates.
+Feedback angle $\alpha$ is computed using the car configuration $\textbf{q} =
+[x\ y\ \theta]^T$ and the position of the lookahead point $(x_p, y_p)$ in the
+world coordinates by the equation
 
 \begin{equation}
-  \alpha = \tan^{-1}(\frac{y_p - y}{x_p - x}) - \theta
+  \alpha = \tan^{-1}(\frac{y_p - y}{x_p - x}) - \theta.
   \label{eq:alpha}
 \end{equation}
 
-Finally, using \eqref{eq:steering} and \eqref{eq:radius6}, we derive the
-steering angle $\delta$ in terms of feedback angle $alpha$, constant wheelbase
-$L_b$, and lookahead distance $L$.
+Note that we take the midpoint of the front axle as the car position in the
+world coordinates.
+
+Finally, using \eqref{eq:steering} and \eqref{eq:radius6},
+we derive steering angle $\delta$ in terms of feedback angle $alpha$,
+constant wheelbase $L_b$, and lookahead distance $L$ given by
 
 \begin{equation}
-  \delta = \tan^{-1}(\frac{2L_b\sin\alpha}{L})
+  \delta = \tan^{-1}(\frac{2L_b\sin\alpha}{L}).
   \label{eq:delta}
 \end{equation}
 
 In order to tune the controller, we need to choose a lookahead distance $L$.
-Kim et al.\ \cite{Kim2013SensorbasedMP} suggests $L = 2R_{min}$, where $R_{min}
-= \frac{L_b}{\tan({\delta_{max})}}$. For our car, the max steering angle
-$\delta_{max} = 0.558$ radians and the wheelbase $L_b = 0.325$ meters.
-Therefore, we use $L = 1.04$ meters. Figure \ref{figure:lookahead} illustrates
-the relation between $R_{min}$ and $L$.
+Kim et al.\ suggests $L = 2R_{min}$, where $R_{min} =
+\frac{L_b}{\tan({\delta_{max})}}$ \cite{Kim2013SensorbasedMP}. For our car, the
+max steering angle $\delta_{max} = 0.558$ radians and the wheelbase $L_b =
+0.325$ meters.  Therefore, we use $L = 1.04$ meters. Figure
+\ref{figure:lookahead} illustrates the relation between $R_{min}$ and $L$.
 
 \begin{figure}[h]
   \centering
@@ -264,15 +267,14 @@ the relation between $R_{min}$ and $L$.
   \label{figure:lookahead}
 \end{figure}
 
-One problem with Equation \eqref{eq:delta} is that it does not account for the
-speed. As the speed increases, steering angle $\delta$ becomes more sensitive
-to the feedback angle $\alpha$ \cite{Kim2013SensorbasedMP}. We address this
-problem by adding a speed factor to lookahead distance $L$ in Equation
-\eqref{eq:lookahead}.
+One problem with \eqref{eq:delta} is that it does not account for the speed. As
+the speed increases, steering angle $\delta$ becomes more sensitive to the
+feedback angle $\alpha$ \cite{Kim2013SensorbasedMP}. We address this problem by
+adding a speed factor to lookahead distance $L$ in the equation
 
 \begin{equation}
-  L \leftarrow L + kv
-  \label{eq:lookahead}
+  \delta = \tan^{-1}(\frac{2L_b\sin\alpha}{L + kv}),
+  \label{eq:delta-with-speed-factor}
 \end{equation}
 
 where $v$ is the recommended speed by the trajectory planner, $k$ is the look
