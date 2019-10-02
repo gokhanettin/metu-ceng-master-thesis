@@ -139,7 +139,7 @@ range it should move, whether it should track the lanes or follow a predefined
 path. At the end, the behavior planner captures the current desired
 behavior in an interpretation message and publishes to the trajectory planner.
 
-Trajectory planner subscribes to the odometry, 3x3 local map, and
+Trajectory planner subscribes to the odometry, 3$\times$3 local map, and
 interpretation topics so as to find a collision-free, kinematically feasible,
 smooth, and optimal trajectory. The trajectory message contains waypoint
 locations in the odometry frame and a recommended speed for each waypoint.

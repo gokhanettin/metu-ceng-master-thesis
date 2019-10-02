@@ -81,7 +81,7 @@ case including the background class.
   \caption[Modified U-net semantic segmentation architecture]{Modified U-net
     architecture for semantic segmentation. Each blue box corresponds to a
     multi-channel feature map. The number of channels is given at the top of
-    each box. The width $\times$ height sizes are provided at the lower left
+    each box. The width$\times$height dimensions are provided at the lower left
     edge of each block of layers. White boxes denote the concatenated feature
     maps from the contracting side. The arrows denote different operations.}
   \label{figure:unet-architecture}
@@ -90,19 +90,19 @@ case including the background class.
 In order to meet smooth driving experience requirements, the segmentation
 inference shall run at 10 Hz and share the limited resources on the central
 computer, which sets an upper bound for the size of our segmentation model.
-Therefore, we resize down the camera images from 672x376 to 128x128. We also
-lower the initial number of filters to 16, which is 64 as described in the
-original U-net paper. Note that as opposed to the original architecture, we use
-paddings for the convolutional layers so that the output of a convolution layer
-has the same width and height as the input. As a result, we don't crop
-contracting feature maps before concatenating them with the corresponding
-feature maps on the expanding side. Another deviation from the original
-architecture is that we train the model in batches (batch size of 8), so we
-apply batch normalization following each 3x3 and 1x1 convolutional layer. We
-also place additional dropout layers to the bottleneck section and expansive
-side. We use Adam optimizer with sparse categorical cross entropy loss function
-from Keras which ships with TensorFlow as a high-level API \cite{Abadi2015TF,
-Chollet2015Keras}.
+Therefore, we resize down the camera images from 672$\times$376 to
+128$\times$128. We also lower the initial number of filters to 16, which is 64
+as described in the original U-net paper. Note that as opposed to the original
+architecture, we use paddings for the convolutional layers so that the output
+of a convolution layer has the same width and height as the input. As a result,
+we don't crop contracting feature maps before concatenating them with the
+corresponding feature maps on the expanding side. Another deviation from the
+original architecture is that we train the model in batches (batch size of 8),
+so we apply batch normalization following each 3$\times$3 and 1$\times$1
+convolutional layer. We also place additional dropout layers to the bottleneck
+section and expansive side. We use Adam optimizer with sparse categorical cross
+entropy loss function from Keras which ships with TensorFlow as a high-level
+API \cite{Abadi2015TF, Chollet2015Keras}.
 
 \subsection{Lane Detection}
 
@@ -363,13 +363,13 @@ traffic sign segmentation mask.
 
 We maintain two different local occupancy grids in size and resolution in the
 perception component. Each occupancy grid is driven by the same laser scan
-message. While 3x3 grid with 0.1 meter/cell resolution is passed to the
-trajectory planner, 4x4 grid with 0.2 meter/cell resolution is used to analyze
-obstacle in the neighborhood that could change the current driving behavior
-such as speed profile, which is also a parameter to the trajectory planner.
-Figure \ref{figure:costmaps} demonstrates the local occupancy grids in action.
-The car is always centered on the grids; therefore, the grids also move as the
-car moves.
+message. While 3$\times$3 grid with 0.1 meter/cell resolution is passed to the
+trajectory planner, 4$\times$4 grid with 0.2 meter/cell resolution is used to
+analyze obstacle in the neighborhood that could change the current driving
+behavior such as speed profile, which is also a parameter to the trajectory
+planner. Figure \ref{figure:costmaps} demonstrates the local occupancy grids
+in action. The car is always centered on the grids; therefore, the grids also
+move as the car moves.
 
 \begin{figure}[h]
   \centering
