@@ -5,7 +5,7 @@ In this chapter, we focus on our trajectory planning and control algorithms.
 The trajectory planner receives a primitive behavior mode, for our case, either
 stop or cruise mode, along with a set of waypoints as a reference path and
 delivers a safe, feasible trajectory consisting of another set of waypoints
-each with a recommended speed to the control block. The conrol block executes
+each with a recommended speed to the control block. The control block executes
 the trajectory by adjusting the steering angle in order to closely follow the
 waypoints at recommended speeds.
 
@@ -23,7 +23,7 @@ We define normal trajectory $d(t)$ and tangential trajectory $s(t)$ to the
 reference path $\vec{r}(s)$ as shown in Figure \ref{figure:frenet}. To use the
 same convention as Yoneda et al.\ \cite{Yoneda2018TrajectoryOA}, we also let
 $d(t)$ and $s(t)$ be offset pattern and distance pattern, respectively. While
-the offset pattern corresponds to lateral dispacement, distance pattern
+the offset pattern corresponds to lateral displacement, distance pattern
 corresponds to longitudinal acceleration and deceleration. In order to obtain a
 trajectory $\vec{x}$ in Cartesian coordinates, we combine the two patterns by
 the equation
@@ -70,7 +70,7 @@ around the speed profile set by the behavior planner; therefore, we set $b_5 =
 condition for the stop mode expecting the car to comfortably slow down and
 eventually stop at the specified position.
 
-For the offset pattern, minimizing the lateral speed and accelaration leads to
+For the offset pattern, minimizing the lateral speed and acceleration leads to
 a more comfortable driving experience, so  we choose the terminal conditions
 $[\Delta d, 0, 0]$ for the candidate trajectories, where $\Delta d = \{-0.1, 0,
 1.0\}$ m. For cruise mode, we choose $[\dot{s}_1 + \Delta \dot{s}_1,
@@ -111,8 +111,8 @@ function $C$ is defined by the equations
 
 where $C_d$ and $C_s$ are the costs from offset and distance patterns,
 respectively. Both terms include integral of jerks, preview times, and
-dispacement of terminal conditions. In multi-lane settings, $C^i_{path}$ is the
-lane cost for \textit{i}th lane. For our scenarios, we have only two lanes;
+displacement of terminal conditions. In multi-lane settings, $C^i_{path}$ is
+the lane cost for \textit{i}th lane. For our scenarios, we have only two lanes;
 therefore, we assign a higher cost to the left lane so as to prevent the car
 from occupying the left lane when the right lane is free as shown in Figure
 \ref{figure:frenet-lanes}. In this way, the car automatically shifts to the
@@ -161,7 +161,7 @@ satisfy the equation
 such that longitudinal and lateral forces applied on the car tires are always
 smaller than the maximum friction between the tires and the ground
 \cite{Kim2013SensorbasedMP}. In other words we assume the car does not slip.
-With these constaints, we estimate the steering angle in terms of turning
+With these constraints, we estimate the steering angle in terms of turning
 radius $R$ and the wheelbase of the car $L_b$ from Figure \ref{figure:steering}
 by the equation
 
@@ -255,7 +255,7 @@ In order to tune the controller, we need to choose a lookahead distance $L$.
 Kim et al.\ suggests $L = 2R_{min}$, where $R_{min} =
 \frac{L_b}{\tan({\delta_{max})}}$ \cite{Kim2013SensorbasedMP}. For our car, the
 max steering angle $\delta_{max} = 0.558$ radians and the wheelbase $L_b =
-0.325$ meters.  Therefore, we use $L = 1.04$ meters. Figure
+0.325$ meters. Therefore, we use $L = 1.04$ meters. Figure
 \ref{figure:lookahead} illustrates the relation between $R_{min}$ and $L$.
 
 \begin{figure}[h]
