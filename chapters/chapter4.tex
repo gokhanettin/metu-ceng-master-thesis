@@ -79,11 +79,13 @@ case including the background class.
   \centering
   \includegraphics[width=1.0\textwidth]{figures/unet-architecture.pdf}
   \caption[Modified U-net semantic segmentation architecture]{Modified U-net
-    architecture for semantic segmentation. Each blue box corresponds to a
-    multi-channel feature map. The number of channels is given at the top of
-    each box. The width$\times$height dimensions are provided at the lower left
-    edge of each block of layers. White boxes denote the concatenated feature
-    maps from the contracting side. The arrows denote different operations.}
+    architecture for semantic segmentation. Each feature map is represented by
+    a blue box. The number of channels in each feature map is given on top of
+    its corresponding box. The width and height dimensions are given at the
+    lower-left edge of each block of layers. White boxes denote the
+    concatenated feature maps from the contracting side. The operations are
+    depicted by the arrows.
+    }
   \label{figure:unet-architecture}
 \end{figure}
 
