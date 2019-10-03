@@ -149,16 +149,16 @@
 % Abstract in English
 %
 \abstract{
-  Autonomous cars capable of driving in city traffic has been long studied in
-  decomposed architectures consisting of perception, planning, and control
-  components. Recent advances in deep learning techniques considerably
-  contributed to the perception component of this approach. These advances also
-  led to evolution of other approaches such as end-to-end learning of steering
-  commands and learning driving affordances from camera images. Though the
-  latter approaches are promising to simplify the overall architecture, the
-  former is found more persuasive constituting the majority of today's
+  Autonomous cars capable of driving in city traffic have been long studied in
+  architectures decomposed into perception, planning, and control components.
+  Recent advances in deep learning techniques considerably contributed to the
+  perception component of this approach. These techniques also laid the
+  groundwork for the progress of other approaches such as end-to-end learning
+  of steering commands and driving affordances from camera images. Though these
+  approaches are promising to simplify the overall architecture, the decomposed
+  architectures are found more persuasive, constituting the majority of today's
   state-of-the-art, market-oriented driverless cars. However, studies on
-  small-scale autonomous cars, which can be considered as low-cost and rapid
+  small-scale autonomous cars, which are considered low-cost and rapid
   prototyping platforms, are not on a par with research on the modern
   decomposed architectures. These studies often remain limited to end-to-end
   approaches or resort to traditional image processing techniques in
@@ -180,32 +180,31 @@
 %
 \oz{
   Şehir trafiğinde sürüş yapabilen otonom araçlar algılama, planlama ve kontrol
-  bileşenlerinden oluşan ayrışmış mimariler olarak uzun zamandır
-  çalışılmaktadır. Derin öğrenme tekniklerindeki son gelişmeler bu yaklaşımın
-  algılama bileşenine büyük ölçüde katkıda bulunmuştur. Bu gelişmeler ayrıca
-  kamera görüntüsü üzerinden uçtan uca yönelim komutlarını ve sürüş
-  sağlarlıklarını öğrenmek gibi yeni yaklaşımların gelişimini de beraberinde
-  getirmiştir. Sonraki yaklaşımlar genel mimariyi sadeleştirmek için ümit
-  verici olsa da bugünün en gelişmiş, pazara yönelik sürücüsüz araçlarının
-  çoğunluğunu oluşturan ilk yaklaşım daha ikna edici bulunmaktadır. Bununla
-  birlikte, düşük maliyetli ve hızlı prototip oluşturma platformları olarak
-  düşünülebilecek küçük ölçekli otonom araçlar üzerinde yapılan çalışmalar,
-  modern ayrışmış mimariler üzerine yapılan araştırmalarla aynı düzeyde
-  değildir. Bu çalışmalar genellikle uçtan uca yaklaşımlarla sınırlı kalmakta
-  veya aşırı basitleştirilmiş trafik senaryoları içinde geleneksel görüntü
-  işleme yöntemlerine başvurmaktadır. Bu tezde, küçük ölçekli araçlar için
-  yedi trafik işareti, trafik ışıkları, şerit değişikliği, yonca yaprağı
-  kavşağı, yaya geçitleri ve park işlemi ile genişletilmiş trafik senaryolarını
-  kapsayan ayrışmış bir mimari sunuyoruz. Bu mimariyi gerçekleştirmek için
-  bölütleme ve sınıflandırma veri setleri oluşturduk. Şerit anlamlarını
-  öğrenmek ve trafik levha ve ışıklarını sınıflandırmak için iki derin öğrenme
-  modeli eğittik. Trafik sahnelerine göre en iyi davranış temellerine karar
-  veren bir davranış planlayıcısı geliştirdik. Bu davranış temellerine
-  dayanarak, şerit boyunca en uygun yörüngeleri bulan bir yörünge planlayıcısı
-  ve bu yörüngeleri takip etmek için bir denetleyici gerçekledik. Özgün şerit
-  bölümleme tasarımız, \%97 doğru sınıflandırıcımız, dayanıklı planlayıcı ve
-  kontrolcü algoritmalarımızla benzetimli ve gerçek güzergahlarda başarılı
-  sürüşler gerçekleştirdik.
+  bileşenlerine ayrılan mimariler olarak uzun zamandır çalışılmaktadır. Derin
+  öğrenme tekniklerindeki son gelişmeler bu yaklaşımın algılama bileşenine
+  önemli ölçüde katkıda bulunmuştur. Bu teknikler ayrıca kamera görüntüleri
+  üzerinden uçtan uca yönelim komutlarının ve sürüş sağlarlıklarının
+  öğrenilmesi gibi diğer yaklaşımların ilerleyişi için de zemin hazırlamıştır.
+  Her ne kadar bu yaklaşımlar genel mimariyi sadeleştirmek için ümit verici
+  olsa da bugünün en gelişmiş, pazara yönelik sürücüsüz araçlarının çoğunluğunu
+  oluşturan ayrışmış mimariler daha ikna edici bulunmaktadır. Bununla birlikte,
+  düşük maliyetli ve hızlı prototip oluşturma platformları olarak düşünülen
+  küçük ölçekli otonom araçlar üzerinde yapılan çalışmalar, modern ayrışmış
+  mimariler üzerine yapılan araştırmalarla aynı düzeyde değildir. Bu çalışmalar
+  genellikle uçtan uca yaklaşımlarla sınırlı kalmakta veya aşırı
+  basitleştirilmiş trafik senaryoları içinde geleneksel görüntü işleme
+  yöntemlerine başvurmaktadır. Bu tezde, küçük ölçekli araçlar için yedi trafik
+  işareti, trafik ışıkları, şerit değişikliği, yonca yaprağı kavşağı, yaya
+  geçitleri ve park işlemi ile genişletilmiş trafik senaryolarını kapsayan
+  ayrışmış bir mimari sunuyoruz. Bu mimariyi gerçekleştirmek için bölütleme ve
+  sınıflandırma veri setleri oluşturduk. Şerit anlamlarını öğrenmek ve trafik
+  levha ve ışıklarını sınıflandırmak için iki derin öğrenme modeli eğittik.
+  Trafik sahnelerine göre en iyi davranış temellerine karar veren bir davranış
+  planlayıcısı geliştirdik. Bu davranış temellerine dayanarak, şerit boyunca en
+  uygun yörüngeleri bulan bir yörünge planlayıcısı ve bu yörüngeleri takip
+  etmek için bir denetleyici gerçekledik. Özgün şerit bölümleme tasarımız, \%97
+  doğru sınıflandırıcımız, dayanıklı planlayıcı ve kontrolcü algoritmalarımızla
+  benzetimli ve gerçek güzergahlarda başarılı sürüşler gerçekleştirdik.
 }
 %
 % Dedication
@@ -214,32 +213,31 @@
 %
 % Acknowledgements
 \acknowledgments{
-  I would like to start with the members of team Robocodes; Berkant Bayraktar,
+  I would like to start with the members of team Robocodes: Berkant Bayraktar,
   Berker Acır, Ilker Ayçiçek, Yunus Emre Saçma, and Asst. Prof. Dr. Selim
-  Temizer. Their patience against all odds made this thesis possible. Lack of
-  space and budget to build a mini race course did not stop them. They had the
-  courage to develop a mini autonomous car in a simulated environment and see
-  it in a competition without ever testing in a real environment against
-  competition rules. Thank you all.
+  Temizer. Their patience against all the odds made this thesis possible. Lack
+  of space and budget to build a racecourse did not stop them. They dared
+  to develop a mini autonomous car in a simulated environment and see it in a
+  competition without ever testing in a real environment against competition
+  rules. Thank you all.
 
   Supervisor of our team and co-supervisor of my thesis, Asst. Prof. Dr. Selim
   Temizer, did more than supervising. I truly enjoyed the enlightenment moments
   of how complicated-looking subjects turned into intuitive ideas after talking
   to him. I am grateful to him for encouraging me to study autonomous cars in
-  which I had chance to expand my knowledge in machine learning and robotics,
-  and gain hands-on experience in both fields. Aside from supervising the team
-  and my thesis, I cannot thank him enough for his time and effort to find a
-  sponsor to afford a mini autonomous car platform.
+  which I had a chance to gain further hands-on experience in machine learning
+  and robotics. Aside from supervising the team and my thesis, I cannot thank
+  him enough for his time and effort to find a sponsor to afford a mini
+  autonomous car platform.
 
   I am thankful to our sponsor, Acasus, for providing us with a mini autonomous
   car platform while we were desperately looking for a sponsor.
 
-  I would like to thank to my supervisor, Prof. Dr. Tolga Can, for his support
-  and for making all the thesis procedures easy for me.
+  I would like to thank my supervisor, Prof. Dr. Tolga Can, for his support and
+  for making all the thesis procedures easy for me.
 
-  I also would like to thank to my friends at Turkish Aerospace Industries,
-  Inc. (TAI) for being tolerant to my unexpected absence when I had to take
-  annual leave so as to work on my thesis.
+  I also would like to thank my friends at Turkish Aerospace for tolerating my
+  unplanned absence when I had to take annual leave to work on my thesis.
 }
 
 %
